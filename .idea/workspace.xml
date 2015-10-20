@@ -63,10 +63,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainCtrl.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="mainCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/mainCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0882353" vertical-offset="648" max-vertical-offset="10656">
+            <state vertical-scroll-proportion="0.72" vertical-offset="648" max-vertical-offset="10656">
               <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
               <folding>
                 <element signature="e#434#1329#0" expanded="false" />
@@ -76,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="dashboard.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.0" vertical-offset="108" max-vertical-offset="1098">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5346535" vertical-offset="108" max-vertical-offset="1134">
+              <caret line="12" column="113" selection-start-line="12" selection-start-column="113" selection-end-line="12" selection-end-column="113" />
               <folding />
             </state>
           </provider>
@@ -127,8 +127,8 @@
         <option value="$PROJECT_DIR$/assets/js/routes.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/controllers/mainCtrl.js" />
-        <option value="$PROJECT_DIR$/views/dashboard.html" />
         <option value="$PROJECT_DIR$/views/malaria.html" />
+        <option value="$PROJECT_DIR$/views/dashboard.html" />
       </list>
     </option>
   </component>
@@ -355,7 +355,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="48" y="-4" width="1319" height="773" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22916667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -364,7 +364,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5938931" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5938931" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -724,19 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-57.333332" vertical-offset="0" max-vertical-offset="1890">
-          <caret line="112" column="137" selection-start-line="112" selection-start-column="137" selection-end-line="112" selection-end-column="137" />
-          <folding>
-            <element signature="tag#ul#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#ul#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#ul#2;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-            <element signature="tag#ul#3;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-46.407406" vertical-offset="5713" max-vertical-offset="7758">
@@ -750,14 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/dashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.0" vertical-offset="108" max-vertical-offset="1098">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/malaria.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.0" vertical-offset="108" max-vertical-offset="936">
@@ -768,12 +747,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/mainCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0882353" vertical-offset="648" max-vertical-offset="10656">
+        <state vertical-scroll-proportion="0.72" vertical-offset="648" max-vertical-offset="10656">
           <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding>
             <element signature="e#434#1329#0" expanded="false" />
             <element signature="e#2088#3175#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-57.333332" vertical-offset="0" max-vertical-offset="1890">
+          <caret line="112" column="137" selection-start-line="112" selection-start-column="137" selection-end-line="112" selection-end-column="137" />
+          <folding>
+            <element signature="tag#ul#0;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#ul#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#ul#2;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+            <element signature="tag#ul#3;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5346535" vertical-offset="108" max-vertical-offset="1134">
+          <caret line="12" column="113" selection-start-line="12" selection-start-column="113" selection-end-line="12" selection-end-column="113" />
+          <folding />
         </state>
       </provider>
     </entry>
