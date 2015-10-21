@@ -45,5 +45,16 @@ angular.module("hmisPortal")
             series: []
         };
 
-        
+        $scope.leftclass = 'col s2';
+        $scope.rightclass = 'col s10';
+        $scope.showFilter = true;
+        $scope.hideFilter = function(){
+            $scope.rightclass = 'col s12';
+            $scope.showFilter = false;
+        }
+        $scope.displayFilter = function(){
+            $scope.leftclass = 'col s2';
+            $scope.rightclass = 'col s10';
+            $scope.showFilter = true;
+        }
      })
