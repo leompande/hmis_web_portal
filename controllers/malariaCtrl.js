@@ -206,10 +206,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'Proportional of Malaria cases in OPD and IPD',
-                description:'Maelezo ya Proportional of Malaria cases in OPD and IPD',
+                title:'Proportional of Malaria cases in OPD',
+                description:'Proportional of Malaria cases in OPD',
                 cardClass:"col m6 s12",
-                data:'aw1jQ1tJTmE',
+                data:'xrYmEc4LCCo',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -259,10 +259,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'Proportional of Malaria cases in OPD and IPD',
-                description:'Maelezo ya Proportional of Malaria cases in OPD and IPD',
+                title:'Proportional of Malaria cases in IPD',
+                description:'Proportional of Malaria cases in OPD',
                 cardClass:"col m6 s12",
-                data:'aw1jQ1tJTmE',
+                data:'CaPhxP3hIHD',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
