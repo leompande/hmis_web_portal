@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/malaria.html" afterPath="$PROJECT_DIR$/views/malaria.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/maternal.html" afterPath="$PROJECT_DIR$/views/maternal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mortality.html" afterPath="$PROJECT_DIR$/views/mortality.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/routes.js" afterPath="$PROJECT_DIR$/assets/js/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/tracer_medicine.html" afterPath="$PROJECT_DIR$/views/tracer_medicine.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="" />
     <ignored path="hmis_portal.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -135,7 +125,7 @@
       <file leaf-file-name="mortality.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/mortality.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="17" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.6870229" vertical-offset="0" max-vertical-offset="2952">
+            <state line="20" column="17" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.8411215" vertical-offset="0" max-vertical-offset="2952">
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
@@ -178,6 +168,7 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -409,10 +400,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1535" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20641026" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32948717" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20641026" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32948717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -826,7 +817,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/mortality.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="17" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.6870229" vertical-offset="0" max-vertical-offset="2952">
+        <state line="20" column="17" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.8411215" vertical-offset="0" max-vertical-offset="2952">
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
