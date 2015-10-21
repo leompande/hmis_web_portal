@@ -57,11 +57,14 @@ angular.module("hmisPortal")
                 {name:'combined',image:'combined.jpg',action:''},
                 {name:'column',image:'column.png',action:''},
                 {name:'area',image:'area.jpg',action:''},
-                {name:'pie',image:'pie.png',action:''}
+                {name:'pie',image:'pie.png',action:''},
+                {name:'map',image:'map.jpg',action:''}
             ],
             dataSource:'',
             size:'small',
             displayTable:false,
+            displayMap:false,
+            chart:'bar',
             chartObject:{
                 title: {
                     text: 'Combination chart'
@@ -113,6 +116,8 @@ angular.module("hmisPortal")
             dataSource:'',
             size:'small',
                 displayTable:false,
+                displayMap:false,
+                chart:'line',
             chartObject:{
                 title: {
                     text: 'Combination chart'
@@ -163,6 +168,8 @@ angular.module("hmisPortal")
             dataSource:'',
             size:'large',
                 displayTable:false,
+                displayMap:false,
+                chart:'combined',
             chartObject:{
                 title: {
                     text: 'Combination chart'
@@ -215,6 +222,8 @@ angular.module("hmisPortal")
             dataSource:'',
             size:'small',
                 displayTable:false,
+                displayMap:false,
+                chart:'table',
             chartObject:{
                 title: {
                     text: 'Combination chart'
@@ -257,7 +266,6 @@ angular.module("hmisPortal")
            angular.forEach(jsonObject.metaData.ou,function(region){
                data.push({'name':jsonObject.metaData.names[region],'id':region,'value':getDataFromUrl(jsonObject.rows,region)});
            });
-            console.log(data);
             return data;
 
         };
@@ -279,11 +287,19 @@ angular.module("hmisPortal")
             $scope.showReport = true;
             if(type == 'table'){
                 card.displayTable = true;
+                card.displayMap = false;
                 $scope.data.chartType = 'table';
-            }else{
+            }else if(type == 'map'){
+                card.displayMap = true;
+                card.displayTable = false;
+                $scope.data.chartType = 'map';
+            }
+            else{
+                card.displayMap = false;
+                card.displayTable = false;
                 $scope.data.chartType = type;
             }
-            $scope.prepareSeries(card);
+            $scope.prepareSeries(card,$scope.data.chartType);
         };
 
         $scope.downloadExcel = function(id){
@@ -306,7 +322,7 @@ angular.module("hmisPortal")
             });
         }
 
-        $scope.prepareSeries = function(cardObject){
+        $scope.prepareSeries = function(cardObject,chart){
             cardObject.chartObject.title.text = cardObject.title;
             cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
 
@@ -330,19 +346,19 @@ angular.module("hmisPortal")
                     cardObject.chartObject.xAxis.categories.push(val.name);
                 });
                 $scope.normalseries = [];
-                if($scope.data.chartType == "pie"){
+                if(chart == "pie"){
                     delete cardObject.chartObject.chart;
                     var serie = [];
                     angular.forEach(dataToUse,function(val){
                         serie.push({name: val.name, y: parseInt(val.value)})
                     });
-                    $scope.normalseries.push({type: $scope.data.chartType, name:cardObject.title , data: serie,showInLegend: true,
+                    $scope.normalseries.push({type: chart, name:cardObject.title , data: serie,showInLegend: true,
                         dataLabels: {
                             enabled: false
                         } });
                     cardObject.chartObject.series = $scope.normalseries;
                 }
-                else if($scope.data.chartType == "combined"){
+                else if(chart == "combined"){
                     delete cardObject.chartObject.chart;
                     var serie1 = [];
                     var serie = [];
@@ -359,12 +375,18 @@ angular.module("hmisPortal")
                         }})
                     cardObject.chartObject.series = $scope.normalseries;
                 }
-                else if($scope.data.chartType == 'table'){
+                else if(chart == 'table'){
                     cardObject.table = {};
                     cardObject.table.colums =[];
                     angular.forEach(dataToUse,function(val){
                         cardObject.table.colums.push({name:val.name,value:parseInt(val.value)});
                     });
+                }else if(chart == 'map'){
+                    if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                        $scope.drawMap($scope.selectedOrgUnit,2,cardObject);
+                    }else{
+                        $scope.drawMap($scope.selectedOrgUnit,3,cardObject);
+                    }
                 }
                 else{
                     delete cardObject.chartObject.chart;
@@ -373,8 +395,8 @@ angular.module("hmisPortal")
                         serie.push(val.value);
                     });
                     cardObject.chartObject.chart={};
-                    cardObject.chartObject.chart.type=$scope.data.chartType;
-                    $scope.normalseries.push({type: $scope.data.chartType, name: cardObject.title, data: serie})
+                    cardObject.chartObject.chart.type=chart;
+                    $scope.normalseries.push({type: chart, name: cardObject.title, data: serie})
                     cardObject.chartObject.series = $scope.normalseries;
                 }
                 cardObject.chartObject.loading = false
@@ -386,7 +408,8 @@ angular.module("hmisPortal")
 
         $rootScope.firstClick = function(){
             angular.forEach($scope.cards.malaria,function(value){
-                $scope.prepareSeries(value);
+//              $scope.data.chartType = value.chart;
+                $scope.prepareSeries(value,value.chart);
             });
         }
         $scope.firstClick();
@@ -397,7 +420,7 @@ angular.module("hmisPortal")
          *
          * DRAW MAP
          * */
-        $scope.drawMap = function(parentUid,level){
+        $scope.drawMap = function(parentUid,level,card){
             $scope.shared = shared;
             shared.facility =3029;
             var url = 'https://dhis.moh.go.tz/api/organisationUnits.geojson?parent='+parentUid+'&level='+level;
@@ -552,17 +575,11 @@ angular.module("hmisPortal")
                                 scope.selectedDistrict = feature ? $scope.districts[feature.getId()] : '';
                                 if(feature) {
                                     // looping throught indicator types
-                                    angular.forEach(Indicators,function(value,index){
-
-
-                                        $http({
-                                            method: 'GET',
-                                            url: "http://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+value+"&dimension=pe:"+$scope.thisyear+"&filter=ou:"+feature.getId()+"&displayProperty=NAME",
-                                            //url:"portal-module/testIndicatorType.json",
-                                            dataType: "json",
-                                            cache: true,
-                                            ifModified: true
-                                        }).success(
+                                    var url1 = "http://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+card.data+"&dimension=pe:"+$scope.thisyear+"&filter=ou:"+feature.getId()+"&displayProperty=NAME";
+                                    $http.get(url1,{withCredentials: true, params : {
+                                        j_username: "portal",
+                                        j_password: "Portal123"
+                                    }}).success(
                                             function(data) {
                                                 var currentDistrict = $scope.districts[feature.getId()];
                                                 if(data.rows[0]){
@@ -574,7 +591,7 @@ angular.module("hmisPortal")
 
                                                 $scope.districts[feature.getId()] = currentDistrict;
                                             });
-                                    });
+
                                     scope.selectedDistrict = feature ? $scope.districts[feature.getId()] : '';
                                 }
                             });
