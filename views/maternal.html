@@ -83,6 +83,7 @@
                         </div>
                         <div style="width: 100%" ng-if="card.displayTable" >
                             <p ng-if="card.chartObject.loading" class="center"><img src="assets/img/loading.gif">Loading ....</p>
+                            <h5 class="center">{{ card.title }}</h5>
                             <table ng-if="!card.chartObject.loading" class="bordered striped centered" id="facilityownership">
                                 <thead>
                                 <tr>

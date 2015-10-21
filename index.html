@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="hmisPortal" ng-controller="mainCtrl">
 <head>
-    <title>HMIS Web Portal</title>
+    <title>HMIS DHIS Web Portal</title>
     <style>
         @font-face {
             font-family: 'Material Icons';
@@ -45,11 +45,11 @@
         <li><a href="./#maternal">MATERNAL</a></li>
         <li><a href="./#ivd">IVD</a></li>
         <li><a href="./#nutrition">NUTRITION</a></li>
-        <li><a href="./#morbidity">MORBIDITY</a></li>
+        <!--<li><a href="./#morbidity">MORBIDITY</a></li>-->
         <li><a href="./#mortality">MORTALITY</a></li>
         <li><a href="./#tracer_medicine">TRACER MEDICINE</a></li>
-        <li><a href="./#hiv">HIV/AIDS</a></li>
-        <li><a href="./#tb">TB LEPROSY</a></li>
+        <!--<li><a href="./#hiv">HIV/AIDS</a></li>-->
+        <!--<li><a href="./#tb">TB LEPROSY</a></li>-->
     </ul>
     <ul id="dropdown3" class="dropdown-content">
         <li><a href="./#downloads">Downloads</a></li>
@@ -70,7 +70,7 @@
         <div class="nav-wrapper">
             <a href="#!" class="brand-logo">
                 <img class="responsive-img" style="height: 50px" src="assets/img/tanzania1.gif">
-                HIMS Web Portal
+                HMIS DHIS Web Portal
             </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -115,10 +115,13 @@
 <script src="assets/js/routes.js"></script>
 <script src="controllers/mainCtrl.js"></script>
 <script src="controllers/malariaCtrl.js"></script>
+<script src="controllers/maternalCtrl.js"></script>
+<script src="controllers/mortalityCtrl.js"></script>
 <script src="controllers/ivdCtrl.js"></script>
 <script src="controllers/nutritionCtrl.js"></script>
-<script src="controllers/maternalCtrl.js"></script>
-<script src="controllers/morbidityCtrl.js"></script>
+<script src="controllers/tracermedicineCtrl.js"></script>
+<script src="controllers/dashboardCtrl.js"></script>
+<script src="controllers/jinsiCtrl.js"></script>
 <script>
     $(document).ready(function(){
         $(".button-collapse").sideNav();

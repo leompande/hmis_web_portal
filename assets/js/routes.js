@@ -11,7 +11,7 @@ angular.module("hmisPortal")
     .config( function($routeProvider){
         $routeProvider.when("/home",{
             templateUrl: 'views/dashboard.html',
-            controller: 'mainCtrl'
+            controller: 'dashboardCtrl'
         });
 
         $routeProvider.when("/downloads",{
@@ -51,12 +51,12 @@ angular.module("hmisPortal")
 
         $routeProvider.when("/mortality",{
             templateUrl: 'views/mortality.html',
-            controller: 'mainCtrl'
+            controller: 'mortalityCtrl'
         });
 
         $routeProvider.when("/tracer_medicine",{
             templateUrl: 'views/tracer_medicine.html',
-            controller: 'mainCtrl'
+            controller: 'tracermedicineCtrl'
         });
 
         $routeProvider.when("/hiv",{
