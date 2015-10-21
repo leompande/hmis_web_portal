@@ -36,12 +36,12 @@ angular.module("hmisPortal")
 
         $routeProvider.when("/ivd",{
             templateUrl: 'views/ivd.html',
-            controller: 'mainCtrl'
+            controller: 'ivdCtrl'
         });
 
         $routeProvider.when("/nutrition",{
             templateUrl: 'views/nutrition.html',
-            controller: 'mainCtrl'
+            controller: 'nutritionCtrl'
         });
 
         $routeProvider.when("/morbidity",{
