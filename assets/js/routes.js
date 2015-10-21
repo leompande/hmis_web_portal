@@ -26,7 +26,7 @@ angular.module("hmisPortal")
 
         $routeProvider.when("/malaria",{
             templateUrl: 'views/malaria.html',
-            controller: 'mainCtrl'
+            controller: 'malariaCtrl'
         });
 
         $routeProvider.when("/maternal",{
