@@ -31,7 +31,7 @@ angular.module("hmisPortal")
 
         $routeProvider.when("/maternal",{
             templateUrl: 'views/maternal.html',
-            controller: 'mainCtrl'
+            controller: 'maternalCtrl'
         });
 
         $routeProvider.when("/ivd",{
