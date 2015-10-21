@@ -80,7 +80,6 @@ angular.module("hmisPortal")
             $scope.jinsichartConfig.title.text = "POPULATION BY GENDER";
             $scope.area = [];
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-
                 $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
                 $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
@@ -89,7 +88,6 @@ angular.module("hmisPortal")
             $http.get($scope.url,{withCredentials: true, params : {
                 j_username: "portal",
                 j_password: "Portal123"
-
             }}).success(function(data){
                 var useThisData = $scope.prepareJinsiData(data);
                 angular.forEach(useThisData.regions,function(value){
@@ -679,11 +677,10 @@ angular.module("hmisPortal")
 
         $rootScope.firstClick1 = function(){
             $scope.preparejinsiSeries();
+            $scope.prepareSeries();
             angular.forEach($scope.cards.malaria,function(value){
                 $scope.preparecompletenesSeries(value,value.chart);
             });
-
-            $scope.prepareSeries();
         }
         $scope.firstClick1();
 
