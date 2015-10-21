@@ -1,12 +1,13 @@
 /**
+ * Created by kelvin on 10/21/15.
+ */
+
+/**
  * Created by kelvin on 10/20/15.
  */
 
 angular.module("hmisPortal")
-    .config(function() {
-
-    })
-    .controller("maternalCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+    .controller("completenesCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
 
         $scope.cards = {};
         $scope.data = {};
@@ -46,10 +47,10 @@ angular.module("hmisPortal")
         };
 
         $scope.cards.malaria = [{
-            title:'Antenatal Care Coverage',
-            description:'Antenatal Care Coverage',
-            cardClass:"col s12 m6",
-            data:'XjbKrjgOFMp',
+            title:'Total Tracers available',
+            description:'Total Tracers available',
+            cardClass:"col s12 m12",
+            data:'PlatsD7r6BI',
             icons:[
                 {name:'table',image:'table.jpg',action:''},
                 {name:'bar',image:'bar.png',action:''},
@@ -99,11 +100,11 @@ angular.module("hmisPortal")
 
         },
             {
-                title:'ANC 4th Visit Coverage',
-                description:'ANC 4th Visit Coverage',
+                title:'Normal saline Availability',
+                description:'Normal saline Availability',
                 cardClass:"col m6 s12",
                 cardSize:"medium",
-                data:'QiA9L6tNHFy',
+                data:'Y6gfcTiQcis',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -153,10 +154,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:' ANC 1st Visit before 12 weeks rate',
-                description:' ANC 1st Visit before 12 weeks rate',
-                cardClass:"col m12 s12",
-                data:'TRoamv0YPt3',
+                title:'Disposable Syringe Availability',
+                description:'Disposable Syringe Availability',
+                cardClass:"col m6 s12",
+                data:'sZYr1CWDW8Y',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -206,10 +207,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'ANC De- worming rate',
-                description:'ANC De- worming rate',
+                title:'Depo-Prover Availability',
+                description:'Depo-Prover Availability',
                 cardClass:"col m6 s12",
-                data:'ovRcOHNO7qZ',
+                data:'TFORL9LBEDP',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -259,10 +260,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'ANC Syphilis prevelance',
-                description:'ANC Syphilis prevelance',
+                title:'Oral Rehydration Availability',
+                description:'Oral Rehydration Availability',
                 cardClass:"col m6 s12",
-                data:'aEcdPpCOi3k',
+                data:'Y0HAPpe3X8A',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -312,10 +313,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'ANC Coverage for women under 20 years',
-                description:'ANC Coverage for women under 20 years',
+                title:'Penta Valent Availability',
+                description:'Penta Valent Availability',
                 cardClass:"col m12 s12",
-                data:'JeIe5FgaGTX',
+                data:'BRS6sUj8FJa',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -365,10 +366,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'ANC HIV Prevelance ( 15 - 24)',
-                description:'ANC HIV Prevelance ( 15 - 24)',
+                title:'Albendazole Availability',
+                description:'Albendazole Availability',
                 cardClass:"col m6 s12",
-                data:'TdxVgoa08tn',
+                data:'AHcdWDFaeZi',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -418,10 +419,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'Health Facility Delivery Rate',
-                description:'Health Facility Delivery Rate',
+                title:'Ergometrine Availability',
+                description:'Ergometrine Availability',
                 cardClass:"col m6 s12",
-                data:'OLWz8aiTGYd',
+                data:'EX233CR1k1T',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -471,10 +472,10 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'Contraceptive  prevalence rate',
-                description:'Contraceptive  prevalence rate',
+                title:'Amoxycillin Availability',
+                description:'Amoxycillin Availability',
                 cardClass:"col m6 s12",
-                data:'lcOiUC6RdPw',
+                data:'KxS8b24bAZC',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -524,10 +525,280 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'Deliveries by skilled attendants',
-                description:'Deliveries by skilled attendants',
+                title:'Artemether / Lumefantrine Oral Available',
+                description:'Artemether / Lumefantrine Oral Available',
                 cardClass:"col m6 s12",
-                data:'vVRVLjgU10c',
+                data:'wjGjt5bacv6',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''},
+                    {name:'map',image:'map.jpg',action:''}
+                ],
+                dataSource:'',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'pie',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+
+            {
+                title:'Mean number of Tracers available By Quarter',
+                description:'Mean number of Tracers available By Quarter',
+                cardClass:"col m12 s12",
+                data:'YKtXjwwuFA3',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''},
+                    {name:'map',image:'map.jpg',action:''}
+                ],
+                dataSource:'',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'combined',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+
+            {
+                title:'Mean Parastatal Facility Tracers available By Quarter',
+                description:'Mean Parastatal Facility Tracers available By Quarter',
+                cardClass:"col m6 s12",
+                data:'UCmAgEwrtnL',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''},
+                    {name:'map',image:'map.jpg',action:''}
+                ],
+                dataSource:'',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'line',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+
+            {
+                title:'Mean FBO Facility Tracers available By Quarter',
+                description:'Mean FBO Facility Tracers available By Quarter',
+                cardClass:"col m6 s12",
+                data:'eRGYpbsCTjL',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''},
+                    {name:'map',image:'map.jpg',action:''}
+                ],
+                dataSource:'',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'area',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+
+            {
+                title:'Mean Public Facility Tracers available By Quarter',
+                description:'Mean Public Facility Tracers available By Quarter',
+                cardClass:"col m6 s12",
+                data:'GfA6IHXRUyb',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''},
+                    {name:'map',image:'map.jpg',action:''}
+                ],
+                dataSource:'',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'map',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+
+            {
+                title:'Mean Private Facility Tracers available By Quarter',
+                description:'Mean Private Facility Tracers available By Quarter',
+                cardClass:"col m6 s12",
+                data:'TJKlz62awvr',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -589,6 +860,13 @@ angular.module("hmisPortal")
 
 
 
+
+
+
+        //var datads = {"headers":[{"name":"dx","column":"Data","type":"java.lang.String","hidden":false,"meta":true},{"name":"ou","column":"Organisation unit","type":"java.lang.String","hidden":false,"meta":true},{"name":"value","column":"Value","type":"java.lang.Double","hidden":false,"meta":false}],"metaData":{"pe":["2014"],"co":[],"ou":["lnOyHhoLzre","Cpd5l15XxwA","yyW17iCz9As","qg5ySBw9X5l","LGTVRhKSn1V","Crkg9BoUo5w","qarQhOt2OEh","DWSo42hunXH","vYT08q7Wo33","EO3Ps3ny0Nr","vU0Qt1A5IDz","RD96nI1JXVV","ZYYX8Q9SGoV","acZHYslyJLt","MAL4cfZoFhJ","VMgrQWSVIYn","bN5q5k5DgLA","Sj50oz9EHvD","IgTAEKMqKRe","YtVMnut7Foe","sWOWPBvwNY2","hAFRrgDK0fy","kZ6RlMnt2bp","A3b5mw8DJYC","vAtZ8a924Lx"],"names":{"2014":"2014","yyW17iCz9As":"Pwani Region","vU0Qt1A5IDz":"Tanga Region","dx":"Data","vYT08q7Wo33":"Mara Region","ZYYX8Q9SGoV":"Ruvuma Region","vAtZ8a924Lx":"Rukwa Region","RD96nI1JXVV":"Kigoma Region","Crkg9BoUo5w":"Kagera Region","Cpd5l15XxwA":"Dodoma Region","MAL4cfZoFhJ":"Geita Region","kZ6RlMnt2bp":"Tabora Region","hAFRrgDK0fy":"Mwanza Region","tit1C1VPIV7":"ANC Proportion of pregnant women receiving ITN Voucher","acZHYslyJLt":"Dar Es Salaam Region","ou":"Organisation unit","qg5ySBw9X5l":"Manyara Region","A3b5mw8DJYC":"Mbeya Region","sWOWPBvwNY2":"Iringa Region","EO3Ps3ny0Nr":"Shinyanga Region","lnOyHhoLzre":"Kilimanjaro Region","pe":"Period","bN5q5k5DgLA":"Mtwara Region","Sj50oz9EHvD":"Morogoro Region","VMgrQWSVIYn":"Lindi Region","YtVMnut7Foe":"Arusha Region","DWSo42hunXH":"Katavi Region","IgTAEKMqKRe":"Simiyu Region","LGTVRhKSn1V":"Singida Region","qarQhOt2OEh":"Njombe Region"}},"rows":[["tit1C1VPIV7","lnOyHhoLzre","38.3"],["tit1C1VPIV7","Cpd5l15XxwA","32.9"],["tit1C1VPIV7","yyW17iCz9As","40.0"],["tit1C1VPIV7","qg5ySBw9X5l","27.6"],["tit1C1VPIV7","LGTVRhKSn1V","42.6"],["tit1C1VPIV7","Crkg9BoUo5w","38.0"],["tit1C1VPIV7","qarQhOt2OEh","34.0"],["tit1C1VPIV7","DWSo42hunXH","21.9"],["tit1C1VPIV7","vYT08q7Wo33","30.8"],["tit1C1VPIV7","EO3Ps3ny0Nr","19.6"],["tit1C1VPIV7","vU0Qt1A5IDz","37.9"],["tit1C1VPIV7","RD96nI1JXVV","36.4"],["tit1C1VPIV7","ZYYX8Q9SGoV","36.9"],["tit1C1VPIV7","acZHYslyJLt","20.8"],["tit1C1VPIV7","MAL4cfZoFhJ","21.4"],["tit1C1VPIV7","VMgrQWSVIYn","41.7"],["tit1C1VPIV7","bN5q5k5DgLA","33.9"],["tit1C1VPIV7","Sj50oz9EHvD","35.4"],["tit1C1VPIV7","IgTAEKMqKRe","23.1"],["tit1C1VPIV7","YtVMnut7Foe","33.9"],["tit1C1VPIV7","sWOWPBvwNY2","32.4"],["tit1C1VPIV7","hAFRrgDK0fy","25.5"],["tit1C1VPIV7","kZ6RlMnt2bp","26.3"],["tit1C1VPIV7","A3b5mw8DJYC","27.9"],["tit1C1VPIV7","vAtZ8a924Lx","25.3"]],"width":3,"height":25};
+//       var datads = {"headers":[{"name":"dx","column":"Data","type":"java.lang.String","hidden":false,"meta":true},{"name":"ou","column":"Organisation unit","type":"java.lang.String","hidden":false,"meta":true},{"name":"value","column":"Value","type":"java.lang.Double","hidden":false,"meta":false}],"metaData":{"pe":["2014"],"co":[],"ou":["QKEr8DFutO8","lgZ6HfZaj3f","aQEZnk4RzKv","uafqZbOYpVL","zHa2ohFrpPM","PHWaJvzTmL8","D21VsjNL2LB"],"names":{"2014":"2014","pe":"Period","lgZ6HfZaj3f":"Arusha City Council","ou":"Organisation unit","dx":"Data","uafqZbOYpVL":"Meru District Council","D21VsjNL2LB":"Monduli District Council","QKEr8DFutO8":"Karatu District Council","zHa2ohFrpPM":"Arusha District Council","tit1C1VPIV7":"ANC Proportion of pregnant women receiving ITN Voucher","aQEZnk4RzKv":"Longido District Council","PHWaJvzTmL8":"Ngorongoro District Council"}},"rows":[["tit1C1VPIV7","QKEr8DFutO8","35.3"],["tit1C1VPIV7","lgZ6HfZaj3f","32.6"],["tit1C1VPIV7","aQEZnk4RzKv","33.6"],["tit1C1VPIV7","uafqZbOYpVL","42.1"],["tit1C1VPIV7","zHa2ohFrpPM","30.7"],["tit1C1VPIV7","PHWaJvzTmL8","27.7"],["tit1C1VPIV7","D21VsjNL2LB","36.8"]],"width":3,"height":7};
+
+
         $scope.data.chartType = 'column';
         $scope.displayTable = false;
         $scope.changeChart = function(type,card){
@@ -612,7 +890,7 @@ angular.module("hmisPortal")
                 card.chart = type;
                 $scope.data.chartType = type;
             }
-            $scope.prepareSeries(card,$scope.data.chartType);
+            $scope.prepareCompleteSeries(card,$scope.data.chartType);
         };
 
         $scope.downloadExcel = function(id){
@@ -635,7 +913,7 @@ angular.module("hmisPortal")
             });
         }
 
-        $scope.prepareSeries = function(cardObject,chart){
+        $scope.prepareCompleteSeries = function(cardObject,chart){
             if(chart == 'table'){
                 cardObject.displayTable = true;
                 cardObject.displayMap = false;
@@ -725,60 +1003,10 @@ angular.module("hmisPortal")
                 }
                 cardObject.chartObject.loading = false
             });
-
-
         };
-        $rootScope.lastCard=function(){
-
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
-            }}).success(function(dataTable){
-                var generalArray=[];
-
-                var underOne="ANC IPT 2 coverage";
-                var undertwo="ANC Malaria prevalence";
-                var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
-                var underfour="ANC IPT 1 coverage";
-                $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
-
-                });
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-
-            });
-
-        }
-        $scope.downloadExcelTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
-            });
-        }
-
-
-        $rootScope.firstClick = function(){
+        $rootScope.firstClick1 = function(){
             angular.forEach($scope.cards.malaria,function(value){
-//              $scope.data.chartType = value.chart;
-                $scope.prepareSeries(value,value.chart);
+                $scope.prepareCompleteSeries(value,value.chart);
             });
             $rootScope.lastCard();
         }
@@ -1020,7 +1248,15 @@ angular.module("hmisPortal")
 
             }
         }
-
+       $scope.getDataFromUrl = function(arr,ou){
+            var num = 0
+            $.each(arr,function(k,v){
+                if(v[1] == ou){
+                    num = parseInt(v[2])
+                }
+            });
+            return num;
+        }
 
     })
     .factory('shared', function() {
@@ -1029,56 +1265,4 @@ angular.module("hmisPortal")
         };
         return shared;
     });
-var ogUnitsObjectConstruct=function(underOne,ObjectNames,ObectData,orgUnits){
-    var num='';
-    angular.forEach(ObectData,function(value) {
-        if(value[1]==orgUnits) {
-            if (ObjectNames.metaData.names[value[0]].indexOf(underOne) >= 0) {
-                num = value[2];
-            }
-        }
-    });
-    return num;
-}
-var undertwoObject=function(undertwo,ObjectNames,ObectData,orgUnits){
-    var num='';
-    angular.forEach(ObectData,function(value) {
-        if(value[1]==orgUnits) {
-            if (ObjectNames.metaData.names[value[0]].indexOf(undertwo) >= 0) {
-                num = value[2];
-            }
-        }
-    });
-    return num;
-}
-var underthreeObject=function(underthree,ObjectNames,ObectData,orgUnits){
-    var num='';
-    angular.forEach(ObectData,function(value) {
-        if(value[1]==orgUnits) {
-            if (ObjectNames.metaData.names[value[0]].indexOf(underthree) >= 0) {
-                num = value[2];
-            }
-        }
-    });
-    return num;
-}
-var underfourObject=function(underfour,ObjectNames,ObectData,orgUnits){
-    var num='';
-    angular.forEach(ObectData,function(value) {
-        if(value[1]==orgUnits) {
-            if (ObjectNames.metaData.names[value[0]].indexOf(underfour) >= 0) {
-                num = value[2];
-            }
-        }
-    });
-    return num;
-}
-function getDataFromUrl(arr,ou){
-    var num = 0
-    $.each(arr,function(k,v){
-        if(v[1] == ou){
-            num = parseInt(v[2])
-        }
-    });
-    return num;
-}
+

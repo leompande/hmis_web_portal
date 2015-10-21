@@ -11,7 +11,7 @@ angular.module("hmisPortal")
     .config( function($routeProvider){
         $routeProvider.when("/home",{
             templateUrl: 'views/dashboard.html',
-            controller: 'mainCtrl'
+            controller: 'dashboardCtrl'
         });
 
         $routeProvider.when("/downloads",{

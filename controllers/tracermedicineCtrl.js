@@ -1046,7 +1046,7 @@ angular.module("hmisPortal")
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
                 j_password: "TUZO2015"
-            },'Content-Type': 'application/octet-stream'}).success(function(data){
+            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
                 a.href = window.URL.createObjectURL(blob);

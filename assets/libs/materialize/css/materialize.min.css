@@ -20,3 +20,9 @@
     display: block;
     padding: 1rem 1rem;
 }
+.card.large {
+    height: 550px;
+}
+.card.large .card-image {
+    height: 420px;
+}
