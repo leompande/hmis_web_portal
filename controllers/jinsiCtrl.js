@@ -224,8 +224,8 @@ angular.module("hmisPortal")
 
         //
         $scope.cards.malaria = [{
-            title:'HIV DATA',
-            description:'HIV DATA',
+            title:'HIV DATA COMPLETENESS',
+            description:'HIV DATA COMPLETENESS',
             cardClass:"col s12 m12",
             data:'Hwcn7ajwZ1p;Dp0VF7ssmcH;CxaDPrjhmax;db4lfMnttc6;',
             icons:[
@@ -276,8 +276,8 @@ angular.module("hmisPortal")
 
         },
             {
-                title:'RCHS DATA',
-                description:'RCHS DATA',
+                title:'RCHS DATA COMPLETENESS',
+                description:'RCHS DATA COMPLETENESS',
                 cardClass:"col m12 s12",
                 cardSize:"medium",
                 data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;QntdhuQfgvT;zeEp4Xu2GOm',
@@ -294,7 +294,7 @@ angular.module("hmisPortal")
                 size:'small',
                 displayTable:false,
                 displayMap:false,
-                chart:'line',
+                chart:'bar',
                 chartObject:{
                     title: {
                         text: 'Combination chart'
@@ -329,8 +329,8 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'HMIS DATA',
-                description:'HMIS DATA',
+                title:'HMIS DATA COMPLETENESS',
+                description:'HMIS DATA COMPLETENESS',
                 cardClass:"col m12 s12",
                 cardSize:"medium",
                 data:'ZOvFj2vtlor;qpcwPcj8D6u;v6wdME3ouXu',
@@ -347,7 +347,7 @@ angular.module("hmisPortal")
                 size:'small',
                 displayTable:false,
                 displayMap:false,
-                chart:'line',
+                chart:'bar',
                 chartObject:{
                     title: {
                         text: 'Combination chart'
@@ -382,8 +382,8 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'RCH DATA',
-                description:'RCH DATA',
+                title:'RCH DATA COMPLETENESS',
+                description:'RCH DATA COMPLETENESS',
                 cardClass:"col m12 s12",
                 cardSize:"medium",
                 data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;rm3y3VHPiFD;QntdhuQfgvT;zeEp4Xu2GOm',
@@ -400,7 +400,7 @@ angular.module("hmisPortal")
                 size:'small',
                 displayTable:false,
                 displayMap:false,
-                chart:'line',
+                chart:'bar',
                 chartObject:{
                     title: {
                         text: 'Combination chart'
@@ -435,8 +435,8 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'NTLP DATA',
-                description:'NTLP DATA',
+                title:'NTLP DATA COMPLETENESS',
+                description:'NTLP DATA COMPLETENESS',
                 cardClass:"col m12 s12",
                 cardSize:"medium",
                 data:'UHDfKY2mUOQ;ykDbDeDvTcx;ZOkoQ7BtbVQ;IzUZXETYoyB',
@@ -453,7 +453,7 @@ angular.module("hmisPortal")
                 size:'small',
                 displayTable:false,
                 displayMap:false,
-                chart:'line',
+                chart:'bar',
                 chartObject:{
                     title: {
                         text: 'Combination chart'

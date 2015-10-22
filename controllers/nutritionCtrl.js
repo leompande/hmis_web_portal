@@ -313,37 +313,52 @@ angular.module("hmisPortal")
         };
         $rootScope.lastCard=function(){
 
+            $scope.loadingImage=true;
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
                 j_password: "TUZO2015"
             }}).success(function(dataTable){
                 var generalArray=[];
-
-                var underOne="ANC IPT 2 coverage";
-                var undertwo="ANC Malaria prevalence";
-                var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
-                var underfour="ANC IPT 1 coverage";
-                $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
+                var underOne="Vitamin A supplementation coverage to children under 1 year";
+                var undertwo="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 12-17";
+                var underSup="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 18-23";
+                var underthree="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 25-59";
+                var underfour="Idadi ya Watu";
+                var underFive="Children under 5 who are underweight";
+                var underWeight="Uwiano wa Uzito kwa Umri";
+                 $scope.arrayed=[{'underOne':'Vitamin A supplementation coverage to children under 1 year','undertwo':'Vitamin A supplementation coverage to children 12-17 months','underSup':'Vitamin A supplementation coverage to children 18-23 months',
+                    'underthree':'itamin A supplementation coverage to children 25-59','underfour':'Population',
+                    'underFive': 'Children under 5 who are underweight','underWeight':'Children who are underweight'
+                }];
                 angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
+                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underSup:underSupObject(underSup,dataTable,dataTable.rows,region),
+                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                        underFive:underFiveObject(underFive,dataTable,dataTable.rows,region),underWeight:underWeightObject(underWeight,dataTable,dataTable.rows,region),
+                     });
 
                 });
+                $scope.loadingImage=false;
                 $scope.tableContent=generalArray;
                 console.log($scope.tableContent);
-
+                //},2000);
+            }).error(function(error){
+                //$scope.loadingImage=false;
+                $scope.authenticationFailed=error;
+                console.log($scope.authenticationFailed);
             });
 
         }
-        $scope.downloadExcelTotal = function(){
+        $scope.downloadExcelVitaminTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
@@ -648,6 +663,39 @@ var underfourObject=function(underfour,ObjectNames,ObectData,orgUnits){
     angular.forEach(ObectData,function(value) {
         if(value[1]==orgUnits) {
             if (ObjectNames.metaData.names[value[0]].indexOf(underfour) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSupObject=function(underSup,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSup) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underFiveObject=function(underFive,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underFive) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underWeightObject=function(underWeight,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underWeight) >= 0) {
                 num = value[2];
             }
         }

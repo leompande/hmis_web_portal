@@ -365,7 +365,7 @@ angular.module("hmisPortal")
 
         };
         $rootScope.lastCard=function(){
-
+            $scope.loadingImage=true;
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
@@ -384,9 +384,9 @@ angular.module("hmisPortal")
                 var underANC2="Hudhurio la Kwanza ANC Ujauzito Wiki 12 au Zaidi";
                 var underPENTA="PENTA 3 vaccination coverage children under 1 year";
                 var underPenta="Watoto Waliochanjwa Penta";
-                 $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Surua (Measles) zilizotolewa','underANC':'ANC Proportion of pregnant women receiving TT2+',
-                    'underthree':'Wajawazito Waliopata Chanjo ya TT2+','underfour':'ANC first visit before 12 weeks',
-                    'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'Watoto Waliochanjwa Penta'
+                 $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Measles Doses to Children under one year of age','underANC':'ANC Proportion of pregnant women receiving TT2+',
+                    'underthree':'ANC tetanus two doses plus+','underfour':'ANC first visit before 12 weeks',
+                    'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'PENTA 3 under 1 year Coverage'
                   }];
                 angular.forEach(dataTable.metaData.ou,function(region){
                     generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
@@ -410,9 +410,9 @@ angular.module("hmisPortal")
         }
         $scope.downloadIvdExcelTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WadaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WadaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",

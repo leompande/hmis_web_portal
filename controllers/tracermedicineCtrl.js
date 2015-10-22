@@ -1010,38 +1010,113 @@ angular.module("hmisPortal")
 
         };
         $rootScope.lastCard=function(){
-
+            $scope.loadingImage=true;
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
                 j_password: "TUZO2015"
             }}).success(function(dataTable){
                 var generalArray=[];
-
-                var underOne="ANC IPT 2 coverage";
-                var undertwo="ANC Malaria prevalence";
-                var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
-                var underfour="ANC IPT 1 coverage";
-                $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
+                var underOne="Total Tracers available";
+                var undertwo="Normal saline Availability";
+                var underpop="Normal Saline/Dextrose 5%/Dextrose Saline Iv Solution - Available";
+                var underthree="Normal Saline/Dextrose 5%/Dextrose Saline Iv Solution - Eligible";
+                var underfour="Disposable Syringe Availability";
+                var underANC="Disposable Syringe And Needles - Available";
+                var underDe="Disposable Syringe And Needles - Eligible";
+                var underMeb="Depo-Prover Availability";
+                var underCov="Depo - Provera Available";
+                var underSy="Depo-Provera Eligible";
+                var underSyP="Oral Rehydration Availability";
+                var underSyT="Oral Rehydration Salts - Available";
+                var underHIV="Oral Rehydration Salts - Eligible";
+                var underHIVTest="Penta Valent Availability";
+                var underHIVTestDone="Penta Valent – Available";
+                var underHIVTestRate="Penta Valent - Eligible";
+                var underHIVTestDev="Albendazole Availability";
+                var underHIVTestDevS="Albendazole / Mebendazole Oral - Available";
+                var underHIVTestDevP="Albendazole / Mebendazole Oral - Eligible";
+                var underHIVTestDevPone="Ergometrine Availability";
+                var underHIVTestDevPtwo="Ergometrine/Oxytocin Injectable/Misoprostol - Available";
+                var underHIVTestDevPthree="Ergometrine/Oxytocin Injectable/Misoprostol - Eligible";
+                var underHIVTestDevPfour="Amoxycillin Availability";
+                var underHIVTestDevPfone="Amoxycillin / Cotrimoxazole oral Available";
+                var underHIVTestDevPfive="Amoxycillin / Cotrimoxazole oral Eligible";
+                var underHIVTestDevPsix="Artemether / Lumefantrine Oral Available";
+                var underHIVTestDevPsev="Artemether / Lumefantrine Oral (ALU) - Available";
+                var underHIVTestDevPeight="Artemether / Lumefantrine Oral (ALU) - Eligible";
+                var underHIVTestDevPnine="Mean number of Tracers available By Quarter";
+                var underHIVTestDevPtwenty="Mean Parastatal Facility Tracers available By Quarter";
+                var underHIVTestDevPtwentyOne="Mean FBO Facility Tracers available By Quarter";
+                var underHIVTestDevPtwentytwo="Mean Public Facility Tracers available By Quarter";
+                var underHIVTestDevPtwentythree="Mean Private Facility Tracers available By Quarter";
+                $scope.arrayed=[{'underOne':'Total Tracers available','undertwo':'Normal saline Availability','underpop':'Normal Saline/Dextrose 5%/Dextrose Saline Iv Solution - Available',
+                    'underthree':'Normal Saline/Dextrose 5%/Dextrose Saline Iv Solution - Eligible','underfour':'Disposable Syringe Availability',
+                    'underANC': 'Disposable Syringe And Needles - Available',
+                    'underDe':'Disposable Syringe And Needles - Eligible','underMeb':'Depo-Prover Availability',
+                    'underCov':'Depo - Provera Available','underSy':'Depo-Provera Eligible',
+                    'underSyP':'Oral Rehydration Availability','underSyT':'Oral Rehydration Salts - Available','underHIV':'Oral Rehydration Salts - Eligible',
+                    'underHIVTest':'Penta Valent Availability','underHIVTestDone':'Penta Valent - Available','underHIVTestRate':'Penta Valent - Eligible',
+                    'underHIVTestDev':'Albendazole Availability','underHIVTestDevS':'Albendazole / Mebendazole Oral- Available',
+                    'underHIVTestDevP':'Albendazole / Mebendazole Oral - Eligible','underHIVTestDevPone':'Ergometrine Availability',
+                    'underHIVTestDevPtwo':'Ergometrine/Oxytocin Injectable/Misoprostol - Available',
+                    'underHIVTestDevPthree':'Ergometrine/Oxytocin Injectable/Misoprostol - Eligible',
+                    'underHIVTestDevPfour':'Amoxycillin Availability',
+                    'underHIVTestDevPfone':'Amoxycillin / Cotrimoxazole oral Available','underHIVTestDevPfive':'Amoxycillin / Cotrimoxazole oral Eligible',
+                    'underHIVTestDevPsix':'Artemether / Lumefantrine Oral Available','underHIVTestDevPsev':'Artemether / Lumefantrine Oral (ALU) - Available',
+                    'underHIVTestDevPeight':'Artemether / Lumefantrine Oral (ALU) - Eligible','underHIVTestDevPnine':'Mean number of Tracers available By Quarter',
+                    'underHIVTestDevPtwenty':'Mean Parastatal Facility Tracers available By Quarter','underHIVTestDevPtwentyOne':'Mean FBO Facility Tracers available By Quarter',
+                    'underHIVTestDevPtwentytwo':'Mean Public Facility Tracers available By Quarter','underHIVTestDevPtwentythree':'Mean Private Facility Tracers available By Quarter'
+                  }];
                 angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
+                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
+                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                        underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                        underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
+                        underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
+                        underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
+                        underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
+                        underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
+                        underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
+                        underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region),
+                        underHIVTestDevPone:underHIVTestDevPoneObject(underHIVTestDevPone,dataTable,dataTable.rows,region),
+                        underHIVTestDevPtwo:underHIVTestDevPtwoObject(underHIVTestDevPtwo,dataTable,dataTable.rows,region),
+                        underHIVTestDevPthree:underHIVTestDevPthreeObject(underHIVTestDevPthree,dataTable,dataTable.rows,region),
+                        underHIVTestDevPfour:underHIVTestDevPfourObject(underHIVTestDevPfour,dataTable,dataTable.rows,region),
+                        underHIVTestDevPfone:underHIVTestDevPfoneObject(underHIVTestDevPfone,dataTable,dataTable.rows,region),
+                        underHIVTestDevPfive:underHIVTestDevPfiveObject(underHIVTestDevPfive,dataTable,dataTable.rows,region),
+                        underHIVTestDevPsix:underHIVTestDevPsixObject(underHIVTestDevPsix,dataTable,dataTable.rows,region),
+                        underHIVTestDevPsev:underHIVTestDevPsevObject(underHIVTestDevPsev,dataTable,dataTable.rows,region),
+                        underHIVTestDevPeight:underHIVTestDevPeightObject(underHIVTestDevPeight,dataTable,dataTable.rows,region),
+                        underHIVTestDevPnine:underHIVTestDevPnineObject(underHIVTestDevPnine,dataTable,dataTable.rows,region),
+                        underHIVTestDevPtwenty:underHIVTestDevPtwentyObject(underHIVTestDevPtwenty,dataTable,dataTable.rows,region),
+                        underHIVTestDevPtwentyOne:underHIVTestDevPtwentyOneObject(underHIVTestDevPtwentyOne,dataTable,dataTable.rows,region),
+                        underHIVTestDevPtwentytwo:underHIVTestDevPtwentytwoObject(underHIVTestDevPtwentytwo,dataTable,dataTable.rows,region),
+                        underHIVTestDevPtwentythree:underHIVTestDevPtwentythreeObject(underHIVTestDevPtwentythree,dataTable,dataTable.rows,region)
+                    });
 
                 });
+                $scope.loadingImage=false;
                 $scope.tableContent=generalArray;
                 console.log($scope.tableContent);
-
+                //},2000);
+            }).error(function(error){
+                //$scope.loadingImage=false;
+                $scope.authenticationFailed=error;
+                console.log($scope.authenticationFailed);
             });
 
         }
-        $scope.downloadExcelTotal = function(){
+        $scope.downloadExcelMedicineTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
@@ -1348,6 +1423,315 @@ var underfourObject=function(underfour,ObjectNames,ObectData,orgUnits){
     angular.forEach(ObectData,function(value) {
         if(value[1]==orgUnits) {
             if (ObjectNames.metaData.names[value[0]].indexOf(underfour) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underpopObject=function(underpop,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underpop) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+
+var underANCObject=function(underANC,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underANC) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underDeObject=function(underDe,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underDe) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underMebObject=function(underMeb,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underMeb) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underCovObject=function(underCov,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underCov) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSyObject=function(underSy,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSy) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSyPObject=function(underSyP,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSyP) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSyTObject=function(underSyT,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSyT) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVObject=function(underHIV,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIV) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestObject=function(underHIVTest,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTest) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDoneObject=function(underHIVTestDone,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDone) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestRateObject=function(underHIVTestRate,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestRate) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevObject=function(underHIVTestDev,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDev) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevSObject=function(underHIVTestDevS,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevS) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPoneObject=function(underHIVTestDevPone,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPone) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPtwoObject=function(underHIVTestDevPtwo,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPtwo) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPthreeObject=function(underHIVTestDevPthree,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPthree) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPfourObject=function(underHIVTestDevPfour,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPfour) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPfoneObject=function(underHIVTestDevPfone,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPfone) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPfiveObject=function(underHIVTestDevPfive,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPfive) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPsixObject=function(underHIVTestDevPsix,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPsix) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPsevObject=function(underHIVTestDevPsev,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPsev) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPeightObject=function(underHIVTestDevPeight,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPeight) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPnineObject=function(underHIVTestDevPnine,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPnine) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPtwentyObject=function(underHIVTestDevPtwenty,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPtwenty) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPtwentyOneObject=function(underHIVTestDevPtwentyOne,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPtwentyOne) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPtwentytwoObject=function(underHIVTestDevPtwentytwo,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPtwentytwo) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPtwentythreeObject=function(underHIVTestDevPtwentythree,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevPtwentythree) >= 0) {
                 num = value[2];
             }
         }

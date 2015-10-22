@@ -76,7 +76,7 @@
                             <highchart ng-if="!card.displayTable && !card.displayMap" config="card.chartObject"></highchart>
                         </div>
                         <div style="width: 100%" ng-if="card.displayMap">
-                            <p ng-if="card.chartObject.loading" class="center"><img src="assets/img/loading.gif">Loading ....</p>
+                            <p ng-if="card.chartObject.loading" class="center"><img src="assets/img/loading.gif" style="width:40%;height:40%"></p>
                             <openlayers ng-if="!card.chartObject.loading" ol-center="Africa" ol-defaults="defaults" custom-layers="true"  height="400px" >
                                 <ol-layer ol-layer-properties="layer" name="test" ng-repeat="layer in layers"></ol-layer>
                             </openlayers>
