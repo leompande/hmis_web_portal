@@ -731,36 +731,74 @@ angular.module("hmisPortal")
         $rootScope.lastCard=function(){
 
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
                 j_password: "TUZO2015"
             }}).success(function(dataTable){
                 var generalArray=[];
-
-                var underOne="ANC IPT 2 coverage";
-                var undertwo="ANC Malaria prevalence";
-                var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
-                var underfour="ANC IPT 1 coverage";
-                $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
+                var underOne="ANC 1st Visit Before 12 weeks rate";
+                var undertwo="Hudhurio la Kwanza ANC Ujauzito chini ya Wiki 12";
+                var underpop="Idadi ya Watu";
+                var underthree="Antenatal care coverage";
+                var underfour="ANC 4th visits Coverage";
+                var underANC="Wajawazito Hudhurio la nne";
+                var underDe="ANC de-worming rate";
+                var underMeb="Wajawazito Waliopewa Dawa ya minyoo (Mebendazole / Albendazole )";
+                var underCov="ANC Coverage for Women of Under 20 years";
+                var underSy="ANC Syphilis Prevalance";
+                var underSyP="Wajawazito Wenye Maambukizi ya Kaswende";
+                var underSyT="Wajawazito Waliopima Kaswende";
+                var underHIV="ANC HIV prevalence (15-24 years)";
+                var underHIVTest="Waliokutwa na Maambukizi ya VVU-Umri Chini ya Miaka 25";
+                var underHIVTestDone="Wajawazito waliopimwa VVU kipimo cha kwanza chini ya umri wa miaka 25";
+                var underHIVTestRate="Health Facility Delivery Rate";
+                var underHIVTestDev="Waliojifungulia kituoni";
+                var underHIVTestDevS="Deliveries by skilled attendants";
+                var underHIVTestDevP="Waliozalishwa na Watoa Huduma Wenye Ujuzi";
+                $scope.arrayed=[{'underOne':'ANC 1st Visit Before 12 weeks rate','undertwo':'ANC First Visit Attendances','underpop':'Population',
+                    'underthree':'Antenatal care coverage','underfour':'ANC 4th Visit Coverage',
+                    'underANC': 'ANC 4th Visit','underDe':'ANC de-worming rate','underMeb':'ANC mebendazole tablets given',
+                    'underCov':'ANC Coverage for Women of Under 20 years','underSy':'ANC Syphilis Prevalance',
+                    'underSyP':'ANC Syphilis Positive','underSyT':'ANC Syphilis Tested','underHIV':'ANC HIV prevalence (15-24 years)',
+                    'underHIVTest':'ANC HIV tests positive (15-24 years)','underHIVTestDone':'ANC HIV test done','underHIVTestRate':'Health Facility Delivery Rate',
+                    'underHIVTestDev':'Deliveries at health facilities','underHIVTestDevS':'Deliveries by skilled attendants',
+                    'underHIVTestDevP':'Deliveries by skilled personnel'
+                }];
                 angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
+                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
+                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                        underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                        underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
+                        underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
+                        underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
+                        underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
+                        underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
+                        underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
+                        underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
+                    });
 
                 });
+                $scope.loadingImage=false;
                 $scope.tableContent=generalArray;
                 console.log($scope.tableContent);
-
+                //},2000);
+            }).error(function(error){
+                //$scope.loadingImage=false;
+                $scope.authenticationFailed=error;
+                console.log($scope.authenticationFailed);
             });
 
         }
-        $scope.downloadExcelTotal = function(){
+        $scope.downloadExcelMaternalTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
@@ -1067,6 +1105,172 @@ var underfourObject=function(underfour,ObjectNames,ObectData,orgUnits){
     angular.forEach(ObectData,function(value) {
         if(value[1]==orgUnits) {
             if (ObjectNames.metaData.names[value[0]].indexOf(underfour) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underpopObject=function(underpop,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underpop) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+
+var underANCObject=function(underANC,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underANC) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underDeObject=function(underDe,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underDe) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underMebObject=function(underMeb,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underMeb) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underCovObject=function(underCov,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underCov) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSyObject=function(underSy,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSy) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSyPObject=function(underSyP,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSyP) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underSyTObject=function(underSyT,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underSyT) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVObject=function(underHIV,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIV) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestObject=function(underHIVTest,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTest) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDoneObject=function(underHIVTestDone,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDone) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestRateObject=function(underHIVTestRate,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestRate) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevObject=function(underHIVTestDev,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDev) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevSObject=function(underHIVTestDevS,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevS) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underHIVTestDevPObject=function(underHIVTestDevP,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underHIVTestDevP) >= 0) {
                 num = value[2];
             }
         }

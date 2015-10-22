@@ -473,9 +473,9 @@ angular.module("hmisPortal")
         $rootScope.lastCard=function(){
             $scope.loadingImage=true;
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;tIs7rshvixe;qN1zFaX9mVe&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;tIs7rshvixe;qN1zFaX9mVe&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
@@ -485,26 +485,46 @@ angular.module("hmisPortal")
                 var generalArray=[];
                 var underOne="Wajawazito Maliopima Malaria";
                 var undertwo="Waliogundulika Kuwa na Malaria";
+                var underMaralia="ANC Malaria prevalence";
                 var underthree="Wajawazito Waliopewa IPT2";
                 var underfour="Jumla Hudhurio la Kwanza";
-                $scope.arrayed=[{'underOne':'ANC Pregnant women tested for Malaria','undertwo':'ANC Pregnant wowmen having Malaria Positive after test','underthree':'Pregnant women receiving two dose of SP','underfour':'ANC First Visit Attendances'}];
+                var underIPT2="ANC IPT 2 coverage";
+                var underITN="ANC Proportion of pregnant women receiving ITN Voucher";
+                var underITNOne="Wajawazito Waliopewa Hati Punguzo za Vyandaruwa";
+                var underIPD="NMCP Proportion of confirmed Malaria cases in IPD";
+                var underOPD="NMCP Proportion of confirmed Malaria cases in OPD";
+                $scope.arrayed=[{'underOne':'ANC Pregnant women tested for Malaria','undertwo':'ANC Pregnant wowmen having Malaria Positive after test','underMaralia':'ANC Malaria prevalence',
+                    'underthree':'Pregnant women receiving two dose of SP','underfour':'ANC First Visit Attendances',
+                    'underIPT2': 'ANC IPT 2 coverage','underITN':'ANC Proportion  of pregnant women receiving ITN Voucher','underITNOne':'pregnant women received ITN Voucher',
+                    'underIPD':'Proportional of Malaria cases in  IPD','underOPD':'Proportional of Malaria cases in  OPD'
+                }];
                 angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
+                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underMaralia:underMaraliaObject(underMaralia,dataTable,dataTable.rows,region),
+                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                        underIPT2:underIPT2Object(underIPT2,dataTable,dataTable.rows,region),underITN:underITNObject(underITN,dataTable,dataTable.rows,region),
+                        underITNOne:underITNOneObject(underITNOne,dataTable,dataTable.rows,region),underOPD:underOPDObject(underOPD,dataTable,dataTable.rows,region),
+                        underIPD:underIPDObject(underIPD,dataTable,dataTable.rows,region)
+                    });
 
                 });
                 $scope.loadingImage=false;
                 $scope.tableContent=generalArray;
                 console.log($scope.tableContent);
                 //},2000);
+            }).error(function(error){
+                //$scope.loadingImage=false;
+                $scope.authenticationFailed=error;
+                console.log($scope.authenticationFailed);
             });
 
         }
         $scope.downloadExcelTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:qN1zFaX9mVe;Y6cNfApg9Kf;rB0DvqiPEVA;tIs7rshvixe&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
                 //var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:qN1zFaX9mVe;Y6cNfApg9Kf;rB0DvqiPEVA;tIs7rshvixe&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou"
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou"
                 //var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
@@ -516,7 +536,9 @@ angular.module("hmisPortal")
                 a.href = window.URL.createObjectURL(blob);
                 a.download = "data.xls";
                 a.click();
-            });
+            }).error(function(error){
+                alert("Aunthentification Failed " +error);
+            });;
         }
 
 
@@ -810,6 +832,73 @@ var underfourObject=function(underfour,ObjectNames,ObectData,orgUnits){
     angular.forEach(ObectData,function(value) {
         if(value[1]==orgUnits) {
             if (ObjectNames.metaData.names[value[0]].indexOf(underfour) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+
+var underMaraliaObject=function(underMaralia,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underMaralia) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underITNObject=function(underITN,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underITN) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+  return num;
+}
+var underIPT2Object=function(underIPT2,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underIPT2) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underITNOneObject=function(underITNOne,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underITNOne) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underOPDObject=function(underOPD,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underOPD) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underIPDObject=function(underIPD,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underIPD) >= 0) {
                 num = value[2];
             }
         }

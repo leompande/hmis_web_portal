@@ -367,36 +367,52 @@ angular.module("hmisPortal")
         $rootScope.lastCard=function(){
 
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
                 j_password: "TUZO2015"
             }}).success(function(dataTable){
                 var generalArray=[];
-
-                var underOne="ANC IPT 2 coverage";
-                var undertwo="ANC Malaria prevalence";
-                var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
-                var underfour="ANC IPT 1 coverage";
-                $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
+                var underOne="Measles vaccination coverage to children under 1 year";
+                var undertwo="Surua (Measles) zilizotolewa";
+                var underANC="ANC Proportion of pregnant women receiving TT2+";
+                var underthree="Wajawazito Waliopata Chanjo ya TT2+";
+                var underfour="Hudhurio la Kwanza ANC Ujauzito chini ya Wiki 12";
+                var underANC2="Hudhurio la Kwanza ANC Ujauzito Wiki 12 au Zaidi";
+                var underPENTA="PENTA 3 vaccination coverage children under 1 year";
+                var underPenta="Watoto Waliochanjwa Penta";
+                 $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Surua (Measles) zilizotolewa','underANC':'ANC Proportion of pregnant women receiving TT2+',
+                    'underthree':'Wajawazito Waliopata Chanjo ya TT2+','underfour':'ANC first visit before 12 weeks',
+                    'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'Watoto Waliochanjwa Penta'
+                  }];
                 angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
+                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                        underANC2:underANC2Object(underANC2,dataTable,dataTable.rows,region),underPENTA:underPENTAObject(underPENTA,dataTable,dataTable.rows,region),
+                        underPenta:underPentaObject(underPenta,dataTable,dataTable.rows,region)
+                    });
 
                 });
+                $scope.loadingImage=false;
                 $scope.tableContent=generalArray;
                 console.log($scope.tableContent);
-
+                //},2000);
+            }).error(function(error){
+                //$scope.loadingImage=false;
+                $scope.authenticationFailed=error;
+                console.log($scope.authenticationFailed);
             });
 
         }
-        $scope.downloadExcelTotal = function(){
+        $scope.downloadIvdExcelTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WadaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WadaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
                 j_username: "tuzoengelbert",
@@ -701,6 +717,51 @@ var underfourObject=function(underfour,ObjectNames,ObectData,orgUnits){
     angular.forEach(ObectData,function(value) {
         if(value[1]==orgUnits) {
             if (ObjectNames.metaData.names[value[0]].indexOf(underfour) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+
+var underANCObject=function(underANC,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underANC) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underANC2Object=function(underANC2,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underANC2) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underPENTAObject=function(underPENTA,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underPENTA) >= 0) {
+                num = value[2];
+            }
+        }
+    });
+    return num;
+}
+var underPentaObject=function(underPenta,ObjectNames,ObectData,orgUnits){
+    var num='';
+    angular.forEach(ObectData,function(value) {
+        if(value[1]==orgUnits) {
+            if (ObjectNames.metaData.names[value[0]].indexOf(underPenta) >= 0) {
                 num = value[2];
             }
         }

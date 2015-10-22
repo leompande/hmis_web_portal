@@ -116,15 +116,34 @@
             </div>
             <div class="col s12 m12">
                 <div class="card z-depth-2 teal lighten-5">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <table class="bordered striped centered">
+                    <div class="card-image waves-effect waves-block waves-light" style="height: 400px;overflow: scroll">
+                        <div ng-show="authenticationFailed">
+                            <p class="red-text">Please check the internet connection {{authenticationFailed.status}} Try Agin</p>
+                        </div>
+                        <p ng-if="loadingImage" class="center"><img src="assets/img/loading.gif" class="small">Loading ....</p>
+                        <table ng-if="!loadingImage" class="bordered striped centered">
                             <thead>
                             <tr ng-repeat="header in arrayed">
                                 <th>Organisation unit</th>
-                                <th>{{header.one}}</th>
-                                <th>{{header.two}}</th>
-                                <th>{{header.three}}</th>
-                                <th>{{header.four}}</th>
+                                <th>{{header.underOne}}</th>
+                                <th>{{header.undertwo}}</th>
+                                <th>{{header.underpop}}</th>
+                                <th>{{header.underthree}}</th>
+                                <th>{{header.underfour}}</th>
+                                <th>{{header.underANC}}</th>
+                                <th>{{header.underDe}}</th>
+                                <th>{{header.underMeb}}</th>
+                                <!--<th>{{header.underIPD}}</th>-->
+                                <th>{{header.underCov}}</th>
+                                <th>{{header.underSy}}</th>
+                                <th>{{header.underSyP}}</th>
+                                <th>{{header.underSyT}}</th>
+                                <th>{{header.underHIV}}</th>
+                                <th>{{header.underHIVTest}}</th>
+                                <th>{{header.underHIVTestRate}}</th>
+                                <th>{{header.underHIVTestDev}}</th>
+                                <th>{{header.underHIVTestDevS}}</th>
+                                <th>{{header.underHIVTestDevP}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -132,9 +151,23 @@
                                 <td>{{content.orgUnit}}</td>
                                 <td>{{content.underOne}}</td>
                                 <td>{{content.undertwo}}</td>
+                                <td>{{content.underpop}}</td>
                                 <td>{{content.underthree}}</td>
                                 <td>{{content.underfour}}</td>
-
+                                <td>{{content.underANC}}</td>
+                                <td>{{content.underDe}}</td>
+                                <td>{{content.underMeb}}</td>
+                                <!--<td>{{content.underIPD}}</td>-->
+                                <td>{{content.underCov}}</td>
+                                <td>{{content.underSy}}</td>
+                                <td>{{content.underSyP}}</td>
+                                <td>{{content.underSyT}}</td>
+                                <td>{{content.underHIV}}</td>
+                                <td>{{content.underHIVTest}}</td>
+                                <td>{{content.underHIVTestRate}}</td>
+                                <td>{{content.underHIVTestDev}}</td>
+                                <td>{{content.underHIVTestDevS}}</td>
+                                <td>{{content.underHIVTestDevP}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -143,7 +176,7 @@
                         <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
 
                         <p>
-                            <a class="btn btn-link right" ng-click="downloadExcelTotal()" target="_blank">
+                            <a class="btn btn-link right" ng-click="downloadExcelMaternalTotal()" target="_blank">
                                 <span class="glyphicon glyphicon-share"></span> Export to Excel
                             </a>
                         </p>
