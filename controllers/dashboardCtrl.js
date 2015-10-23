@@ -369,7 +369,7 @@ angular.module("hmisPortal")
                 cardObject.chartObject.xAxis.categories = [];
                 //
                 var dataToUse = $scope.preparePopData(data);
-                cardObject.chartObject.title.text = cardObject.title +" ( "+$scope.totalPop +" )";
+                cardObject.chartObject.title.text = cardObject.title;
                 angular.forEach(dataToUse,function(val){
                     cardObject.chartObject.xAxis.categories.push(val.name);
                 });
