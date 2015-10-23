@@ -900,10 +900,7 @@ angular.module("hmisPortal")
 
                 url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+            $http.get(url,{withCredentials: true,'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
                 a.href = window.URL.createObjectURL(blob);
@@ -933,11 +930,7 @@ angular.module("hmisPortal")
                 $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             cardObject.chartObject.loading = true;
-            $http.get($scope.url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-
-            }}).success(function(data){
+            $http.get($scope.url,{withCredentials: true}).success(function(data){
                 $scope.area = [];
                 cardObject.chartObject.xAxis.categories = [];
                 //
@@ -1012,10 +1005,7 @@ angular.module("hmisPortal")
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
-            }}).success(function(dataTable){
+            $http.get(lastUrl,{withCredentials: true }).success(function(dataTable){
                 var generalArray=[];
                 var underOne="Total Tracers available";
                 var undertwo="Normal saline Availability";
@@ -1114,10 +1104,7 @@ angular.module("hmisPortal")
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+            $http.get(lastUrl,{withCredentials: true,'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
                 a.href = window.URL.createObjectURL(blob);
@@ -1148,11 +1135,7 @@ angular.module("hmisPortal")
             shared.facility =3029;
             var url = 'https://dhis.moh.go.tz/api/organisationUnits.geojson?parent='+parentUid+'&level='+level;
             card.chartObject.loading = true;
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-
-            }}).success(
+            $http.get(url,{withCredentials: true}).success(
                 function(data) {
                     card.chartObject.loading = false;
                     var TotalGeo = {
@@ -1301,10 +1284,7 @@ angular.module("hmisPortal")
                                 if(feature) {
                                     // looping throught indicator types
                                     var url1 = "http://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+card.data+"&dimension=pe:"+$scope.thisyear+"&filter=ou:"+feature.getId()+"&displayProperty=NAME";
-                                    $http.get(url1,{withCredentials: true, params : {
-                                        j_username: "portal",
-                                        j_password: "Portal123"
-                                    }}).success(
+                                    $http.get(url1,{withCredentials: true}).success(
                                         function(data) {
                                             var currentDistrict = $scope.districts[feature.getId()];
                                             if(data.rows[0]){
