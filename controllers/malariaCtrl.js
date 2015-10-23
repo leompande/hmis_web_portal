@@ -718,7 +718,7 @@ angular.module("hmisPortal")
                                 scope.selectedDistrict = feature ? $scope.districts[feature.getId()] : '';
                                 if(feature) {
                                     // looping throught indicator types
-                                    var url1 = "http://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+card.data+"&dimension=pe:"+$scope.thisyear+"&filter=ou:"+feature.getId()+"&displayProperty=NAME";
+                                    var url1 = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+card.data+"&dimension=pe:"+$scope.thisyear+"&filter=ou:"+feature.getId()+"&displayProperty=NAME";
                                     $http.get(url1,{withCredentials: true, params : {
                                         j_username: "portal",
                                         j_password: "Portal123"

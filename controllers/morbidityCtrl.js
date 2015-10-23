@@ -1048,15 +1048,15 @@ angular.module("hmisPortal")
         $scope.downloadExcel = function(id){
             var url = "";
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                url = "https://dhis.moh.go.tz/api/analytics.xls?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }else{
 
-                url = "https://dhis.moh.go.tz/api/analytics.xls?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }
             $http.get(url,{withCredentials: true, params : {
                 j_username: "portal",
                 j_password: "Portal123"
-            },'Content-Type': 'application/octet-stream'}).success(function(data){
+            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
                 a.href = window.URL.createObjectURL(blob);
