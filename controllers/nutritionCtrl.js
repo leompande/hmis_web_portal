@@ -201,10 +201,7 @@ angular.module("hmisPortal")
 
                 url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+            $http.get(url,{withCredentials: true,'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
                 a.href = window.URL.createObjectURL(blob);
@@ -234,11 +231,7 @@ angular.module("hmisPortal")
                 $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             cardObject.chartObject.loading = true;
-            $http.get($scope.url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-
-            }}).success(function(data){
+            $http.get($scope.url,{withCredentials: true }).success(function(data){
                 $scope.area = [];
                 cardObject.chartObject.xAxis.categories = [];
                 //
@@ -314,10 +307,7 @@ angular.module("hmisPortal")
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(dataTable){
+            $http.get(lastUrl,{withCredentials: true }).success(function(dataTable){
                 var generalArray=[];
                 var underOne="Vitamin A supplementation coverage to children under 1 year";
                 var undertwo="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 12-17";
@@ -355,10 +345,7 @@ angular.module("hmisPortal")
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/octet-stream'}).success(function(data){
+            $http.get(lastUrl,{withCredentials: true,'Content-Type': 'application/octet-stream'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
                 a.href = window.URL.createObjectURL(blob);
