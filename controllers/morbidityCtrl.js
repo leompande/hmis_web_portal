@@ -1166,8 +1166,8 @@ angular.module("hmisPortal")
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             }}).success(function(dataTable){
                 var generalArray=[];
                 var underOne="Acute Diarrhoea (<14 Days)";
@@ -1233,8 +1233,8 @@ angular.module("hmisPortal")
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);

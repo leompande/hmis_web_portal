@@ -315,8 +315,8 @@ angular.module("hmisPortal")
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             }}).success(function(dataTable){
                 var generalArray=[];
                 var underOne="Vitamin A supplementation coverage to children under 1 year";
@@ -356,8 +356,8 @@ angular.module("hmisPortal")
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             },'Content-Type': 'application/octet-stream'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);

@@ -740,8 +740,8 @@ angular.module("hmisPortal")
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             }}).success(function(dataTable){
                 var generalArray=[];
                 var underOne="ANC 1st Visit Before 12 weeks rate";
@@ -805,8 +805,8 @@ angular.module("hmisPortal")
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);
