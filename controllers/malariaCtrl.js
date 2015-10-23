@@ -20,7 +20,7 @@ angular.module("hmisPortal")
             xAxis: {
                 categories: [],
                 labels:{
-                    rotation: -70,
+                    rotation: -90,
                     style:{ "color": "#000000", "fontWeight": "normal" }
                 }
             },
@@ -72,7 +72,7 @@ angular.module("hmisPortal")
                 xAxis: {
                     categories: [],
                     labels:{
-                        rotation: -70,
+                        rotation: -90,
                         style:{ "color": "#000000", "fontWeight": "normal" }
                     }
                 },
@@ -126,7 +126,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -179,7 +179,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -232,7 +232,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -285,7 +285,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -315,12 +315,17 @@ angular.module("hmisPortal")
 
         $scope.prepareData = function(jsonObject){
             var data = [];
+            data.push({'name':jsonObject.metaData.names[$rootScope.selectedOrgUnit],'id':$rootScope.selectedOrgUnit,'value':getDataFromUrl(jsonObject.rows,$rootScope.selectedOrgUnit)});
+
             angular.forEach(jsonObject.metaData.ou,function(region){
-                data.push({'name':jsonObject.metaData.names[region],'id':region,'value':getDataFromUrl(jsonObject.rows,region)});
+                if(region != $rootScope.selectedOrgUnit ){
+                    data.push({'name':jsonObject.metaData.names[region],'id':region,'value':getDataFromUrl(jsonObject.rows,region)});
+                }
             });
             return data;
 
         };
+
 
 
 
@@ -360,10 +365,10 @@ angular.module("hmisPortal")
         $scope.downloadExcel = function(id){
             var url = "";
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }else{
 
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }
             $http.get(url,{withCredentials: true, params : {
                 j_username: "portal",
@@ -393,9 +398,9 @@ angular.module("hmisPortal")
             cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
 
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             cardObject.chartObject.loading = true;
             $http.get($scope.url,{withCredentials: true, params : {

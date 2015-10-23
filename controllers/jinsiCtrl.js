@@ -223,64 +223,14 @@ angular.module("hmisPortal")
 
 
         //
-        $scope.cards.malaria = [{
-            title:'HIV DATA COMPLETENESS',
-            description:'HIV DATA COMPLETENESS',
-            cardClass:"col s12 m12",
-            data:'Hwcn7ajwZ1p;Dp0VF7ssmcH;CxaDPrjhmax;db4lfMnttc6;',
-            icons:[
-                {name:'table',image:'table.jpg',action:''},
-                {name:'bar',image:'bar.png',action:''},
-                {name:'line',image:'line.png',action:''},
-                {name:'combined',image:'combined.jpg',action:''},
-                {name:'column',image:'column.png',action:''},
-                {name:'area',image:'area.jpg',action:''},
-                {name:'pie',image:'pie.png',action:''}
-            ],
-            dataSource:'dhis',
-            size:'small',
-            displayTable:false,
-            displayMap:false,
-            chart:'bar',
-            chartObject:{
-                title: {
-                    text: 'HIV DATA'
-                },
-                xAxis: {
-                    categories: [],
-                    labels:{
-                        rotation: -70,
-                        style:{ "color": "#000000", "fontWeight": "normal" }
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: ''
-                    },labels:{
-                        style:{ "color": "#000000", "fontWeight": "bold" }
-                    }
-                },
-                labels: {
-                    items: [{
-                        html: 'HIV DATA',
-                        style: {
-                            left: '50px',
-                            top: '18px',
-                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                        }
-                    }]
-                },
-                series: []
-            }
+        $scope.cards.malaria = [
 
-        },
             {
-                title:'RCHS DATA COMPLETENESS',
-                description:'RCHS DATA COMPLETENESS',
+                title:'RCH DATA COMPLETENESS',
+                description:'RCH DATA COMPLETENESS',
                 cardClass:"col m12 s12",
                 cardSize:"medium",
-                data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;QntdhuQfgvT;zeEp4Xu2GOm',
+                data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;rm3y3VHPiFD;QntdhuQfgvT;zeEp4Xu2GOm',
                 icons:[
                     {name:'table',image:'table.jpg',action:''},
                     {name:'bar',image:'bar.png',action:''},
@@ -382,58 +332,57 @@ angular.module("hmisPortal")
 
             },
             {
-                title:'RCH DATA COMPLETENESS',
-                description:'RCH DATA COMPLETENESS',
-                cardClass:"col m12 s12",
-                cardSize:"medium",
-                data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;rm3y3VHPiFD;QntdhuQfgvT;zeEp4Xu2GOm',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''}
-                ],
-                dataSource:'dhis',
-                size:'small',
-                displayTable:false,
-                displayMap:false,
-                chart:'bar',
-                chartObject:{
+            title:'NACP DATA COMPLETENESS',
+            description:'NACP DATA COMPLETENESS',
+            cardClass:"col s12 m12",
+            data:'Hwcn7ajwZ1p;Dp0VF7ssmcH;CxaDPrjhmax;db4lfMnttc6',
+            icons:[
+                {name:'table',image:'table.jpg',action:''},
+                {name:'bar',image:'bar.png',action:''},
+                {name:'line',image:'line.png',action:''},
+                {name:'combined',image:'combined.jpg',action:''},
+                {name:'column',image:'column.png',action:''},
+                {name:'area',image:'area.jpg',action:''},
+                {name:'pie',image:'pie.png',action:''}
+            ],
+            dataSource:'dhis',
+            size:'small',
+            displayTable:false,
+            displayMap:false,
+            chart:'bar',
+            chartObject:{
+                title: {
+                    text: 'HIV DATA'
+                },
+                xAxis: {
+                    categories: [],
+                    labels:{
+                        rotation: -70,
+                        style:{ "color": "#000000", "fontWeight": "normal" }
+                    }
+                },
+                yAxis: {
+                    min: 0,
                     title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -70,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        text: ''
+                    },labels:{
+                        style:{ "color": "#000000", "fontWeight": "bold" }
+                    }
+                },
+                labels: {
+                    items: [{
+                        html: 'HIV DATA',
+                        style: {
+                            left: '50px',
+                            top: '18px',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
                         }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
+                    }]
+                },
+                series: []
+            }
 
-            },
+        },
             {
                 title:'NTLP DATA COMPLETENESS',
                 description:'NTLP DATA COMPLETENESS',
@@ -494,11 +443,15 @@ angular.module("hmisPortal")
             var elements = [];
             var arr = card.data.split(";")
             angular.forEach(arr,function(val){
-                elements.push({'name':jsonObject.metaData.names[val],'uid':val})
-            });
+                var name=jsonObject.metaData.names[val].replace("NACP_", " ").replace("HMIS_", " ");
 
+                 elements.push({'name':name,'uid':val})
+            });
+            data.push({'name': jsonObject.metaData.names[$rootScope.selectedOrgUnit], 'id': $rootScope.selectedOrgUnit});
             angular.forEach(jsonObject.metaData.ou,function(region){
-                data.push({'name':jsonObject.metaData.names[region],'id':region});
+                if(region != $rootScope.selectedOrgUnit ) {
+                    data.push({'name': jsonObject.metaData.names[region], 'id': region});
+                }
             });
             structure.regions = data;
             structure.elements = elements;
@@ -510,15 +463,15 @@ angular.module("hmisPortal")
             var url = "";
             if(card.dataSource == 'etl'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    url = "https:/etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https:/etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }else{
-                    url = "https://etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https://etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }
             }else if(card.dataSource == 'dhis'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }else{
-                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }
             }
 
@@ -569,16 +522,16 @@ angular.module("hmisPortal")
             $scope.area = [];
             if(cardObject.dataSource == 'etl'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }else{
-                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
             }else if(cardObject.dataSource == 'dhis'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
 
-                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }else{
-                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
             }
 
@@ -677,7 +630,7 @@ angular.module("hmisPortal")
 
         $rootScope.firstClick1 = function(){
             $scope.preparejinsiSeries();
-            $scope.prepareSeries();
+            $rootScope.firstClick2();
             angular.forEach($scope.cards.malaria,function(value){
                 $scope.preparecompletenesSeries(value,value.chart);
             });
