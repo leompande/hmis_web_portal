@@ -7,8 +7,8 @@
  */
 
 angular.module("hmisPortal")
-    .config(function() {
-
+    .config(function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
     })
     .controller("tracermedicineCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
 

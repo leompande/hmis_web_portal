@@ -3,6 +3,9 @@
  */
 
 angular.module("hmisPortal")
+    .config(function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
+    })
     .controller("jinsiCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
 
         $scope.cards = {};

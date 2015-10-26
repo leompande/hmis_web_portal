@@ -2,8 +2,8 @@
  * Created by leo on 10/21/15.
  */
 angular.module("hmisPortal")
-    .config(function() {
-
+    .config(function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
     })
     .controller("ivdCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
 
