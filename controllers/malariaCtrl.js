@@ -543,7 +543,7 @@ angular.module("hmisPortal")
                 a.click();
             }).error(function(error){
                 alert("Aunthentification Failed " +error);
-            });;
+            });
         }
 
 
