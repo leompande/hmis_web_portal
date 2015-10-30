@@ -4,7 +4,7 @@
 
 
 angular.module("hmisPortal")
-    .config(function() {
+    .run(function() {
            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
                 {withCredentials: true, params : {
                     j_username: "portal", j_password: "Portal123"
