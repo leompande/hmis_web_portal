@@ -3,6 +3,14 @@
  */
 angular.module("hmisPortal")
     .run( function($rootScope, $location) {
+        $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
+            {withCredentials: true, params : {
+                j_username: "portal", j_password: "Portal123"
+            }});
+        $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
+            {withCredentials: true, params : {
+                j_username: "portal", j_password: "Portal123"
+            }});
         // register listener to watch route changes
         $rootScope.$on( "$routeChangeStart", function(event, next, current) {
             Pace.restart()

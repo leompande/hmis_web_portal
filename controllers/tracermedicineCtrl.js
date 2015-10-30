@@ -8,8 +8,7 @@
 
 angular.module("hmisPortal")
     .run(function() {
-        jQuery(document).ready(function() {
-            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
+           $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
                 {withCredentials: true, params : {
                     j_username: "portal", j_password: "Portal123"
                 }});
@@ -17,8 +16,8 @@ angular.module("hmisPortal")
                 {withCredentials: true, params : {
                     j_username: "portal", j_password: "Portal123"
                 }});
-        });
-    })
+        })
+
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
