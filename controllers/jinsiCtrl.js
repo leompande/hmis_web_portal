@@ -3,15 +3,8 @@
  */
 
 angular.module("hmisPortal")
-    .run(function() {
-        $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
-            {withCredentials: true, params : {
-                j_username: "portal", j_password: "Portal123"
-            }});
-        $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
-            {withCredentials: true, params : {
-                j_username: "portal", j_password: "Portal123"
-            }});
+    .config(function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
     })
     .controller("jinsiCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
 
