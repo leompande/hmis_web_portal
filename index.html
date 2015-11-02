@@ -38,26 +38,11 @@
         var base = "https://dhis.moh.go.tz/";
         var base1 = "https://etl.moh.go.tz/dhis/";
 
-        function setLinks() {
-            jQuery("#map1").attr("src", base + "api/maps/cH1M9AjUaIZ/data?width=800");
-            jQuery("#map2").attr("src", base + "api/maps/aVYDp6FYyFU/data?width=800");
-            jQuery("#chart1").attr("src", base + "api/charts/j1gNXBgwKVm/data");
-            jQuery("#chart2").attr("src", base + "api/charts/LRFDsb8jcG0/data");
-            jQuery("#table1").load( base + "api/reportTables/zfFRJUAZ8II/data.html");
-            jQuery("#table2").load( base + "api/reportTables/NBt7kGTOQTb/data.html");
-        }
-
         jQuery(document).ready(function() {
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                         j_username: "portal", j_password: "Portal123"
-                    },
-                    setLinks
-            );$.post( base1 + "dhis-web-commons-security/login.action?authOnly=true", {
-                        j_username: "portal", j_password: "Portal123"
-                    },
-                    setLinks
+                    }
             );
-        });
 //        $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
 //                {withCredentials: true, params : {
 //                    j_username: "portal", j_password: "Portal123"

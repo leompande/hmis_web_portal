@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/jinsiCtrl.js" afterPath="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="hmis_portal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="68" selection-start="2591" selection-end="2591" vertical-scroll-proportion="-5.185185" vertical-offset="850" max-vertical-offset="2232">
+            <state line="43" column="21" selection-start="1855" selection-end="1855" vertical-scroll-proportion="0.30501089" vertical-offset="634" max-vertical-offset="1962">
               <folding>
                 <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
               </folding>
@@ -81,10 +81,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="546" column="17" selection-start="23466" selection-end="23466" vertical-scroll-proportion="-0.33333334" vertical-offset="9990" max-vertical-offset="11916">
+            <state line="546" column="17" selection-start="23466" selection-end="23466" vertical-scroll-proportion="0.0" vertical-offset="9990" max-vertical-offset="11916">
               <folding />
             </state>
           </provider>
@@ -163,8 +163,8 @@
         <option value="$PROJECT_DIR$/controllers/mainCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/ivdCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -626,19 +626,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="68" selection-start="2591" selection-end="2591" vertical-scroll-proportion="-5.185185" vertical-offset="850" max-vertical-offset="2232">
-          <folding>
-            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
-          </folding>
+        <state line="546" column="17" selection-start="23466" selection-end="23466" vertical-scroll-proportion="0.0" vertical-offset="9990" max-vertical-offset="11916">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="546" column="17" selection-start="23466" selection-end="23466" vertical-scroll-proportion="-0.33333334" vertical-offset="9990" max-vertical-offset="11916">
-          <folding />
+        <state line="43" column="21" selection-start="1855" selection-end="1855" vertical-scroll-proportion="0.30501089" vertical-offset="634" max-vertical-offset="1962">
+          <folding>
+            <element signature="tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
