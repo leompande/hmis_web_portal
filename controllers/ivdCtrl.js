@@ -2,11 +2,20 @@
  * Created by leo on 10/21/15.
  */
 angular.module("hmisPortal")
-    .config(function() {
-
+    .config(function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
     })
     .controller("ivdCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
-
+        jQuery(document).ready(function() {
+            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
+                {withCredentials: true, params : {
+                    j_username: "portal", j_password: "Portal123"
+                }});
+            $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
+                {withCredentials: true, params : {
+                    j_username: "portal", j_password: "Portal123"
+                }});
+        });
         $scope.cards = {};
         $scope.data = {};
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
@@ -19,7 +28,7 @@ angular.module("hmisPortal")
             xAxis: {
                 categories: [],
                 labels:{
-                    rotation: -70,
+                    rotation: -90,
                     style:{ "color": "#000000", "fontWeight": "normal" }
                 }
             },
@@ -73,7 +82,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -126,7 +135,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -179,7 +188,7 @@ angular.module("hmisPortal")
                     xAxis: {
                         categories: [],
                         labels:{
-                            rotation: -70,
+                            rotation: -90,
                             style:{ "color": "#000000", "fontWeight": "normal" }
                         }
                     },
@@ -209,8 +218,12 @@ angular.module("hmisPortal")
 
         $scope.prepareData = function(jsonObject){
             var data = [];
+            data.push({'name':jsonObject.metaData.names[$rootScope.selectedOrgUnit],'id':$rootScope.selectedOrgUnit,'value':getDataFromUrl(jsonObject.rows,$rootScope.selectedOrgUnit)});
+
             angular.forEach(jsonObject.metaData.ou,function(region){
-                data.push({'name':jsonObject.metaData.names[region],'id':region,'value':getDataFromUrl(jsonObject.rows,region)});
+                if(region != $rootScope.selectedOrgUnit ){
+                    data.push({'name':jsonObject.metaData.names[region],'id':region,'value':getDataFromUrl(jsonObject.rows,region)});
+                }
             });
             return data;
 
@@ -254,10 +267,10 @@ angular.module("hmisPortal")
         $scope.downloadExcel = function(id){
             var url = "";
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }else{
 
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
             }
             $http.get(url,{withCredentials: true, params : {
                 j_username: "portal",
@@ -287,9 +300,9 @@ angular.module("hmisPortal")
             cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
 
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             cardObject.chartObject.loading = true;
             $http.get($scope.url,{withCredentials: true, params : {
@@ -365,15 +378,15 @@ angular.module("hmisPortal")
 
         };
         $rootScope.lastCard=function(){
-
+            $scope.loadingImage=true;
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             }}).success(function(dataTable){
                 var generalArray=[];
                 var underOne="Measles vaccination coverage to children under 1 year";
@@ -384,9 +397,9 @@ angular.module("hmisPortal")
                 var underANC2="Hudhurio la Kwanza ANC Ujauzito Wiki 12 au Zaidi";
                 var underPENTA="PENTA 3 vaccination coverage children under 1 year";
                 var underPenta="Watoto Waliochanjwa Penta";
-                 $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Surua (Measles) zilizotolewa','underANC':'ANC Proportion of pregnant women receiving TT2+',
-                    'underthree':'Wajawazito Waliopata Chanjo ya TT2+','underfour':'ANC first visit before 12 weeks',
-                    'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'Watoto Waliochanjwa Penta'
+                 $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Measles Doses to Children under one year of age','underANC':'ANC Proportion of pregnant women receiving TT2+',
+                    'underthree':'ANC tetanus two doses plus+','underfour':'ANC first visit before 12 weeks',
+                    'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'PENTA 3 under 1 year Coverage'
                   }];
                 angular.forEach(dataTable.metaData.ou,function(region){
                     generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
@@ -410,13 +423,13 @@ angular.module("hmisPortal")
         }
         $scope.downloadIvdExcelTotal = function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WadaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WadaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
             }
             $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
+                j_username: "portal",
+                j_password: "Portal123"
             },'Content-Type': 'application/octet-stream'}).success(function(data){
                 var a = document.createElement('a');
                 var blob = new Blob([data]);

@@ -3,8 +3,20 @@
  */
 
 angular.module("hmisPortal")
+    .config(function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
+    })
     .controller("jinsiCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
-
+        jQuery(document).ready(function() {
+            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
+                {withCredentials: true, params : {
+                    j_username: "portal", j_password: "Portal123"
+                }});
+            $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
+                {withCredentials: true, params : {
+                    j_username: "portal", j_password: "Portal123"
+                }});
+        });
         $scope.cards = {};
         $scope.data = {};
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
@@ -89,80 +101,93 @@ angular.module("hmisPortal")
                 j_username: "portal",
                 j_password: "Portal123"
             }}).success(function(data){
-                var useThisData = $scope.prepareJinsiData(data);
-                angular.forEach(useThisData.regions,function(value){
-                    $scope.area.push(value.name);
-                });
-                $scope.subCategory = useThisData.elements;
-                $scope.jinsichartConfig.xAxis.categories = $scope.area;
+                if(data.hasOwnProperty('metaData')) {
+                    var useThisData = $scope.prepareJinsiData(data);
+                    angular.forEach(useThisData.regions, function (value) {
+                        $scope.area.push(value.name);
+                    });
+                    $scope.subCategory = useThisData.elements;
+                    $scope.jinsichartConfig.xAxis.categories = $scope.area;
 
-                $scope.normalseries = [];
-                if($scope.data.chartType == "pie"){
-                    delete $scope.jinsichartConfig.chart;
-                    var serie = [];
-                    angular.forEach($scope.subCategory,function(value){
-                        angular.forEach(useThisData.regions,function(val){
-                            var number = $scope.getDataFromUrl(data.rows,val.id,value.uid);
+                    $scope.normalseries = [];
+                    if ($scope.data.chartType == "pie") {
+                        delete $scope.jinsichartConfig.chart;
+                        var serie = [];
+                        angular.forEach($scope.subCategory, function (value) {
+                            angular.forEach(useThisData.regions, function (val) {
+                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
 
-                            serie.push({name: value.name+" - "+ val.name , y: parseInt(number)})
+                                serie.push({name: value.name + " - " + val.name, y: parseInt(number)})
+                            });
                         });
-                    });
-                    $scope.normalseries.push({type: $scope.data.chartType, name:$scope.UsedName , data: serie,showInLegend: true,
-                        dataLabels: {
-                            enabled: false
-                        } })
-                    $scope.jinsichartConfig.series = $scope.normalseries;
-                }
-                else if($scope.data.chartType == "combined"){
-                    delete $scope.jinsichartConfig.chart;
-                    var serie1 = [];
-                    angular.forEach($scope.subCategory,function(value){
-                        var serie = [];
+                        $scope.normalseries.push({
+                            type: $scope.data.chartType, name: $scope.UsedName, data: serie, showInLegend: true,
+                            dataLabels: {
+                                enabled: false
+                            }
+                        })
+                        $scope.jinsichartConfig.series = $scope.normalseries;
+                    }
+                    else if ($scope.data.chartType == "combined") {
+                        delete $scope.jinsichartConfig.chart;
+                        var serie1 = [];
+                        angular.forEach($scope.subCategory, function (value) {
+                            var serie = [];
 
-                        angular.forEach(useThisData.regions,function(val){
-                            var number = $scope.getDataFromUrl(data.rows,val.id,value.uid);
-                            serie.push(parseInt(number));
-                            serie1.push({name: value.name+" - "+ val.name , y: parseInt(number) })
+                            angular.forEach(useThisData.regions, function (val) {
+                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+                                serie.push(parseInt(number));
+                                serie1.push({name: value.name + " - " + val.name, y: parseInt(number)})
+                            });
+                            $scope.normalseries.push({type: 'column', name: value.name, data: serie});
+                            $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
                         });
-                        $scope.normalseries.push({type: 'column', name: value.name, data: serie});
-                        $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
-                    });
-                    $scope.normalseries.push({type: 'pie', name: $scope.UsedName, data: serie1,center: [100, 80],size: 150,showInLegend: false,
-                        dataLabels: {
-                            enabled: false
-                        }})
-                    $scope.jinsichartConfig.series = $scope.normalseries;
-                }
-                else if($scope.data.chartType == 'table'){
-                    $scope.jinsitable ={}
-                    $scope.jinsitable.headers = [];
-                    $scope.jinsitable.colums =[];
-                    angular.forEach($scope.subCategory,function(value){
-                        var serie = [];
-                        $scope.jinsitable.headers.push(value.name);
-                    });
-                    angular.forEach(useThisData.regions,function(val){
-                        var seri = [];
-                        angular.forEach($scope.subCategory,function(value){
-                            var number = $scope.getDataFromUrl(data.rows,val.id,value.uid);
-                            seri.push({name:value.name,value:parseInt(number)});
+                        $scope.normalseries.push({
+                            type: 'pie',
+                            name: $scope.UsedName,
+                            data: serie1,
+                            center: [100, 80],
+                            size: 150,
+                            showInLegend: false,
+                            dataLabels: {
+                                enabled: false
+                            }
+                        })
+                        $scope.jinsichartConfig.series = $scope.normalseries;
+                    }
+                    else if ($scope.data.chartType == 'table') {
+                        $scope.jinsitable = {}
+                        $scope.jinsitable.headers = [];
+                        $scope.jinsitable.colums = [];
+                        angular.forEach($scope.subCategory, function (value) {
+                            var serie = [];
+                            $scope.jinsitable.headers.push(value.name);
                         });
-                        $scope.jinsitable.colums.push({name:val.name,values:seri});
-                    });
-                }
-                else{
-                    delete $scope.jinsichartConfig.chart;
-                    angular.forEach($scope.subCategory,function(value){
-                        var serie = [];
-                        angular.forEach(useThisData.regions,function(val){
-                            var number = $scope.getDataFromUrl(data.rows,val.id,value.uid);
-                            serie.push(number);
+                        angular.forEach(useThisData.regions, function (val) {
+                            var seri = [];
+                            angular.forEach($scope.subCategory, function (value) {
+                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+                                seri.push({name: value.name, value: parseInt(number)});
+                            });
+                            $scope.jinsitable.colums.push({name: val.name, values: seri});
                         });
-                        $scope.normalseries.push({type: $scope.data.chartType, name: value.name, data: serie})
-                    });
-                    $scope.jinsichartConfig.series = $scope.normalseries;
+                    }
+                    else {
+                        delete $scope.jinsichartConfig.chart;
+                        angular.forEach($scope.subCategory, function (value) {
+                            var serie = [];
+                            angular.forEach(useThisData.regions, function (val) {
+                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+                                serie.push(number);
+                            });
+                            $scope.normalseries.push({type: $scope.data.chartType, name: value.name, data: serie})
+                        });
+                        $scope.jinsichartConfig.series = $scope.normalseries;
+                    }
+                    $scope.jinsichartConfig.loading = false
+                }else{
+                    $scope.jinsichartConfig.loading = false
                 }
-                $scope.jinsichartConfig.loading = false
             });
 
 
@@ -223,11 +248,119 @@ angular.module("hmisPortal")
 
 
         //
-        $scope.cards.malaria = [{
-            title:'HIV DATA',
-            description:'HIV DATA',
+        $scope.cards.malaria = [
+
+            {
+                title:'RCH DATA COMPLETENESS',
+                description:'RCH DATA COMPLETENESS',
+                cardClass:"col m12 s12",
+                cardSize:"medium",
+                data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;rm3y3VHPiFD;QntdhuQfgvT;zeEp4Xu2GOm',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''}
+                ],
+                dataSource:'dhis',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'bar',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+            {
+                title:'HMIS DATA COMPLETENESS',
+                description:'HMIS DATA COMPLETENESS',
+                cardClass:"col m12 s12",
+                cardSize:"medium",
+                data:'ZOvFj2vtlor;qpcwPcj8D6u;v6wdME3ouXu',
+                icons:[
+                    {name:'table',image:'table.jpg',action:''},
+                    {name:'bar',image:'bar.png',action:''},
+                    {name:'line',image:'line.png',action:''},
+                    {name:'combined',image:'combined.jpg',action:''},
+                    {name:'column',image:'column.png',action:''},
+                    {name:'area',image:'area.jpg',action:''},
+                    {name:'pie',image:'pie.png',action:''}
+                ],
+                dataSource:'dhis',
+                size:'small',
+                displayTable:false,
+                displayMap:false,
+                chart:'bar',
+                chartObject:{
+                    title: {
+                        text: 'Combination chart'
+                    },
+                    xAxis: {
+                        categories: [],
+                        labels:{
+                            rotation: -70,
+                            style:{ "color": "#000000", "fontWeight": "normal" }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''
+                        },labels:{
+                            style:{ "color": "#000000", "fontWeight": "bold" }
+                        }
+                    },
+                    labels: {
+                        items: [{
+                            html: 'doses',
+                            style: {
+                                left: '50px',
+                                top: '18px',
+                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                            }
+                        }]
+                    },
+                    series: []
+                }
+
+            },
+            {
+            title:'NACP DATA COMPLETENESS',
+            description:'NACP DATA COMPLETENESS',
             cardClass:"col s12 m12",
-            data:'Hwcn7ajwZ1p;Dp0VF7ssmcH;CxaDPrjhmax;db4lfMnttc6;',
+            data:'Hwcn7ajwZ1p;Dp0VF7ssmcH;CxaDPrjhmax;db4lfMnttc6',
             icons:[
                 {name:'table',image:'table.jpg',action:''},
                 {name:'bar',image:'bar.png',action:''},
@@ -276,167 +409,8 @@ angular.module("hmisPortal")
 
         },
             {
-                title:'RCHS DATA',
-                description:'RCHS DATA',
-                cardClass:"col m12 s12",
-                cardSize:"medium",
-                data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;QntdhuQfgvT;zeEp4Xu2GOm',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''}
-                ],
-                dataSource:'dhis',
-                size:'small',
-                displayTable:false,
-                displayMap:false,
-                chart:'line',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -70,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
-
-            },
-            {
-                title:'HMIS DATA',
-                description:'HMIS DATA',
-                cardClass:"col m12 s12",
-                cardSize:"medium",
-                data:'ZOvFj2vtlor;qpcwPcj8D6u;v6wdME3ouXu',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''}
-                ],
-                dataSource:'dhis',
-                size:'small',
-                displayTable:false,
-                displayMap:false,
-                chart:'line',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -70,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
-
-            },
-            {
-                title:'RCH DATA',
-                description:'RCH DATA',
-                cardClass:"col m12 s12",
-                cardSize:"medium",
-                data:'GzvLb3XVZbR;TfoI3vTGv1f;cap79mdf6Co;rm3y3VHPiFD;QntdhuQfgvT;zeEp4Xu2GOm',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''}
-                ],
-                dataSource:'dhis',
-                size:'small',
-                displayTable:false,
-                displayMap:false,
-                chart:'line',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -70,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
-
-            },
-            {
-                title:'NTLP DATA',
-                description:'NTLP DATA',
+                title:'NTLP DATA COMPLETENESS',
+                description:'NTLP DATA COMPLETENESS',
                 cardClass:"col m12 s12",
                 cardSize:"medium",
                 data:'UHDfKY2mUOQ;ykDbDeDvTcx;ZOkoQ7BtbVQ;IzUZXETYoyB',
@@ -453,7 +427,7 @@ angular.module("hmisPortal")
                 size:'small',
                 displayTable:false,
                 displayMap:false,
-                chart:'line',
+                chart:'bar',
                 chartObject:{
                     title: {
                         text: 'Combination chart'
@@ -494,11 +468,15 @@ angular.module("hmisPortal")
             var elements = [];
             var arr = card.data.split(";")
             angular.forEach(arr,function(val){
-                elements.push({'name':jsonObject.metaData.names[val],'uid':val})
-            });
+                var name=jsonObject.metaData.names[val].replace("NACP_", " ").replace("HMIS_", " ");
 
+                 elements.push({'name':name,'uid':val})
+            });
+            data.push({'name': jsonObject.metaData.names[$rootScope.selectedOrgUnit], 'id': $rootScope.selectedOrgUnit});
             angular.forEach(jsonObject.metaData.ou,function(region){
-                data.push({'name':jsonObject.metaData.names[region],'id':region});
+                if(region != $rootScope.selectedOrgUnit ) {
+                    data.push({'name': jsonObject.metaData.names[region], 'id': region});
+                }
             });
             structure.regions = data;
             structure.elements = elements;
@@ -510,15 +488,15 @@ angular.module("hmisPortal")
             var url = "";
             if(card.dataSource == 'etl'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    url = "https:/etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https:/etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }else{
-                    url = "https://etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https://etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }
             }else if(card.dataSource == 'dhis'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }else{
-                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }
             }
 
@@ -569,16 +547,16 @@ angular.module("hmisPortal")
             $scope.area = [];
             if(cardObject.dataSource == 'etl'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }else{
-                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
             }else if(cardObject.dataSource == 'dhis'){
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
 
-                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }else{
-                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
             }
 
@@ -588,80 +566,85 @@ angular.module("hmisPortal")
                 j_password: "Portal123"
 
             }}).success(function(data){
-                var useThisData = $scope.preparecompletenesData(data,cardObject);
-                angular.forEach(useThisData.regions,function(value){
-                    $scope.area.push(value.name);
-                });
-                $scope.subCategory = useThisData.elements;
-                cardObject.chartObject.xAxis.categories = $scope.area;
-
-                $scope.normalseries = [];
-                if($scope.data.chartType == "pie"){
-                    delete cardObject.chartObject.chart;
-                    var serie = [];
-                    angular.forEach(useThisData.elements,function(value){
-                        angular.forEach(useThisData.regions,function(val){
-                            var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-
-                            serie.push({name: value.name+" - "+ val.name , y: parseInt(number)})
-                        });
+                if(data.hasOwnProperty('metaData')){
+                    var useThisData = $scope.preparecompletenesData(data,cardObject);
+                    angular.forEach(useThisData.regions,function(value){
+                        $scope.area.push(value.name);
                     });
-                    $scope.normalseries.push({type: chart, name:$scope.UsedName , data: serie,showInLegend: true,
-                        dataLabels: {
-                            enabled: false
-                        } })
-                    cardObject.chartObject.series = $scope.normalseries;
-                }
-                else if(chart == "combined"){
-                    delete cardObject.chartObject.chart;
-                    var serie1 = [];
-                    angular.forEach(useThisData.elements,function(value){
+                    $scope.subCategory = useThisData.elements;
+                    cardObject.chartObject.xAxis.categories = $scope.area;
+
+                    $scope.normalseries = [];
+                    if($scope.data.chartType == "pie"){
+                        delete cardObject.chartObject.chart;
                         var serie = [];
-
-                        angular.forEach(useThisData.regions,function(val){
-                            var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-                            serie.push(parseInt(number));
-                            serie1.push({name: value.name+" - "+ val.name , y: parseInt(number) })
-                        });
-                        $scope.normalseries.push({type: 'column', name: value.name, data: serie});
-                        $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
-                    });
-                    $scope.normalseries.push({type: 'pie', name: $scope.UsedName, data: serie1,center: [100, 80],size: 150,showInLegend: false,
-                        dataLabels: {
-                            enabled: false
-                        }})
-                    cardObject.chartObject.series = $scope.normalseries;
-                }
-                else if(chart == 'table'){
-                    cardObject.table ={}
-                    cardObject.table.headers = [];
-                    cardObject.table.colums =[];
-                    angular.forEach(useThisData.elements,function(value){
-                        var serie = [];
-                        cardObject.table.headers.push(value.name);
-                    });
-                    angular.forEach(useThisData.regions,function(val){
-                        var seri = [];
                         angular.forEach(useThisData.elements,function(value){
-                            var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-                            seri.push({name:value.name,value:parseInt(number)});
+                            angular.forEach(useThisData.regions,function(val){
+                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+
+                                serie.push({name: value.name+" - "+ val.name , y: parseInt(number)})
+                            });
                         });
-                        cardObject.table.colums.push({name:val.name,values:seri});
-                    });
-                }
-                else{
-                    delete cardObject.chartObject.chart;
-                    angular.forEach(useThisData.elements,function(value){
-                        var serie = [];
+                        $scope.normalseries.push({type: chart, name:$scope.UsedName , data: serie,showInLegend: true,
+                            dataLabels: {
+                                enabled: false
+                            } })
+                        cardObject.chartObject.series = $scope.normalseries;
+                    }
+                    else if(chart == "combined"){
+                        delete cardObject.chartObject.chart;
+                        var serie1 = [];
+                        angular.forEach(useThisData.elements,function(value){
+                            var serie = [];
+
+                            angular.forEach(useThisData.regions,function(val){
+                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+                                serie.push(parseInt(number));
+                                serie1.push({name: value.name+" - "+ val.name , y: parseInt(number) })
+                            });
+                            $scope.normalseries.push({type: 'column', name: value.name, data: serie});
+                            $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
+                        });
+                        $scope.normalseries.push({type: 'pie', name: $scope.UsedName, data: serie1,center: [100, 80],size: 150,showInLegend: false,
+                            dataLabels: {
+                                enabled: false
+                            }})
+                        cardObject.chartObject.series = $scope.normalseries;
+                    }
+                    else if(chart == 'table'){
+                        cardObject.table ={}
+                        cardObject.table.headers = [];
+                        cardObject.table.colums =[];
+                        angular.forEach(useThisData.elements,function(value){
+                            var serie = [];
+                            cardObject.table.headers.push(value.name);
+                        });
                         angular.forEach(useThisData.regions,function(val){
-                            var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-                            serie.push(number);
+                            var seri = [];
+                            angular.forEach(useThisData.elements,function(value){
+                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+                                seri.push({name:value.name,value:parseInt(number)});
+                            });
+                            cardObject.table.colums.push({name:val.name,values:seri});
                         });
-                        $scope.normalseries.push({type: chart, name: value.name, data: serie})
-                    });
-                    cardObject.chartObject.series = $scope.normalseries;
+                    }
+                    else{
+                        delete cardObject.chartObject.chart;
+                        angular.forEach(useThisData.elements,function(value){
+                            var serie = [];
+                            angular.forEach(useThisData.regions,function(val){
+                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+                                serie.push(number);
+                            });
+                            $scope.normalseries.push({type: chart, name: value.name, data: serie})
+                        });
+                        cardObject.chartObject.series = $scope.normalseries;
+                    }
+                    cardObject.chartObject.loading = false
+                }else{
+                    cardObject.chartObject.loading = false
                 }
-                cardObject.chartObject.loading = false
+
             });
 
         };
@@ -677,7 +660,7 @@ angular.module("hmisPortal")
 
         $rootScope.firstClick1 = function(){
             $scope.preparejinsiSeries();
-            $scope.prepareSeries();
+            $rootScope.firstClick2();
             angular.forEach($scope.cards.malaria,function(value){
                 $scope.preparecompletenesSeries(value,value.chart);
             });

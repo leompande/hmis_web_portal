@@ -3,7 +3,7 @@
  */
 angular.module("hmisPortal")
     .run( function($rootScope, $location) {
-        // register listener to watch route changes
+          // register listener to watch route changes
         $rootScope.$on( "$routeChangeStart", function(event, next, current) {
             Pace.restart()
         });
