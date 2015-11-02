@@ -486,19 +486,12 @@ angular.module("hmisPortal")
 
         $scope.downloadcompletenesExcel = function(card){
             var url = "";
-            if(card.dataSource == 'etl'){
-                if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    url = "https:/etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
-                }else{
-                    url = "https://etl.moh.go.tz/dhis/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
-                }
-            }else if(card.dataSource == 'dhis'){
+
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }else{
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }
-            }
 
             $http.get(url,{withCredentials: true, params : {
                 j_username: "portal",
@@ -545,20 +538,13 @@ angular.module("hmisPortal")
             cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
 
             $scope.area = [];
-            if(cardObject.dataSource == 'etl'){
-                if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-                }else{
-                    $scope.url = "https://etl.moh.go.tz/dhis/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-                }
-            }else if(cardObject.dataSource == 'dhis'){
+
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
 
                     $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }else{
                     $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
-            }
 
             cardObject.chartObject.loading = true;
             $http.get($scope.url,{withCredentials: true, params : {
