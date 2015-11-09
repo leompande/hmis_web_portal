@@ -68,128 +68,134 @@ angular.module("hmisPortal")
         };
 
         $scope.downloadjinsiExcel = function(){
-            var url = "";
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                var url = "";
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
 
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
-            }else{
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                }else{
 
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
-            }
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.csv";
-                a.click();
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
+                }
+                $http.get(url,{withCredentials: true, params : {
+                    j_username: "portal",
+                    j_password: "Portal123"
+                },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.csv";
+                    a.click();
+                });
             });
         };
 
         $scope.preparejinsiSeries = function(){
-            $scope.jinsichartConfig.title.text = "POPULATION BY GENDER";
-            $scope.area = [];
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $scope.jinsichartConfig.loading = true;
-            $http.get($scope.url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(data){
-                if(data.hasOwnProperty('metaData')) {
-                    var useThisData = $scope.prepareJinsiData(data);
-                    angular.forEach(useThisData.regions, function (value) {
-                        $scope.area.push(value.name);
-                    });
-                    $scope.subCategory = useThisData.elements;
-                    $scope.jinsichartConfig.xAxis.categories = $scope.area;
-
-                    $scope.normalseries = [];
-                    if ($scope.data.chartType == "pie") {
-                        delete $scope.jinsichartConfig.chart;
-                        var serie = [];
-                        angular.forEach($scope.subCategory, function (value) {
-                            angular.forEach(useThisData.regions, function (val) {
-                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
-
-                                serie.push({name: value.name + " - " + val.name, y: parseInt(number)})
-                            });
-                        });
-                        $scope.normalseries.push({
-                            type: $scope.data.chartType, name: $scope.UsedName, data: serie, showInLegend: true,
-                            dataLabels: {
-                                enabled: false
-                            }
-                        })
-                        $scope.jinsichartConfig.series = $scope.normalseries;
-                    }
-                    else if ($scope.data.chartType == "combined") {
-                        delete $scope.jinsichartConfig.chart;
-                        var serie1 = [];
-                        angular.forEach($scope.subCategory, function (value) {
-                            var serie = [];
-
-                            angular.forEach(useThisData.regions, function (val) {
-                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
-                                serie.push(parseInt(number));
-                                serie1.push({name: value.name + " - " + val.name, y: parseInt(number)})
-                            });
-                            $scope.normalseries.push({type: 'column', name: value.name, data: serie});
-                            $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
-                        });
-                        $scope.normalseries.push({
-                            type: 'pie',
-                            name: $scope.UsedName,
-                            data: serie1,
-                            center: [100, 80],
-                            size: 150,
-                            showInLegend: false,
-                            dataLabels: {
-                                enabled: false
-                            }
-                        })
-                        $scope.jinsichartConfig.series = $scope.normalseries;
-                    }
-                    else if ($scope.data.chartType == 'table') {
-                        $scope.jinsitable = {}
-                        $scope.jinsitable.headers = [];
-                        $scope.jinsitable.colums = [];
-                        angular.forEach($scope.subCategory, function (value) {
-                            var serie = [];
-                            $scope.jinsitable.headers.push(value.name);
-                        });
-                        angular.forEach(useThisData.regions, function (val) {
-                            var seri = [];
-                            angular.forEach($scope.subCategory, function (value) {
-                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
-                                seri.push({name: value.name, value: parseInt(number)});
-                            });
-                            $scope.jinsitable.colums.push({name: val.name, values: seri});
-                        });
-                    }
-                    else {
-                        delete $scope.jinsichartConfig.chart;
-                        angular.forEach($scope.subCategory, function (value) {
-                            var serie = [];
-                            angular.forEach(useThisData.regions, function (val) {
-                                var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
-                                serie.push(number);
-                            });
-                            $scope.normalseries.push({type: $scope.data.chartType, name: value.name, data: serie})
-                        });
-                        $scope.jinsichartConfig.series = $scope.normalseries;
-                    }
-                    $scope.jinsichartConfig.loading = false
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                $scope.jinsichartConfig.title.text = "POPULATION BY GENDER";
+                $scope.area = [];
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }else{
-                    $scope.jinsichartConfig.loading = false
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
-            });
+                $scope.jinsichartConfig.loading = true;
+                $http.get($scope.url).success(function(data){
+                    if(data.hasOwnProperty('metaData')) {
+                        var useThisData = $scope.prepareJinsiData(data);
+                        angular.forEach(useThisData.regions, function (value) {
+                            $scope.area.push(value.name);
+                        });
+                        $scope.subCategory = useThisData.elements;
+                        $scope.jinsichartConfig.xAxis.categories = $scope.area;
 
+                        $scope.normalseries = [];
+                        if ($scope.data.chartType == "pie") {
+                            delete $scope.jinsichartConfig.chart;
+                            var serie = [];
+                            angular.forEach($scope.subCategory, function (value) {
+                                angular.forEach(useThisData.regions, function (val) {
+                                    var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+
+                                    serie.push({name: value.name + " - " + val.name, y: parseInt(number)})
+                                });
+                            });
+                            $scope.normalseries.push({
+                                type: $scope.data.chartType, name: $scope.UsedName, data: serie, showInLegend: true,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            })
+                            $scope.jinsichartConfig.series = $scope.normalseries;
+                        }
+                        else if ($scope.data.chartType == "combined") {
+                            delete $scope.jinsichartConfig.chart;
+                            var serie1 = [];
+                            angular.forEach($scope.subCategory, function (value) {
+                                var serie = [];
+
+                                angular.forEach(useThisData.regions, function (val) {
+                                    var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+                                    serie.push(parseInt(number));
+                                    serie1.push({name: value.name + " - " + val.name, y: parseInt(number)})
+                                });
+                                $scope.normalseries.push({type: 'column', name: value.name, data: serie});
+                                $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
+                            });
+                            $scope.normalseries.push({
+                                type: 'pie',
+                                name: $scope.UsedName,
+                                data: serie1,
+                                center: [100, 80],
+                                size: 150,
+                                showInLegend: false,
+                                dataLabels: {
+                                    enabled: false
+                                }
+                            })
+                            $scope.jinsichartConfig.series = $scope.normalseries;
+                        }
+                        else if ($scope.data.chartType == 'table') {
+                            $scope.jinsitable = {}
+                            $scope.jinsitable.headers = [];
+                            $scope.jinsitable.colums = [];
+                            angular.forEach($scope.subCategory, function (value) {
+                                var serie = [];
+                                $scope.jinsitable.headers.push(value.name);
+                            });
+                            angular.forEach(useThisData.regions, function (val) {
+                                var seri = [];
+                                angular.forEach($scope.subCategory, function (value) {
+                                    var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+                                    seri.push({name: value.name, value: parseInt(number)});
+                                });
+                                $scope.jinsitable.colums.push({name: val.name, values: seri});
+                            });
+                        }
+                        else {
+                            delete $scope.jinsichartConfig.chart;
+                            angular.forEach($scope.subCategory, function (value) {
+                                var serie = [];
+                                angular.forEach(useThisData.regions, function (val) {
+                                    var number = $scope.getDataFromUrl(data.rows, val.id, value.uid);
+                                    serie.push(number);
+                                });
+                                $scope.normalseries.push({type: $scope.data.chartType, name: value.name, data: serie})
+                            });
+                            $scope.jinsichartConfig.series = $scope.normalseries;
+                        }
+                        $scope.jinsichartConfig.loading = false
+                    }else{
+                        $scope.jinsichartConfig.loading = false
+                    }
+                });
+            });
 
         };
 
