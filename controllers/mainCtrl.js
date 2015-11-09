@@ -6,7 +6,7 @@ angular.module("hmisPortal")
     .run(function() {
 
     })
-    .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+    .controller("mainCtrl",function ($rootScope,$scope,$q) {
         $scope.authanticateDHIS = function(){
             var deferred = $q.defer();
             try{

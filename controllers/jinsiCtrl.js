@@ -485,7 +485,10 @@ angular.module("hmisPortal")
         };
 
         $scope.downloadcompletenesExcel = function(card){
-            $scope.authanticateDHIS().then(function(){
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
                 var url = "";
 
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
@@ -526,7 +529,10 @@ angular.module("hmisPortal")
         };
 
         $scope.preparecompletenesSeries = function(cardObject,chart){
-            $scope.authanticateDHIS().then(function(){
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                    j_username: "portal", j_password: "Portal123"
+                },function(){
                 if(chart == 'table'){
                     cardObject.displayTable = true;
                     cardObject.displayMap = false;
