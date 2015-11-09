@@ -10,6 +10,7 @@ angular.module("hmisPortal")
         $scope.authanticateDHIS = function(){
             var deferred = $q.defer();
             try{
+                var base = "https://dhis.moh.go.tz/";
                 $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                         j_username: "portal", j_password: "Portal123"
                     },function(){
