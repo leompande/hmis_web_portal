@@ -278,6 +278,7 @@ angular.module("hmisPortal")
         }
 
         $scope.prepareSeries = function(cardObject,chart){
+            cardObject.chartObject.loading = true;
             var base = "https://dhis.moh.go.tz/";
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                 j_username: "portal", j_password: "Portal123"
@@ -301,7 +302,7 @@ angular.module("hmisPortal")
                 }else{
                     $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
-                cardObject.chartObject.loading = true;
+
                 $http.get($scope.url).success(function(data){
                     $scope.area = [];
                     cardObject.chartObject.xAxis.categories = [];

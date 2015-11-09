@@ -94,6 +94,7 @@ angular.module("hmisPortal")
         };
 
         $scope.preparejinsiSeries = function(){
+            $scope.jinsichartConfig.loading = true;
             var base = "https://dhis.moh.go.tz/";
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                 j_username: "portal", j_password: "Portal123"
@@ -105,7 +106,7 @@ angular.module("hmisPortal")
                 }else{
                     $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:ykShMtNgDB1&dimension=hENn80Fmmlf:mtUMlCLFTTz;syxWmui9UMq&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
-                $scope.jinsichartConfig.loading = true;
+
                 $http.get($scope.url).success(function(data){
                     if(data.hasOwnProperty('metaData')) {
                         var useThisData = $scope.prepareJinsiData(data);
@@ -535,6 +536,7 @@ angular.module("hmisPortal")
         };
 
         $scope.preparecompletenesSeries = function(cardObject,chart){
+            cardObject.chartObject.loading = true;
             var base = "https://dhis.moh.go.tz/";
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                     j_username: "portal", j_password: "Portal123"
@@ -562,7 +564,7 @@ angular.module("hmisPortal")
                     $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
 
-                cardObject.chartObject.loading = true;
+
                 $http.get($scope.url).success(function(data){
                     if(data.hasOwnProperty('metaData')){
                         var useThisData = $scope.preparecompletenesData(data,cardObject);

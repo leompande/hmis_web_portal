@@ -4,6 +4,7 @@
     <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/dashboardCtrl.js" afterPath="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/ivdCtrl.js" afterPath="$PROJECT_DIR$/controllers/ivdCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/jinsiCtrl.js" afterPath="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/malariaCtrl.js" afterPath="$PROJECT_DIR$/controllers/malariaCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/maternalCtrl.js" afterPath="$PROJECT_DIR$/controllers/maternalCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/morbidityCtrl.js" afterPath="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
@@ -35,7 +36,7 @@
       <file leaf-file-name="nutritionCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="221" column="25" selection-start="8474" selection-end="8684" vertical-scroll-proportion="0.0" vertical-offset="3745" max-vertical-offset="12762">
+            <state line="218" column="50" selection-start="8512" selection-end="8512" vertical-scroll-proportion="0.0" vertical-offset="3745" max-vertical-offset="12780">
               <folding />
             </state>
           </provider>
@@ -44,7 +45,7 @@
       <file leaf-file-name="mortalityCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="547" column="25" selection-start="24529" selection-end="24739" vertical-scroll-proportion="0.0" vertical-offset="9631" max-vertical-offset="17910">
+            <state line="544" column="50" selection-start="24567" selection-end="24567" vertical-scroll-proportion="0.0" vertical-offset="9631" max-vertical-offset="17928">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -52,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tracermedicineCtrl.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="tracermedicineCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="999" column="19" selection-start="40391" selection-end="40391" vertical-scroll-proportion="3.2902584" vertical-offset="16327" max-vertical-offset="31194">
+            <state line="911" column="12" selection-start="35462" selection-end="35500" vertical-scroll-proportion="0.0" vertical-offset="16165" max-vertical-offset="31212">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -66,16 +67,16 @@
       <file leaf-file-name="maternalCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/maternalCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="644" column="12" selection-start="25039" selection-end="25249" vertical-scroll-proportion="0.0" vertical-offset="14329" max-vertical-offset="23382">
+            <state line="644" column="50" selection-start="25077" selection-end="25077" vertical-scroll-proportion="0.0" vertical-offset="11359" max-vertical-offset="23400">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboardCtrl.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="dashboardCtrl.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/dashboardCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="22" selection-start="3139" selection-end="3139" vertical-scroll-proportion="-6.4333334" vertical-offset="1139" max-vertical-offset="9234">
+            <state line="348" column="50" selection-start="15988" selection-end="15988" vertical-scroll-proportion="-1.7124736" vertical-offset="7074" max-vertical-offset="9270">
               <folding />
             </state>
           </provider>
@@ -90,10 +91,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="538" column="50" selection-start="23447" selection-end="23447" vertical-scroll-proportion="0.0" vertical-offset="7669" max-vertical-offset="10350">
+              <folding>
+                <element signature="e#4368#10629#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="malariaCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/malariaCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="379" column="25" selection-start="14662" selection-end="14872" vertical-scroll-proportion="0.0" vertical-offset="6643" max-vertical-offset="16506">
+            <state line="376" column="50" selection-start="14700" selection-end="14700" vertical-scroll-proportion="0.0" vertical-offset="6643" max-vertical-offset="16524">
               <folding />
             </state>
           </provider>
@@ -102,16 +114,7 @@
       <file leaf-file-name="morbidityCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/morbidityCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1072" column="25" selection-start="41668" selection-end="41878" vertical-scroll-proportion="0.0" vertical-offset="19224" max-vertical-offset="31068">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="25" selection-start="4382" selection-end="4592" vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="12204">
+            <state line="1069" column="50" selection-start="41706" selection-end="41706" vertical-scroll-proportion="0.0" vertical-offset="18900" max-vertical-offset="31086">
               <folding />
             </state>
           </provider>
@@ -120,7 +123,7 @@
       <file leaf-file-name="ivdCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/ivdCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="283" column="25" selection-start="14507" selection-end="14717" vertical-scroll-proportion="0.0" vertical-offset="4933" max-vertical-offset="14220">
+            <state line="280" column="50" selection-start="14545" selection-end="14545" vertical-scroll-proportion="0.0" vertical-offset="4879" max-vertical-offset="14238">
               <folding />
             </state>
           </provider>
@@ -165,15 +168,15 @@
         <option value="$PROJECT_DIR$/controllers/completenesCtrl.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/controllers/mainCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/ivdCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/malariaCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/maternalCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/maternalCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/malariaCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/ivdCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
       </list>
     </option>
   </component>
@@ -570,20 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/mainCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="18" selection-start="281" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1494">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="25" selection-start="4382" selection-end="4592" vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="12204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/completenesCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="10" selection-start="339" selection-end="880" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="23112">
@@ -591,44 +580,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/dashboardCtrl.js">
+    <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="22" selection-start="3139" selection-end="3139" vertical-scroll-proportion="-6.4333334" vertical-offset="1139" max-vertical-offset="9234">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/ivdCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="283" column="25" selection-start="14507" selection-end="14717" vertical-scroll-proportion="0.0" vertical-offset="4933" max-vertical-offset="14220">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/malariaCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="379" column="25" selection-start="14662" selection-end="14872" vertical-scroll-proportion="0.0" vertical-offset="6643" max-vertical-offset="16506">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/maternalCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="644" column="12" selection-start="25039" selection-end="25249" vertical-scroll-proportion="0.0" vertical-offset="14329" max-vertical-offset="23382">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/morbidityCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1072" column="25" selection-start="41668" selection-end="41878" vertical-scroll-proportion="0.0" vertical-offset="19224" max-vertical-offset="31068">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="547" column="25" selection-start="24529" selection-end="24739" vertical-scroll-proportion="0.0" vertical-offset="9631" max-vertical-offset="17910">
+        <state line="911" column="12" selection-start="35462" selection-end="35500" vertical-scroll-proportion="0.0" vertical-offset="16165" max-vertical-offset="31212">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -637,17 +591,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="25" selection-start="8474" selection-end="8684" vertical-scroll-proportion="0.0" vertical-offset="3745" max-vertical-offset="12762">
+        <state line="218" column="50" selection-start="8512" selection-end="8512" vertical-scroll-proportion="0.0" vertical-offset="3745" max-vertical-offset="12780">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
+    <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="999" column="19" selection-start="40391" selection-end="40391" vertical-scroll-proportion="3.2902584" vertical-offset="16327" max-vertical-offset="31194">
+        <state line="544" column="50" selection-start="24567" selection-end="24567" vertical-scroll-proportion="0.0" vertical-offset="9631" max-vertical-offset="17928">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/morbidityCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1069" column="50" selection-start="41706" selection-end="41706" vertical-scroll-proportion="0.0" vertical-offset="18900" max-vertical-offset="31086">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/maternalCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="644" column="50" selection-start="25077" selection-end="25077" vertical-scroll-proportion="0.0" vertical-offset="11359" max-vertical-offset="23400">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/malariaCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="376" column="50" selection-start="14700" selection-end="14700" vertical-scroll-proportion="0.0" vertical-offset="6643" max-vertical-offset="16524">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/mainCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="18" selection-start="281" selection-end="596" vertical-scroll-proportion="0.40697673" vertical-offset="114" max-vertical-offset="1494">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="538" column="50" selection-start="23447" selection-end="23447" vertical-scroll-proportion="0.0" vertical-offset="7669" max-vertical-offset="10350">
+          <folding>
+            <element signature="e#4368#10629#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/ivdCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="280" column="50" selection-start="14545" selection-end="14545" vertical-scroll-proportion="0.0" vertical-offset="4879" max-vertical-offset="14238">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/dashboardCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="348" column="50" selection-start="15988" selection-end="15988" vertical-scroll-proportion="-1.7124736" vertical-offset="7074" max-vertical-offset="9270">
+          <folding />
         </state>
       </provider>
     </entry>

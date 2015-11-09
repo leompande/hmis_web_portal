@@ -216,6 +216,7 @@ angular.module("hmisPortal")
         }
 
         $scope.prepareSeries = function(cardObject,chart){
+            cardObject.chartObject.loading = true;
             var base = "https://dhis.moh.go.tz/";
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                 j_username: "portal", j_password: "Portal123"
