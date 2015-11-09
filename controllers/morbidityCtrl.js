@@ -1172,88 +1172,93 @@ angular.module("hmisPortal")
         };
         $rootScope.lastCard=function(){
             $scope.loadingImage=true;
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(dataTable){
-                var generalArray=[];
-                var underOne="Acute Diarrhoea (<14 Days)";
-                var undertwo="Acute Ear Infection in OPD";
-                var underpop="X_OPD_Animal bite (suspected Rabies) Umri mwaka 1 hadi umri chini ya 5";
-                var underthree="X_OPD_Birth asphyxia Umri chini ya mwezi 1";
-                var underfour="X_OPD_Bronchial Asthma Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underANC="X_OPD_Caries Umri mwaka 1 hadi umri chini  ya mwaka 5";
-                var underDe="X_OPD_Caries Umri mwaka 5 hadi umri chini  ya mwaka 60";
-                var underMeb="EYE:Cataract Congenital <5";
-                var underCov="EYE:Cataract Congenital >15";
-                var underSy="X_OPD_Fungal Infection, Non-skin Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underSyP="X_OPD_Fungal Infection, Non-skin Umri mwaka 5 hadi umri chini ya mwaka 60";
-                var underSyT="X_OPD_Gynaecological Diseases, Other Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underHIV="X_OPD_Gynaecological Diseases, Other Umri mwaka 5 hadi umri chini ya mwaka 60";
-                var underHIVTest="X_IPD_Tuberculosis Umri mwaka 1 hadi chini ya mwaka 5";
-                var underHIVTestDone="X_OPD_Tuberculosis Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underHIVTestRate="X_OPD_Tuberculosis Umri mwaka 5 hadi umri chini ya mwaka 60";
-                var underHIVTestDev="X_IPD_Tuberculosis Umri mwaka 5 hadi chini ya mwaka 60";
-                var underHIVTestDevS="X_IPD_Cardiovascular Disorders, other Umri mwaka 1 hadi chini ya mwaka 5";
-                var underHIVTestDevP="X_IPD_Cardiovascular Disorders, other Umri mwaka 5 hadi chini ya mwaka 60";
-                $scope.arrayed=[{'underOne':'OPD Diarrhoea,Acute(<14 days)','undertwo':'OPD Acute Ear Infection(<5)','underpop':'OPD_Animal bite (suspected Rabies) < 5',
-                    'underthree':'OPD_Birth asphyxia Umri < 5','underfour':'OPD_Bronchial Asthma < 5',
-                    'underANC': 'OPD_Caries < 5','underDe':'OPD_Caries >5','underMeb':'Cataract Congenital <5',
-                    'underCov':'Cataract Congenital >5','underSy':'OPD_Fungal Infection, Non-skin <5',
-                    'underSyP':'OPD_Fungal Infection, Non-skin >5 ','underSyT':'OPD_Gynaecological Diseases, Other<5','underHIV':'X_OPD_Gynaecological Diseases, Other >5',
-                    'underHIVTest':'IPD_Tuberculosis < 5','underHIVTestDone':'OPD_Tuberculosis > 5','underHIVTestRate':'OPD_Tuberculosis >5',
-                    'underHIVTestDev':'IPD_Tuberculosis >5','underHIVTestDevS':'IPD_Cardiovascular Disorders, other > 5',
-                    'underHIVTestDevP':'IPD_Cardiovascular Disorders,> 5'
-                }];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
-                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
-                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
-                        underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
-                        underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
-                        underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
-                        underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
-                        underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
-                        underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
-                        underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
-                        underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl).success(function(dataTable){
+                    var generalArray=[];
+                    var underOne="Acute Diarrhoea (<14 Days)";
+                    var undertwo="Acute Ear Infection in OPD";
+                    var underpop="X_OPD_Animal bite (suspected Rabies) Umri mwaka 1 hadi umri chini ya 5";
+                    var underthree="X_OPD_Birth asphyxia Umri chini ya mwezi 1";
+                    var underfour="X_OPD_Bronchial Asthma Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underANC="X_OPD_Caries Umri mwaka 1 hadi umri chini  ya mwaka 5";
+                    var underDe="X_OPD_Caries Umri mwaka 5 hadi umri chini  ya mwaka 60";
+                    var underMeb="EYE:Cataract Congenital <5";
+                    var underCov="EYE:Cataract Congenital >15";
+                    var underSy="X_OPD_Fungal Infection, Non-skin Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underSyP="X_OPD_Fungal Infection, Non-skin Umri mwaka 5 hadi umri chini ya mwaka 60";
+                    var underSyT="X_OPD_Gynaecological Diseases, Other Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underHIV="X_OPD_Gynaecological Diseases, Other Umri mwaka 5 hadi umri chini ya mwaka 60";
+                    var underHIVTest="X_IPD_Tuberculosis Umri mwaka 1 hadi chini ya mwaka 5";
+                    var underHIVTestDone="X_OPD_Tuberculosis Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underHIVTestRate="X_OPD_Tuberculosis Umri mwaka 5 hadi umri chini ya mwaka 60";
+                    var underHIVTestDev="X_IPD_Tuberculosis Umri mwaka 5 hadi chini ya mwaka 60";
+                    var underHIVTestDevS="X_IPD_Cardiovascular Disorders, other Umri mwaka 1 hadi chini ya mwaka 5";
+                    var underHIVTestDevP="X_IPD_Cardiovascular Disorders, other Umri mwaka 5 hadi chini ya mwaka 60";
+                    $scope.arrayed=[{'underOne':'OPD Diarrhoea,Acute(<14 days)','undertwo':'OPD Acute Ear Infection(<5)','underpop':'OPD_Animal bite (suspected Rabies) < 5',
+                        'underthree':'OPD_Birth asphyxia Umri < 5','underfour':'OPD_Bronchial Asthma < 5',
+                        'underANC': 'OPD_Caries < 5','underDe':'OPD_Caries >5','underMeb':'Cataract Congenital <5',
+                        'underCov':'Cataract Congenital >5','underSy':'OPD_Fungal Infection, Non-skin <5',
+                        'underSyP':'OPD_Fungal Infection, Non-skin >5 ','underSyT':'OPD_Gynaecological Diseases, Other<5','underHIV':'X_OPD_Gynaecological Diseases, Other >5',
+                        'underHIVTest':'IPD_Tuberculosis < 5','underHIVTestDone':'OPD_Tuberculosis > 5','underHIVTestRate':'OPD_Tuberculosis >5',
+                        'underHIVTestDev':'IPD_Tuberculosis >5','underHIVTestDevS':'IPD_Cardiovascular Disorders, other > 5',
+                        'underHIVTestDevP':'IPD_Cardiovascular Disorders,> 5'
+                    }];
+                    angular.forEach(dataTable.metaData.ou,function(region){
+                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                            undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
+                            underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                            underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                            underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
+                            underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
+                            underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
+                            underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
+                            underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
+                            underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
+                            underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
+                        });
+
                     });
+                    $scope.loadingImage=false;
+                    $scope.tableContent=generalArray;
+                    console.log($scope.tableContent);
+                    //},2000);
+                }).error(function(error){
+                    $scope.loadingImage=false;
+
+                    $scope.authenticationFailed="Oops..!! Something wrong Check internet Connection and reload your page Again..!! ";
+                    console.log($scope.authenticationFailed);
 
                 });
-                $scope.loadingImage=false;
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-                //},2000);
-            }).error(function(error){
-                $scope.loadingImage=false;
-
-                 $scope.authenticationFailed="Oops..!! Something wrong Check internet Connection and reload your page Again..!! ";
-                console.log($scope.authenticationFailed);
-
             });
 
         }
         $scope.downloadExcelMaternalTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
+
         }
 
 

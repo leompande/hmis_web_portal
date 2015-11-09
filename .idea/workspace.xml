@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/completenesCtrl.js" afterPath="$PROJECT_DIR$/controllers/completenesCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/dashboardCtrl.js" afterPath="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cache.appcache" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/ivdCtrl.js" afterPath="$PROJECT_DIR$/controllers/ivdCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/jinsiCtrl.js" afterPath="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/malariaCtrl.js" afterPath="$PROJECT_DIR$/controllers/malariaCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/maternalCtrl.js" afterPath="$PROJECT_DIR$/controllers/maternalCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/morbidityCtrl.js" afterPath="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/mortalityCtrl.js" afterPath="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/nutritionCtrl.js" afterPath="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" afterPath="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hmis_portal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,32 +33,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="nutritionCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
+      <file leaf-file-name="mortalityCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="15" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12942">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tracermedicineCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="15" selection-start="340" selection-end="717" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="31374">
+            <state line="684" column="35" selection-start="32729" selection-end="32729" vertical-scroll-proportion="0.0" vertical-offset="2989" max-vertical-offset="8802">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#1855#18327#0" expanded="false" />
+                <element signature="e#24892#29913#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mortalityCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
+      <file leaf-file-name="nutritionCtrl.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="15" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="18090">
+            <state line="329" column="14" selection-start="14501" selection-end="14501" vertical-scroll-proportion="0.0" vertical-offset="3977" max-vertical-offset="10656">
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#1809#5971#0" expanded="false" />
+                <element signature="e#14869#16984#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -68,8 +61,21 @@
       <file leaf-file-name="maternalCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/maternalCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="15" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="23562">
-              <folding />
+            <state line="817" column="25" selection-start="36585" selection-end="36795" vertical-scroll-proportion="0.0" vertical-offset="14316" max-vertical-offset="23364">
+              <folding>
+                <element signature="e#34251#36073#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tracermedicineCtrl.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1128" column="35" selection-start="53083" selection-end="53083" vertical-scroll-proportion="-0.0019880715" vertical-offset="20305" max-vertical-offset="31554">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,23 +89,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="completenesCtrl.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="completenesCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/completenesCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="7" selection-start="336" selection-end="336" vertical-scroll-proportion="0.250497" vertical-offset="72" max-vertical-offset="23112">
+            <state line="13" column="7" selection-start="336" selection-end="336" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="23112">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
+      <file leaf-file-name="cache.appcache" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cache.appcache">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="8" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6516">
-              <folding>
-                <element signature="e#4202#10463#0" expanded="false" />
-                <element signature="e#11979#20134#0" expanded="false" />
-              </folding>
+            <state line="63" column="37" selection-start="2374" selection-end="2374" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="3204">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,8 +110,11 @@
       <file leaf-file-name="malariaCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/malariaCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="15" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16686">
-              <folding />
+            <state line="533" column="25" selection-start="23998" selection-end="24208" vertical-scroll-proportion="0.0" vertical-offset="4032" max-vertical-offset="11394">
+              <folding>
+                <element signature="e#1818#12190#0" expanded="false" />
+                <element signature="e#21112#23716#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,7 +122,7 @@
       <file leaf-file-name="ivdCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/ivdCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="15" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0" vertical-offset="31" max-vertical-offset="14400">
+            <state line="387" column="25" selection-start="19937" selection-end="20147" vertical-scroll-proportion="0.0" vertical-offset="6841" max-vertical-offset="14472">
               <folding />
             </state>
           </provider>
@@ -125,8 +131,10 @@
       <file leaf-file-name="morbidityCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/morbidityCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="15" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="31266">
-              <folding />
+            <state line="1246" column="25" selection-start="53743" selection-end="53953" vertical-scroll-proportion="0.0" vertical-offset="20902" max-vertical-offset="30114">
+              <folding>
+                <element signature="e#47101#53674#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,16 +177,17 @@
         <option value="$PROJECT_DIR$/views/dashboard.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/controllers/mainCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/maternalCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/malariaCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/ivdCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/completenesCtrl.js" />
+        <option value="$PROJECT_DIR$/cache.appcache" />
+        <option value="$PROJECT_DIR$/controllers/ivdCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/malariaCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/maternalCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
       </list>
     </option>
   </component>
@@ -243,7 +252,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -257,7 +266,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hmis_portal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hmis_web_portal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -274,6 +301,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/controllers" />
       <recent name="$PROJECT_DIR$/assets/libs" />
       <recent name="$PROJECT_DIR$/assets/css" />
@@ -332,14 +360,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="52" width="1525" height="818" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08974359" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20914127" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32948717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19810683" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19810683" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -373,11 +401,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/libs/materialize/css/materialize.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
@@ -575,59 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="15" selection-start="340" selection-end="717" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="31374">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="15" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12942">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="15" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="18090">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/morbidityCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="15" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="31266">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/maternalCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="15" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="23562">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/malariaCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="15" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16686">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/mainCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="15" selection-start="210" selection-end="539" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1404">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="8" selection-start="285" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6516">
@@ -635,13 +605,6 @@
             <element signature="e#4202#10463#0" expanded="false" />
             <element signature="e#11979#20134#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/ivdCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="15" selection-start="659" selection-end="659" vertical-scroll-proportion="0.0" vertical-offset="31" max-vertical-offset="14400">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -654,8 +617,87 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/completenesCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="7" selection-start="336" selection-end="336" vertical-scroll-proportion="0.250497" vertical-offset="72" max-vertical-offset="23112">
+        <state line="13" column="7" selection-start="336" selection-end="336" vertical-scroll-proportion="0.0" vertical-offset="72" max-vertical-offset="23112">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cache.appcache">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="37" selection-start="2374" selection-end="2374" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="3204">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/ivdCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="387" column="25" selection-start="19937" selection-end="20147" vertical-scroll-proportion="0.0" vertical-offset="6841" max-vertical-offset="14472">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/mainCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="15" selection-start="210" selection-end="539" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1404">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/malariaCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="533" column="25" selection-start="23998" selection-end="24208" vertical-scroll-proportion="0.0" vertical-offset="4032" max-vertical-offset="11394">
+          <folding>
+            <element signature="e#1818#12190#0" expanded="false" />
+            <element signature="e#21112#23716#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/maternalCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="817" column="25" selection-start="36585" selection-end="36795" vertical-scroll-proportion="0.0" vertical-offset="14316" max-vertical-offset="23364">
+          <folding>
+            <element signature="e#34251#36073#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/morbidityCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1246" column="25" selection-start="53743" selection-end="53953" vertical-scroll-proportion="0.0" vertical-offset="20902" max-vertical-offset="30114">
+          <folding>
+            <element signature="e#47101#53674#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="684" column="35" selection-start="32729" selection-end="32729" vertical-scroll-proportion="0.0" vertical-offset="2989" max-vertical-offset="8802">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1855#18327#0" expanded="false" />
+            <element signature="e#24892#29913#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="329" column="14" selection-start="14501" selection-end="14501" vertical-scroll-proportion="0.0" vertical-offset="3977" max-vertical-offset="10656">
+          <folding>
+            <element signature="e#1809#5971#0" expanded="false" />
+            <element signature="e#14869#16984#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/tracermedicineCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1128" column="35" selection-start="53083" selection-end="53083" vertical-scroll-proportion="-0.0019880715" vertical-offset="20305" max-vertical-offset="31554">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

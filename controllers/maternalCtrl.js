@@ -745,86 +745,89 @@ angular.module("hmisPortal")
 
         };
         $rootScope.lastCard=function(){
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl).success(function(dataTable){
+                    var generalArray=[];
+                    var underOne="ANC 1st Visit Before 12 weeks rate";
+                    var undertwo="Hudhurio la Kwanza ANC Ujauzito chini ya Wiki 12";
+                    var underpop="Idadi ya Watu";
+                    var underthree="Antenatal care coverage";
+                    var underfour="ANC 4th visits Coverage";
+                    var underANC="Wajawazito Hudhurio la nne";
+                    var underDe="ANC de-worming rate";
+                    var underMeb="Wajawazito Waliopewa Dawa ya minyoo (Mebendazole / Albendazole )";
+                    var underCov="ANC Coverage for Women of Under 20 years";
+                    var underSy="ANC Syphilis Prevalance";
+                    var underSyP="Wajawazito Wenye Maambukizi ya Kaswende";
+                    var underSyT="Wajawazito Waliopima Kaswende";
+                    var underHIV="ANC HIV prevalence (15-24 years)";
+                    var underHIVTest="Waliokutwa na Maambukizi ya VVU-Umri Chini ya Miaka 25";
+                    var underHIVTestDone="Wajawazito waliopimwa VVU kipimo cha kwanza chini ya umri wa miaka 25";
+                    var underHIVTestRate="Health Facility Delivery Rate";
+                    var underHIVTestDev="Waliojifungulia kituoni";
+                    var underHIVTestDevS="Deliveries by skilled attendants";
+                    var underHIVTestDevP="Waliozalishwa na Watoa Huduma Wenye Ujuzi";
+                    $scope.arrayed=[{'underOne':'ANC 1st Visit Before 12 weeks rate','undertwo':'ANC First Visit Attendances','underpop':'Population',
+                        'underthree':'Antenatal care coverage','underfour':'ANC 4th Visit Coverage',
+                        'underANC': 'ANC 4th Visit','underDe':'ANC de-worming rate','underMeb':'ANC mebendazole tablets given',
+                        'underCov':'ANC Coverage for Women of Under 20 years','underSy':'ANC Syphilis Prevalance',
+                        'underSyP':'ANC Syphilis Positive','underSyT':'ANC Syphilis Tested','underHIV':'ANC HIV prevalence (15-24 years)',
+                        'underHIVTest':'ANC HIV tests positive (15-24 years)','underHIVTestDone':'ANC HIV test done','underHIVTestRate':'Health Facility Delivery Rate',
+                        'underHIVTestDev':'Deliveries at health facilities','underHIVTestDevS':'Deliveries by skilled attendants',
+                        'underHIVTestDevP':'Deliveries by skilled personnel'
+                    }];
+                    angular.forEach(dataTable.metaData.ou,function(region){
+                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                            undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
+                            underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                            underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                            underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
+                            underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
+                            underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
+                            underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
+                            underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
+                            underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
+                            underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
+                        });
 
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:TRoamv0YPt3;WAdaCligbNP;ykShMtNgDB1;XjbKrjgOFMp;QiA9L6tNHFy;yqA1CfsfBHQ;ovRcOHNO7qZ;m1PpRCnZF4l;JeIe5FgaGTX;aEcdPpCOi3k;VSXdXdsSUd3;PmSZNZHac3t;TdxVgoa08tn;F99dNfvn18N;s4zyCyJ7EjQ;OLWz8aiTGYd;kLI4iGDbN3p;vVRVLjgU10c;DPLR0aQemYC&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(dataTable){
-                var generalArray=[];
-                var underOne="ANC 1st Visit Before 12 weeks rate";
-                var undertwo="Hudhurio la Kwanza ANC Ujauzito chini ya Wiki 12";
-                var underpop="Idadi ya Watu";
-                var underthree="Antenatal care coverage";
-                var underfour="ANC 4th visits Coverage";
-                var underANC="Wajawazito Hudhurio la nne";
-                var underDe="ANC de-worming rate";
-                var underMeb="Wajawazito Waliopewa Dawa ya minyoo (Mebendazole / Albendazole )";
-                var underCov="ANC Coverage for Women of Under 20 years";
-                var underSy="ANC Syphilis Prevalance";
-                var underSyP="Wajawazito Wenye Maambukizi ya Kaswende";
-                var underSyT="Wajawazito Waliopima Kaswende";
-                var underHIV="ANC HIV prevalence (15-24 years)";
-                var underHIVTest="Waliokutwa na Maambukizi ya VVU-Umri Chini ya Miaka 25";
-                var underHIVTestDone="Wajawazito waliopimwa VVU kipimo cha kwanza chini ya umri wa miaka 25";
-                var underHIVTestRate="Health Facility Delivery Rate";
-                var underHIVTestDev="Waliojifungulia kituoni";
-                var underHIVTestDevS="Deliveries by skilled attendants";
-                var underHIVTestDevP="Waliozalishwa na Watoa Huduma Wenye Ujuzi";
-                $scope.arrayed=[{'underOne':'ANC 1st Visit Before 12 weeks rate','undertwo':'ANC First Visit Attendances','underpop':'Population',
-                    'underthree':'Antenatal care coverage','underfour':'ANC 4th Visit Coverage',
-                    'underANC': 'ANC 4th Visit','underDe':'ANC de-worming rate','underMeb':'ANC mebendazole tablets given',
-                    'underCov':'ANC Coverage for Women of Under 20 years','underSy':'ANC Syphilis Prevalance',
-                    'underSyP':'ANC Syphilis Positive','underSyT':'ANC Syphilis Tested','underHIV':'ANC HIV prevalence (15-24 years)',
-                    'underHIVTest':'ANC HIV tests positive (15-24 years)','underHIVTestDone':'ANC HIV test done','underHIVTestRate':'Health Facility Delivery Rate',
-                    'underHIVTestDev':'Deliveries at health facilities','underHIVTestDevS':'Deliveries by skilled attendants',
-                    'underHIVTestDevP':'Deliveries by skilled personnel'
-                }];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
-                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
-                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
-                        underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
-                        underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
-                        underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
-                        underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
-                        underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
-                        underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
-                        underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
-                        underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
                     });
-
+                    $scope.loadingImage=false;
+                    $scope.tableContent=generalArray;
+                    console.log($scope.tableContent);
+                    //},2000);
+                }).error(function(error){
+                    //$scope.loadingImage=false;
+                    $scope.authenticationFailed=error;
+                    console.log($scope.authenticationFailed);
                 });
-                $scope.loadingImage=false;
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-                //},2000);
-            }).error(function(error){
-                //$scope.loadingImage=false;
-                $scope.authenticationFailed=error;
-                console.log($scope.authenticationFailed);
             });
 
         }
         $scope.downloadExcelMaternalTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
         }
 

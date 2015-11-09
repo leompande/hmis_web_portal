@@ -645,48 +645,50 @@ angular.module("hmisPortal")
 
         };
         $rootScope.lastCard=function(){
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl).success(function(dataTable){
+                    var generalArray=[];
 
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
-            }}).success(function(dataTable){
-                var generalArray=[];
+                    var underOne="ANC IPT 2 coverage";
+                    var undertwo="ANC Malaria prevalence";
+                    var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
+                    var underfour="ANC IPT 1 coverage";
+                    $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
+                    angular.forEach(dataTable.metaData.ou,function(region){
+                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
 
-                var underOne="ANC IPT 2 coverage";
-                var undertwo="ANC Malaria prevalence";
-                var underthree="ANC Proportion of pregnant women receiving ITN Voucher";
-                var underfour="ANC IPT 1 coverage";
-                $scope.arrayed=[{'one':underOne,'two':undertwo,'three':underthree,'four':underfour}];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region)});
+                    });
+                    $scope.tableContent=generalArray;
+                    console.log($scope.tableContent);
 
                 });
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-
             });
-
         }
         $scope.downloadExcelTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "tuzoengelbert",
-                j_password: "TUZO2015"
-            },'Content-Type': 'application/octet-stream'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/octet-stream'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
         }
 

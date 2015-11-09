@@ -382,63 +382,67 @@ angular.module("hmisPortal")
         };
         $rootScope.lastCard=function(){
             $scope.loadingImage=true;
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(dataTable){
-                var generalArray=[];
-                var underOne="Measles vaccination coverage to children under 1 year";
-                var undertwo="Surua (Measles) zilizotolewa";
-                var underANC="ANC Proportion of pregnant women receiving TT2+";
-                var underthree="Wajawazito Waliopata Chanjo ya TT2+";
-                var underfour="Hudhurio la Kwanza ANC Ujauzito chini ya Wiki 12";
-                var underANC2="Hudhurio la Kwanza ANC Ujauzito Wiki 12 au Zaidi";
-                var underPENTA="PENTA 3 vaccination coverage children under 1 year";
-                var underPenta="Watoto Waliochanjwa Penta";
-                 $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Measles Doses to Children under one year of age','underANC':'ANC Proportion of pregnant women receiving TT2+',
-                    'underthree':'ANC tetanus two doses plus+','underfour':'ANC first visit before 12 weeks',
-                    'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'PENTA 3 under 1 year Coverage'
-                  }];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
-                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
-                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
-                        underANC2:underANC2Object(underANC2,dataTable,dataTable.rows,region),underPENTA:underPENTAObject(underPENTA,dataTable,dataTable.rows,region),
-                        underPenta:underPentaObject(underPenta,dataTable,dataTable.rows,region)
-                    });
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl).success(function(dataTable){
+                    var generalArray=[];
+                    var underOne="Measles vaccination coverage to children under 1 year";
+                    var undertwo="Surua (Measles) zilizotolewa";
+                    var underANC="ANC Proportion of pregnant women receiving TT2+";
+                    var underthree="Wajawazito Waliopata Chanjo ya TT2+";
+                    var underfour="Hudhurio la Kwanza ANC Ujauzito chini ya Wiki 12";
+                    var underANC2="Hudhurio la Kwanza ANC Ujauzito Wiki 12 au Zaidi";
+                    var underPENTA="PENTA 3 vaccination coverage children under 1 year";
+                    var underPenta="Watoto Waliochanjwa Penta";
+                    $scope.arrayed=[{'underOne':'Measles vaccination coverage to children under 1 year','undertwo':'Measles Doses to Children under one year of age','underANC':'ANC Proportion of pregnant women receiving TT2+',
+                        'underthree':'ANC tetanus two doses plus+','underfour':'ANC first visit before 12 weeks',
+                        'underANC2': 'ANC first visit after 12 weeks','underPENTA':'PENTA 3 vaccination coverage children under 1 year','underPenta':'PENTA 3 under 1 year Coverage'
+                    }];
+                    angular.forEach(dataTable.metaData.ou,function(region){
+                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                            undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                            underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                            underANC2:underANC2Object(underANC2,dataTable,dataTable.rows,region),underPENTA:underPENTAObject(underPENTA,dataTable,dataTable.rows,region),
+                            underPenta:underPentaObject(underPenta,dataTable,dataTable.rows,region)
+                        });
 
+                    });
+                    $scope.loadingImage=false;
+                    $scope.tableContent=generalArray;
+                    console.log($scope.tableContent);
+                    //},2000);
+                }).error(function(error){
+                    //$scope.loadingImage=false;
+                    $scope.authenticationFailed=error;
+                    console.log($scope.authenticationFailed);
                 });
-                $scope.loadingImage=false;
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-                //},2000);
-            }).error(function(error){
-                //$scope.loadingImage=false;
-                $scope.authenticationFailed=error;
-                console.log($scope.authenticationFailed);
             });
 
         }
         $scope.downloadIvdExcelTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/octet-stream'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:c29EE9nH8gQ;JXJ6K85BwHb;DHP2lGgo4kH;RyNkn76uTJo;WAdaCligbNP;ykDWUlQzexW;WhsP7nsuwnz;V2ZzQl7dgVF&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/octet-stream'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
         }
 

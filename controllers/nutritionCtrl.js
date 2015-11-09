@@ -321,40 +321,45 @@ angular.module("hmisPortal")
         $rootScope.lastCard=function(){
 
             $scope.loadingImage=true;
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true }).success(function(dataTable){
-                var generalArray=[];
-                var underOne="Vitamin A supplementation coverage to children under 1 year";
-                var undertwo="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 12-17";
-                var underSup="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 18-23";
-                var underthree="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 25-59";
-                var underfour="Idadi ya Watu";
-                var underFive="Children under 5 who are underweight";
-                var underWeight="Uwiano wa Uzito kwa Umri";
-                 $scope.arrayed=[{'underOne':'Vitamin A supplementation coverage to children under 1 year','undertwo':'Vitamin A supplementation coverage to children 12-17 months','underSup':'Vitamin A supplementation coverage to children 18-23 months',
-                    'underthree':'itamin A supplementation coverage to children 25-59','underfour':'Population',
-                    'underFive': 'Children under 5 who are underweight','underWeight':'Children who are underweight'
-                }];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
-                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underSup:underSupObject(underSup,dataTable,dataTable.rows,region),
-                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
-                        underFive:underFiveObject(underFive,dataTable,dataTable.rows,region),underWeight:underWeightObject(underWeight,dataTable,dataTable.rows,region),
-                     });
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl).success(function(dataTable){
+                    var generalArray=[];
+                    var underOne="Vitamin A supplementation coverage to children under 1 year";
+                    var undertwo="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 12-17";
+                    var underSup="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 18-23";
+                    var underthree="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 25-59";
+                    var underfour="Idadi ya Watu";
+                    var underFive="Children under 5 who are underweight";
+                    var underWeight="Uwiano wa Uzito kwa Umri";
+                     $scope.arrayed=[{'underOne':'Vitamin A supplementation coverage to children under 1 year','undertwo':'Vitamin A supplementation coverage to children 12-17 months','underSup':'Vitamin A supplementation coverage to children 18-23 months',
+                        'underthree':'itamin A supplementation coverage to children 25-59','underfour':'Population',
+                        'underFive': 'Children under 5 who are underweight','underWeight':'Children who are underweight'
+                    }];
+                    angular.forEach(dataTable.metaData.ou,function(region){
+                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                            undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underSup:underSupObject(underSup,dataTable,dataTable.rows,region),
+                            underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                            underFive:underFiveObject(underFive,dataTable,dataTable.rows,region),underWeight:underWeightObject(underWeight,dataTable,dataTable.rows,region),
+                         });
 
+                    });
+                    $scope.loadingImage=false;
+                    $scope.tableContent=generalArray;
+                    console.log($scope.tableContent);
+                    //},2000);
+                }).error(function(error){
+                    //$scope.loadingImage=false;
+                    $scope.authenticationFailed=error;
+                    console.log($scope.authenticationFailed);
                 });
-                $scope.loadingImage=false;
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-                //},2000);
-            }).error(function(error){
-                //$scope.loadingImage=false;
-                $scope.authenticationFailed=error;
-                console.log($scope.authenticationFailed);
             });
 
         }

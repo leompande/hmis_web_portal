@@ -1013,12 +1013,16 @@ angular.module("hmisPortal")
         };
         $rootScope.lastCard=function(){
             $scope.loadingImage=true;
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
-            $http.get(lastUrl,{withCredentials: true }).success(function(dataTable){
+            $http.get(lastUrl).success(function(dataTable){
                 var generalArray=[];
                 var underOne="Total Tracers available";
                 var undertwo="Normal saline Availability";
@@ -1109,20 +1113,26 @@ angular.module("hmisPortal")
                 $scope.authenticationFailed=error;
                 console.log($scope.authenticationFailed);
             });
+            });
 
         }
         $scope.downloadExcelMedicineTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }
-            $http.get(lastUrl,{withCredentials: true,'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:PlatsD7r6BI;Y6gfcTiQcis;n0X9iB1Z5uS;R5wsRAcTOtA;sZYr1CWDW8Y;AT7PchtF6Jy;evvqSpYy99J;TFORL9LBEDP;gOnXFvuLClY;DPxobo6eezJ;Y0HAPpe3X8A;IctQGELdKnU;YdumyTaJeaY;BRS6sUj8FJa;sA9bxsRppLr;HKYab4TIAXs;AHcdWDFaeZi;Kj2VNr4bNmK;D9UegHR72F7;EX233CR1k1T;ySw4xVVyeJm;KhlPt64ioMc;KxS8b24bAZC;ZrjzeUlhXGt;W9g7M8URMFw;wjGjt5bacv6;cCCL5yNl301;P6nVr0o4O8O;YKtXjwwuFA3;UCmAgEwrtnL;eRGYpbsCTjL;GfA6IHXRUyb;TJKlz62awvr&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
         }
 
