@@ -744,7 +744,7 @@ angular.module("hmisPortal")
             });
 
         };
-        $rootScope.lastCard=function(){
+        $scope.lastCard=function(){
             var base = "https://dhis.moh.go.tz/";
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
                 j_username: "portal", j_password: "Portal123"
@@ -837,7 +837,7 @@ angular.module("hmisPortal")
 //              $scope.data.chartType = value.chart;
                 $scope.prepareSeries(value,value.chart);
             });
-            $rootScope.lastCard();
+            $scope.lastCard();
         }
         $scope.firstClick();
 

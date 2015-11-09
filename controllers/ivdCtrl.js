@@ -380,7 +380,7 @@ angular.module("hmisPortal")
             });
 
         };
-        $rootScope.lastCard=function(){
+        $scope.lastCard=function(){
             $scope.loadingImage=true;
             var base = "https://dhis.moh.go.tz/";
             $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
@@ -452,7 +452,7 @@ angular.module("hmisPortal")
 //              $scope.data.chartType = value.chart;
                 $scope.prepareSeries(value,value.chart);
             });
-            $rootScope.lastCard();
+            $scope.lastCard();
         }
         $scope.firstClick();
 
