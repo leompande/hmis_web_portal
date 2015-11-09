@@ -485,7 +485,8 @@ angular.module("hmisPortal")
         };
 
         $scope.downloadcompletenesExcel = function(card){
-            var url = "";
+            $scope.authanticateDHIS().then(function(){
+                var url = "";
 
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
@@ -493,16 +494,18 @@ angular.module("hmisPortal")
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+card.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx;hENn80Fmmlf&rows=ou";
                 }
 
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.csv";
-                a.click();
-            });
+                $http.get(url,{withCredentials: true, params : {
+                    j_username: "portal",
+                    j_password: "Portal123"
+                },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.csv";
+                    a.click();
+                });
+            })
+
         };
 
         $scope.changecompletenesChart = function($event,type,card){
@@ -523,21 +526,22 @@ angular.module("hmisPortal")
         };
 
         $scope.preparecompletenesSeries = function(cardObject,chart){
-            if(chart == 'table'){
-                cardObject.displayTable = true;
-                cardObject.displayMap = false;
-            }else if(chart == 'map'){
-                cardObject.displayMap = true;
-                cardObject.displayTable = false;
-            }
-            else{
-                cardObject.displayMap = false;
-                cardObject.displayTable = false;
-            }
-            cardObject.chartObject.title.text = cardObject.title;
-            cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
+            $scope.authanticateDHIS().then(function(){
+                if(chart == 'table'){
+                    cardObject.displayTable = true;
+                    cardObject.displayMap = false;
+                }else if(chart == 'map'){
+                    cardObject.displayMap = true;
+                    cardObject.displayTable = false;
+                }
+                else{
+                    cardObject.displayMap = false;
+                    cardObject.displayTable = false;
+                }
+                cardObject.chartObject.title.text = cardObject.title;
+                cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
 
-            $scope.area = [];
+                $scope.area = [];
 
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
 
@@ -546,94 +550,94 @@ angular.module("hmisPortal")
                     $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
                 }
 
-            cardObject.chartObject.loading = true;
-            $http.get($scope.url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-
-            }}).success(function(data){
-                if(data.hasOwnProperty('metaData')){
-                    var useThisData = $scope.preparecompletenesData(data,cardObject);
-                    angular.forEach(useThisData.regions,function(value){
-                        $scope.area.push(value.name);
-                    });
-                    $scope.subCategory = useThisData.elements;
-                    cardObject.chartObject.xAxis.categories = $scope.area;
-
-                    $scope.normalseries = [];
-                    if($scope.data.chartType == "pie"){
-                        delete cardObject.chartObject.chart;
-                        var serie = [];
-                        angular.forEach(useThisData.elements,function(value){
-                            angular.forEach(useThisData.regions,function(val){
-                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-
-                                serie.push({name: value.name+" - "+ val.name , y: parseInt(number)})
-                            });
+                cardObject.chartObject.loading = true;
+                $http.get($scope.url).success(function(data){
+                    if(data.hasOwnProperty('metaData')){
+                        var useThisData = $scope.preparecompletenesData(data,cardObject);
+                        angular.forEach(useThisData.regions,function(value){
+                            $scope.area.push(value.name);
                         });
-                        $scope.normalseries.push({type: chart, name:$scope.UsedName , data: serie,showInLegend: true,
-                            dataLabels: {
-                                enabled: false
-                            } })
-                        cardObject.chartObject.series = $scope.normalseries;
-                    }
-                    else if(chart == "combined"){
-                        delete cardObject.chartObject.chart;
-                        var serie1 = [];
-                        angular.forEach(useThisData.elements,function(value){
+                        $scope.subCategory = useThisData.elements;
+                        cardObject.chartObject.xAxis.categories = $scope.area;
+
+                        $scope.normalseries = [];
+                        if($scope.data.chartType == "pie"){
+                            delete cardObject.chartObject.chart;
                             var serie = [];
-
-                            angular.forEach(useThisData.regions,function(val){
-                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-                                serie.push(parseInt(number));
-                                serie1.push({name: value.name+" - "+ val.name , y: parseInt(number) })
-                            });
-                            $scope.normalseries.push({type: 'column', name: value.name, data: serie});
-                            $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
-                        });
-                        $scope.normalseries.push({type: 'pie', name: $scope.UsedName, data: serie1,center: [100, 80],size: 150,showInLegend: false,
-                            dataLabels: {
-                                enabled: false
-                            }})
-                        cardObject.chartObject.series = $scope.normalseries;
-                    }
-                    else if(chart == 'table'){
-                        cardObject.table ={}
-                        cardObject.table.headers = [];
-                        cardObject.table.colums =[];
-                        angular.forEach(useThisData.elements,function(value){
-                            var serie = [];
-                            cardObject.table.headers.push(value.name);
-                        });
-                        angular.forEach(useThisData.regions,function(val){
-                            var seri = [];
                             angular.forEach(useThisData.elements,function(value){
-                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-                                seri.push({name:value.name,value:parseInt(number)});
+                                angular.forEach(useThisData.regions,function(val){
+                                    var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+
+                                    serie.push({name: value.name+" - "+ val.name , y: parseInt(number)})
+                                });
                             });
-                            cardObject.table.colums.push({name:val.name,values:seri});
-                        });
-                    }
-                    else{
-                        delete cardObject.chartObject.chart;
-                        angular.forEach(useThisData.elements,function(value){
-                            var serie = [];
+                            $scope.normalseries.push({type: chart, name:$scope.UsedName , data: serie,showInLegend: true,
+                                dataLabels: {
+                                    enabled: false
+                                } })
+                            cardObject.chartObject.series = $scope.normalseries;
+                        }
+                        else if(chart == "combined"){
+                            delete cardObject.chartObject.chart;
+                            var serie1 = [];
+                            angular.forEach(useThisData.elements,function(value){
+                                var serie = [];
+
+                                angular.forEach(useThisData.regions,function(val){
+                                    var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+                                    serie.push(parseInt(number));
+                                    serie1.push({name: value.name+" - "+ val.name , y: parseInt(number) })
+                                });
+                                $scope.normalseries.push({type: 'column', name: value.name, data: serie});
+                                $scope.normalseries.push({type: 'spline', name: value.name, data: serie});
+                            });
+                            $scope.normalseries.push({type: 'pie', name: $scope.UsedName, data: serie1,center: [100, 80],size: 150,showInLegend: false,
+                                dataLabels: {
+                                    enabled: false
+                                }})
+                            cardObject.chartObject.series = $scope.normalseries;
+                        }
+                        else if(chart == 'table'){
+                            cardObject.table ={}
+                            cardObject.table.headers = [];
+                            cardObject.table.colums =[];
+                            angular.forEach(useThisData.elements,function(value){
+                                var serie = [];
+                                cardObject.table.headers.push(value.name);
+                            });
                             angular.forEach(useThisData.regions,function(val){
-                                var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
-                                serie.push(number);
+                                var seri = [];
+                                angular.forEach(useThisData.elements,function(value){
+                                    var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+                                    seri.push({name:value.name,value:parseInt(number)});
+                                });
+                                cardObject.table.colums.push({name:val.name,values:seri});
                             });
-                            $scope.normalseries.push({type: chart, name: value.name, data: serie})
-                        });
-                        cardObject.chartObject.series = $scope.normalseries;
+                        }
+                        else{
+                            delete cardObject.chartObject.chart;
+                            angular.forEach(useThisData.elements,function(value){
+                                var serie = [];
+                                angular.forEach(useThisData.regions,function(val){
+                                    var number = $scope.getcompletenesDataFromUrl(data.rows,val.id,value.uid);
+                                    serie.push(number);
+                                });
+                                $scope.normalseries.push({type: chart, name: value.name, data: serie})
+                            });
+                            cardObject.chartObject.series = $scope.normalseries;
+                        }
+                        cardObject.chartObject.loading = false
+                    }else{
+                        cardObject.chartObject.loading = false
                     }
-                    cardObject.chartObject.loading = false
-                }else{
-                    cardObject.chartObject.loading = false
-                }
+
+                });
 
             });
 
         };
+
+
         $scope.getcompletenesDataFromUrl  = function (arr,ou,de){
             var num = 0
             $.each(arr,function(k,v){

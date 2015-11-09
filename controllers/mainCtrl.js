@@ -4,28 +4,24 @@
 
 angular.module("hmisPortal")
     .run(function() {
-//        jQuery(document).ready(function() {
-//            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
-//                {withCredentials: true, params : {
-//                    j_username: "portal", j_password: "Portal123"
-//                }});
-//            $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
-//               {withCredentials: true, params : {
-//                j_username: "portal", j_password: "Portal123"
-//              }});
-//        });
+
     })
     .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
-//        jQuery(document).ready(function() {
-//            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
-//                {withCredentials: true, params : {
-//                    j_username: "portal", j_password: "Portal123"
-//                }});
-//            $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
-//                {withCredentials: true, params : {
-//                    j_username: "portal", j_password: "Portal123"
-//                }});
-//        });
+        $scope.authanticateDHIS = function(){
+            var deferred = $q.defer();
+            try{
+                $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                        j_username: "portal", j_password: "Portal123"
+                    },function(){
+                        deferred.resolve();
+                    }
+                );
+            }catch(e){
+                deferred.reject(e);
+            }
+            return deferred.promise;
+        }
+
         $scope.cards = {};
         $scope.data = {};
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
