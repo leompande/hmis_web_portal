@@ -73,13 +73,9 @@ angular.module("hmisPortal")
                 if($scope.selectedOrgUnit == "m0frOspS7JY"){
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:ykShMtNgDB1&dimension=Cow9nZikDgD:LBipXEMD6mq;FfN1mqXvpR7;aZcKJ9XxvaF;HKU7NijIEIH;p1b4SYcdjJw;h8JRv8POdfy&dimension=ou:LEVEL-2;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&outputIdScheme=NAME";
                 }else{
-
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:ykShMtNgDB1&dimension=Cow9nZikDgD:LBipXEMD6mq;FfN1mqXvpR7;aZcKJ9XxvaF;HKU7NijIEIH;p1b4SYcdjJw;h8JRv8POdfy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&outputIdScheme=NAME";
                 }
-                $http.get(url,{withCredentials: true, params : {
-                    j_username: "portal",
-                    j_password: "Portal123"
-                },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                $http.get(url,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                     var a = document.createElement('a');
                     var blob = new Blob([data]);
                     a.href = window.URL.createObjectURL(blob);
@@ -338,10 +334,7 @@ angular.module("hmisPortal")
 
                     url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
                 }
-                $http.get(url,{withCredentials: true, params : {
-                    j_username: "portal",
-                    j_password: "Portal123"
-                },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                $http.get(url,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
                     var a = document.createElement('a');
                     var blob = new Blob([data]);
                     a.href = window.URL.createObjectURL(blob);
