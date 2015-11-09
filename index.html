@@ -61,11 +61,9 @@
         <li><a href="./#maternal">MATERNAL</a></li>
         <li><a href="./#ivd">IVD</a></li>
         <li><a href="./#nutrition">NUTRITION</a></li>
-        <!--<li><a href="./#morbidity">MORBIDITY</a></li>-->
+        <li><a href="./#morbidity">MORBIDITY</a></li>
         <li><a href="./#mortality">MORTALITY</a></li>
         <li><a href="./#tracer_medicine">TRACER MEDICINE</a></li>
-        <!--<li><a href="./#hiv">HIV/AIDS</a></li>-->
-        <!--<li><a href="./#tb">TB LEPROSY</a></li>-->
     </ul>
     <nav class="teal darken-2">
         <div class="nav-wrapper">
@@ -88,7 +86,8 @@
     </nav>
 </div>
 <!--file views will stay here-->
-<div ng-view></div>
+<div ng-if="showLoader">Loading....</div>
+<div ng-if="!showLoader" ng-view></div>
 
 <!--import pace for visualization-->
 <script src='assets/libs/pace/pace.min.js'></script>

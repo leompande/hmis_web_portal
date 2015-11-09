@@ -7,21 +7,16 @@ angular.module("hmisPortal")
 
     })
     .controller("mainCtrl",function ($rootScope,$scope,$q) {
-        $scope.authanticateDHIS = function(){
-            var deferred = $q.defer();
-            try{
-                var base = "https://dhis.moh.go.tz/";
-                $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
-                        j_username: "portal", j_password: "Portal123"
-                    },function(){
-                        deferred.resolve();
-                    }
-                );
-            }catch(e){
-                deferred.reject(e);
-            }
-            return deferred.promise;
-        }
+        $rootScope.showLoader = false;
+        $rootScope.$on("$routeChangeStart",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = true;
+            });
+        $rootScope.$on("$routeChangeSuccess",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = false;
+
+            });
 
         $scope.cards = {};
         $scope.data = {};
