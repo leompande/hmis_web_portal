@@ -6,7 +6,16 @@ angular.module("hmisPortal")
         $httpProvider.defaults.withCredentials = true;
     })
     .controller("ivdCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+        //displaying loading during page change
+        $rootScope.$on("$routeChangeStart",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = true;
+            });
+        $rootScope.$on("$routeChangeSuccess",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = false;
 
+            });
         $scope.cards = {};
         $scope.data = {};
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
