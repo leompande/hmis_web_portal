@@ -414,60 +414,60 @@ angular.module("hmisPortal")
                 series: []
             }
 
-        },
-            {
-                title:'NTLP DATA COMPLETENESS',
-                description:'NTLP DATA COMPLETENESS',
-                cardClass:"col m12 s12",
-                cardSize:"medium",
-                data:'UHDfKY2mUOQ;ykDbDeDvTcx;ZOkoQ7BtbVQ;IzUZXETYoyB',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''}
-                ],
-                dataSource:'etl',
-                size:'small',
-                displayTable:false,
-                displayMap:false,
-                chart:'bar',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -70,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
-
-            }
+        }
+//            {
+//                title:'NTLP DATA COMPLETENESS',
+//                description:'NTLP DATA COMPLETENESS',
+//                cardClass:"col m12 s12",
+//                cardSize:"medium",
+//                data:'UHDfKY2mUOQ;ykDbDeDvTcx;ZOkoQ7BtbVQ;IzUZXETYoyB',
+//                icons:[
+//                    {name:'table',image:'table.jpg',action:''},
+//                    {name:'bar',image:'bar.png',action:''},
+//                    {name:'line',image:'line.png',action:''},
+//                    {name:'combined',image:'combined.jpg',action:''},
+//                    {name:'column',image:'column.png',action:''},
+//                    {name:'area',image:'area.jpg',action:''},
+//                    {name:'pie',image:'pie.png',action:''}
+//                ],
+//                dataSource:'etl',
+//                size:'small',
+//                displayTable:false,
+//                displayMap:false,
+//                chart:'bar',
+//                chartObject:{
+//                    title: {
+//                        text: 'Combination chart'
+//                    },
+//                    xAxis: {
+//                        categories: [],
+//                        labels:{
+//                            rotation: -70,
+//                            style:{ "color": "#000000", "fontWeight": "normal" }
+//                        }
+//                    },
+//                    yAxis: {
+//                        min: 0,
+//                        title: {
+//                            text: ''
+//                        },labels:{
+//                            style:{ "color": "#000000", "fontWeight": "bold" }
+//                        }
+//                    },
+//                    labels: {
+//                        items: [{
+//                            html: 'doses',
+//                            style: {
+//                                left: '50px',
+//                                top: '18px',
+//                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+//                            }
+//                        }]
+//                    },
+//                    series: []
+//                }
+//
+//            }
         ];
         $scope.preparecompletenesData = function(jsonObject,card){
             var structure = {};
