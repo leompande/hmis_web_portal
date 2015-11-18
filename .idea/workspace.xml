@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/jinsiCtrl.js" afterPath="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/nutritionCtrl.js" afterPath="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
     </list>
     <ignored path="hmis_portal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,10 +34,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nutritionCtrl.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="nutritionCtrl.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="320" column="23" selection-start="13875" selection-end="13883" vertical-scroll-proportion="0.0" vertical-offset="5760" max-vertical-offset="13032">
+            <state line="112" column="34" selection-start="3942" selection-end="3942" vertical-scroll-proportion="0.36065573" vertical-offset="1818" max-vertical-offset="13032">
               <folding />
             </state>
           </provider>
@@ -62,10 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="jinsiCtrl.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="416" column="9" selection-start="18031" selection-end="18031" vertical-scroll-proportion="0.07285974" vertical-offset="7448" max-vertical-offset="12240">
+            <state line="667" column="65" selection-start="30206" selection-end="30206" vertical-scroll-proportion="0.0" vertical-offset="11691" max-vertical-offset="12240">
               <folding />
             </state>
           </provider>
@@ -157,7 +156,6 @@
         <option value="$PROJECT_DIR$/controllers/completenesCtrl.js" />
         <option value="$PROJECT_DIR$/cache.appcache" />
         <option value="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
-        <option value="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
         <option value="$PROJECT_DIR$/controllers/maternalCtrl.js" />
@@ -165,6 +163,7 @@
         <option value="$PROJECT_DIR$/controllers/ivdCtrl.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
+        <option value="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
       </list>
     </option>
   </component>
@@ -571,13 +570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="320" column="23" selection-start="13875" selection-end="13883" vertical-scroll-proportion="0.0" vertical-offset="5760" max-vertical-offset="13032">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="646" column="10" selection-start="29925" selection-end="29925" vertical-scroll-proportion="0.0" vertical-offset="11628" max-vertical-offset="18126">
@@ -634,7 +626,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/jinsiCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="416" column="9" selection-start="18031" selection-end="18031" vertical-scroll-proportion="0.07285974" vertical-offset="7448" max-vertical-offset="12240">
+        <state line="667" column="65" selection-start="30206" selection-end="30206" vertical-scroll-proportion="0.0" vertical-offset="11691" max-vertical-offset="12240">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/nutritionCtrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="34" selection-start="3942" selection-end="3942" vertical-scroll-proportion="0.36065573" vertical-offset="1818" max-vertical-offset="13032">
           <folding />
         </state>
       </provider>

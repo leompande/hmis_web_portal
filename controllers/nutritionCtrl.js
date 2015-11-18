@@ -55,8 +55,8 @@ angular.module("hmisPortal")
         };
 
         $scope.cards.malaria = [{
-            title:'Vitamin A supplementation  coverage for children under 1 ( its suppose to be under5 )',
-            description:'Maelezo ya Vitamin A supplementation  coverage for children under 1 ( its suppose to be under5 )',
+            title:'Vitamin A supplementation  coverage for children under 5 ',
+            description:'Maelezo ya Vitamin A supplementation  coverage for children under 5',
             cardClass:"col s12 m12",
             data:'elneHkTBLxm',
             icons:[
@@ -110,7 +110,7 @@ angular.module("hmisPortal")
             {
                 title:'Children under 5 who are underweight',
                 description:'Maelezo ya Children under 5 who are underweight',
-                cardClass:"col m6 s12",
+                cardClass:"col m12 s12",
                 cardSize:"medium",
                 data:'cj5OnikG3Mz',
                 icons:[
