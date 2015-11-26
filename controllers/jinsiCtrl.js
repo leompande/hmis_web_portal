@@ -769,7 +769,7 @@ angular.module("hmisPortal")
             $scope.facilityOwnchartConfig.title.text = "";
             $scope.facilityOwnchartConfig.yAxis.title.text = "";
 
-            $scope.subCategory =[{'name':'Govt','uid':'Govt'},{'name':'Parastal','uid':'Parastal'},{'name':'FBOs','uid':'FBOs'},{'name':'Private','uid':'Private'} ]
+            $scope.OwnsubCategory =[{'name':'Govt','uid':'Govt'},{'name':'Parastal','uid':'Parastal'},{'name':'FBOs','uid':'FBOs'},{'name':'Private','uid':'Private'} ]
 
               $scope.area = [];
               $scope.useregion = [];
@@ -818,7 +818,7 @@ angular.module("hmisPortal")
 
                     delete $scope.facilityOwnchartConfig.chart;
                     var serie = [];
-                    angular.forEach($scope.subCategory,function(value){
+                    angular.forEach($scope.OwnsubCategory,function(value){
                         angular.forEach($scope.useregion,function(val){
                             var number = $scope.getFacilityData($scope.regions,val.id,value.uid);
                             serie.push({name: value.name+" - "+ val.name , y: parseInt(number)})
@@ -834,7 +834,7 @@ angular.module("hmisPortal")
                 else if(chart == "combined"){
                     delete $scope.facilityOwnchartConfig.chart;
                     var serie1 = [];
-                    angular.forEach($scope.subCategory,function(value){
+                    angular.forEach($scope.OwnsubCategory,function(value){
                         var serie = [];
 
                         angular.forEach($scope.useregion,function(val){
@@ -857,13 +857,13 @@ angular.module("hmisPortal")
                     $scope.owntable ={}
                     $scope.owntable.headers = [];
                     $scope.owntable.colums =[];
-                    angular.forEach($scope.subCategory,function(value){
+                    angular.forEach($scope.OwnsubCategory,function(value){
                         var serie = [];
                         $scope.owntable.headers.push(value.name);
                     });
                     angular.forEach($scope.useregion,function(val){
                         var seri = [];
-                        angular.forEach($scope.subCategory,function(value){
+                        angular.forEach($scope.OwnsubCategory,function(value){
                             var number = $scope.getFacilityData($scope.regions,val.id,value.uid);
                             seri.push({name:value.name,value:parseInt(number)});
                         });
@@ -874,7 +874,7 @@ angular.module("hmisPortal")
                 else{
 
                     delete $scope.facilityOwnchartConfig.chart;
-                    angular.forEach($scope.subCategory,function(value){
+                    angular.forEach($scope.OwnsubCategory,function(value){
                         var serie = [];
                         angular.forEach($scope.useregion,function(val){
                             var number = $scope.getFacilityData($scope.regions,val.id,value.uid);
