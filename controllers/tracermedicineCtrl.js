@@ -62,7 +62,7 @@ angular.module("hmisPortal")
             title:'Total Tracers available',
             description:'Total Tracers available',
             cardClass:"col s12 m12",
-            data:'EuZsjuKYROQ',
+            data:'PlatsD7r6BI',
             icons:[
                 {name:'table',image:'table.jpg',action:''},
                 {name:'bar',image:'bar.png',action:''},

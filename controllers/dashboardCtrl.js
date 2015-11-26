@@ -8,7 +8,12 @@ angular.module("hmisPortal")
         $httpProvider.defaults.withCredentials = true;
     })
     .controller("dashboardCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
-        //displaying loading during page change
+        $scope.linkValue="statistcs"
+        $scope.activateLink = function(linkValue){
+            $scope.linkValue = linkValue;
+
+        }
+         //displaying loading during page change
         $rootScope.$on("$routeChangeStart",
             function (event, current, previous, rejection) {
                 $rootScope.showLoader = true;
