@@ -15,7 +15,7 @@ angular.module("hmisPortal")
 //              }});
 //        });
     })
-    .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+    .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 //        jQuery(document).ready(function() {
 //            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
 //                {withCredentials: true, params : {
@@ -28,6 +28,7 @@ angular.module("hmisPortal")
 //        });
         $scope.cards = {};
         $scope.data = {};
+        var map = this;
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
         $rootScope.selectedPeriod = "2014";
         $scope.selectedOrgUnitLevel = "2";

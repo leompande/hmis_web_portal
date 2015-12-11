@@ -7,7 +7,7 @@ angular.module("hmisPortal")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
-    .controller("dashboardCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+    .controller("dashboardCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 //        jQuery(document).ready(function() {
 //            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
 //                {withCredentials: true, params : {
@@ -20,6 +20,7 @@ angular.module("hmisPortal")
 //        });
         $scope.cards = {};
         $scope.data = {};
+        var map = this;
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
         $rootScope.selectedPeriod = "2014";
         $scope.selectedOrgUnitLevel = "2";
@@ -423,10 +424,17 @@ angular.module("hmisPortal")
                     });
                     console.log(cardObject.table.colums);
                 }else if(chart == 'map'){
+
                     if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                        $scope.drawMap($scope.selectedOrgUnit,2,cardObject);
+                        angular.forEach(dataToUse,function(val){
+                            cardObject.chartObject.series.push({id:val.id,name:val.name,value:parseInt(val.value)});
+                        });
+                        map.drawMap($scope.selectedOrgUnit,2,cardObject);
                     }else{
-                        $scope.drawMap($scope.selectedOrgUnit,3,cardObject);
+                        angular.forEach(dataToUse,function(val){
+                            cardObject.chartObject.series.push({id:val.id,name:val.name,value:parseInt(val.value)});
+                        });
+                        map.drawMap($scope.selectedOrgUnit,3,cardObject);
                     }
                 }
                 else{
@@ -452,13 +460,18 @@ angular.module("hmisPortal")
         $scope.firstClick2();
 
 
-    })
-    .factory('shared', function() {
-        var shared = {
-            "facility":0
-        };
-        return shared;
+        /**
+         *
+         * DRAW MAP
+         * */
+        map.drawMap = function(parentUid,level,card){
+            if(card.chart==="map"){
+                mapService.renderMap(parentUid,level,card);
+            }
+        }
+
     });
+
 var ogUnitsObjectConstruct=function(underOne,ObjectNames,ObectData,orgUnits){
     var num='';
     angular.forEach(ObectData,function(value) {

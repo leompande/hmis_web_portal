@@ -10,7 +10,378 @@ angular.module("hmisPortal")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
-    .controller("mortalityCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+    .factory('shared', function() {
+        var shared = {
+            "facility":0
+        };
+        return shared;
+    })
+    .service('mapService',['$rootScope','$http','olData','olHelpers','shared',function($scope,$http,olData,olHelpers,shared){
+        localStorage.clear();
+        var map = this;
+        map.renderMap = function(parentUid,level,card){
+            console.log(card.chartObject.series);
+            var max_and_min = getMaxAndMin(card.chartObject.series);
+            var legend = getLegend(max_and_min);
+            card.legend = legend;
+            map.shared = shared;
+            shared.facility =3029;
+            var url = 'https://dhis.moh.go.tz/api/organisationUnits.geojson?parent='+parentUid+'&level='+level;
+            card.chartObject.loading = true;
+            $http.get(url,{withCredentials: true, params : {
+                j_username: "portal",
+                j_password: "Portal123"
+
+            }}).success(
+                function(data) {
+                    card.chartObject.loading = false;
+                    var TotalGeo = {
+                        "type":"FeatureCollection",
+                        "features":[]
+                    };
+                    var districtProperties = [];
+                    var dateObject = new Date();
+                    card.thisyear = dateObject.getFullYear();
+                    card.districts = {};
+                    card.DistrictFreeObject = [];
+                    angular.forEach(data.features, function (value, index) {
+                        var appropiateColor = decideOnColor(max_and_min,legend,value);
+                           // creating dynamic colors for district
+                        card.saveColorInlocalStorage(prepareId(card,value.id),appropiateColor.color);
+
+                        // prepare objects of district for properties to display on tooltip
+                        districtProperties[prepareId(card,value.id)] = {
+                            district_id:prepareId(card,value.id),
+                            year:card.thisyear,
+                            name:value.properties.name,
+                            "color":appropiateColor.color,
+                            "facility":Math.floor(Math.random() * 256),
+                            "anc_12":0,
+                            "anc_fisrt":0,
+                            "inst":0,
+                            "post":0,
+                            "measle":0,
+                            "penta3":0,
+                            "vitaminA":0,
+                            "child":0,
+                            "cervical":0,
+                            "doctor":0,
+                            "nurse":0,
+                            "complete":0
+
+                        };
+
+                        card.DistrictFreeObject.push(districtProperties[prepareId(card,value.id)]);
+                        card.districts[prepareId(card,value.id)]= districtProperties;
+
+                        // creating geojson object
+                        var Object = {
+                            "type":"Feature",
+                            "id":prepareId(card,value.id),
+                            "properties":{
+                                "name":value.properties
+                            },
+                            "geometry":{
+                                "type":value.geometry.type,
+                                "coordinates":value.geometry.coordinates
+                            },
+                            "style":{
+                                fill:{
+                                    color:card.getColorFromLocalStorage(prepareId(card,value.id)),
+                                    opacity:5
+                                },
+                                stroke:{
+                                    color:'white',
+                                    width:2
+                                }
+                            }
+                        };
+                        TotalGeo.features.push(Object);
+
+                    });
+
+                    // function getter for district object
+                    var getColor = function(district){
+                        if(!district || !district['district_id']){
+                            return "#FFF";
+                        }
+                        var color = districtProperties[district['district_id']].color;
+                        return color;
+                    }
+                    var getStyle = function(feature){
+                        var style = olHelpers.createStyle({
+                            fill:{
+                                color:getColor(card.districts[feature.getId()]),
+                                opacity:0.4
+                            },
+                            stroke:{
+                                color:'#000000',
+                                width:1
+                            }
+                        });
+                        return [ style ];
+                    }
+
+                    angular.extend(card, {
+                        Africa: {
+                            lat: -6.45,
+                            lon: 35,
+                            zoom: 5.6
+                        },
+                        layers:[
+                            {
+                                name:'mapbox',
+                                source: {
+                                    type: 'TileJSON',
+                                    url:'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp'
+                                }
+                            } ,
+                            {
+                                name:'geojson',
+                                source: {
+                                    type: 'GeoJSON',
+                                    geojson: {
+                                        object: TotalGeo
+                                    }
+                                },
+                                style: getStyle
+                            }
+                        ],
+                        defaults: {
+                            events: {
+                                layers: [ 'mousemove', 'click']
+                            }
+                        }
+                    });
+
+                    card.districts = {};
+                    angular.forEach(card.DistrictFreeObject,function(data,index){
+                        var district = data;
+                        card.districts[district['district_id']] = district;
+                    });
+
+
+                    olData.getMap().then(function(scope) {
+                        var previousFeature;
+                        var overlay = new ol.Overlay({
+                            element: document.getElementById('districtbox'),
+                            positioning: 'top-right',
+                            offset: [100, -100],
+                            position: [100, -100]
+                        });
+                        var overlayHidden = true;
+                        // Mouse over function, called from the Leaflet Map Events
+//                        $scope.$on('card.openlayers.layers.geojson.click', function(event, feature, olEvent) {
+//
+//                            $scope.$apply(function(scope) {
+//                                console.log(card);
+//                                if(feature) {
+//                                    $scope.id = feature.getId();
+//                                    scope.selectedDistrict = feature ? $scope.districts[feature.getId()]: '';
+//                                }
+//                            });
+//                        });
+//
+//                        card.$on('openlayers.layers.geojson.mousemove', function(event, feature, olEvent) {
+//                            console.log("abcd");
+//                        });
+//                        card.$on('openlayers.layers.geojson.featuresadded', function(event, feature, olEvent) {//
+//                            $scope.$apply(function(scope) {
+//                                if(feature) {
+//                                    card.id = feature.getId();
+//                        card.informationTooltip = feature ? card.districts[feature.getId()]: '';
+//                                }
+//                            });
+//
+//                        });
+                    });
+
+                    card.closeTootip = function(){
+                        card.selectedDistrict = null;
+
+                    }
+                    card.closeTootipHover = function(){
+                        card.selectedDistrictHover = null;
+
+                    }
+
+
+                });
+            card.saveColorInlocalStorage  = function(id,value){
+
+                if(!card.getColorFromLocalStorage(id)){
+                    localStorage.setItem(id , value);
+                }
+            }
+
+            card.getColorFromLocalStorage = function(id){
+                var Item = localStorage.getItem( id );
+                if(!Item){
+                    return false;
+                }else{
+                    return Item;
+                }
+
+            }
+
+
+        }
+        function getMaxAndMin(card){
+
+            var count = card.length;
+            var individuals = [];
+            if(count==27){
+                var array_of_data = "";
+                angular.forEach(card[0].data,function(value,index){
+
+                    if(index==card[0].data.length-1){
+                        array_of_data = array_of_data+value;
+                    }else{
+                        array_of_data=array_of_data+value+",";
+                    }
+
+                });
+
+                angular.forEach(card,function(value,index){
+
+                    if(value.name.split(" ").indexOf("Region")>=0){
+//                        if(index>1){
+                            individuals.push(value);
+//                        }
+                    }
+
+
+                });
+
+                var max = Math.max.apply(Math, array_of_data.split(","));
+                var min = Math.min.apply(Math, array_of_data.split(","));
+                return [max,min,individuals];
+            }else if(count==26){
+
+                var array_of_data = "";
+                angular.forEach(card[0].data,function(value,index){
+                    console.log("Organisation Unit Council");
+                    console.log(value);
+                    if(index==card[0].data.length-1){
+                        array_of_data = array_of_data+value;
+                    }else{
+                        array_of_data=array_of_data+value+",";
+                    }
+
+                });
+
+                angular.forEach(card,function(value,index){
+                    console.log("Organisation Unit regions");
+                    console.log(value);
+                    if(value.name.split(" ").indexOf("Region")>=0){
+//                        if(index>1){
+                            individuals.push(value);
+//                        }
+                    }
+
+
+                });
+
+                var max = Math.max.apply(Math, array_of_data.split(","));
+                var min = Math.min.apply(Math, array_of_data.split(","));
+                return [max,min,individuals];
+
+            }else{
+                var array_of_data = "";
+                var individuals = [];
+                angular.forEach(card[0].data,function(value,index){
+
+                    if(index==card[0].data.length-1){
+                        array_of_data = array_of_data+value;
+                    }else{
+                        array_of_data=array_of_data+value+",";
+                    }
+
+                });
+
+                angular.forEach(card,function(value,index){
+
+                    if(value.name.split(" ").indexOf("Council")>=0){
+                        if(index>1){
+                            individuals.push(value);
+                        }
+                    }
+
+                });
+
+                var max = Math.max.apply(Math, array_of_data.split(","));
+                var min = Math.min.apply(Math, array_of_data.split(","));
+                return [max,min,individuals];
+            }
+        }
+        function getLegend(input){
+            if(input){
+                var legends = "";
+                var max = parseInt(input[0]);
+                var min = parseInt(input[1]);
+                var data = input[2];
+                var count = data.length;
+                if(max==0){
+                    max=1;
+                }
+                var mins='';
+                if(min==0){
+                    mins=0;
+                }else{
+                    mins="0-"+min
+                }
+
+                if(((max-min)/count)<1){
+                    legends = [{set:mins+"",color:"#FF0000",classfy:"min",members:0},{set:min+" - "+((max+min)/2).toFixed(0),color:"#DEBE0C",classfy:"medium",members:0},{set:(max)+"+",color:"#2F8533",classfy:"max",members:0}];
+                }else{
+                    var intervals = ((max-min)/count).toFixed(0);
+                    legends = [{set:mins+"",color:"#FF0000",classfy:"min",members:0},{set:min+" - "+((max+min)/2).toFixed(0),color:"#DEBE0C",classfy:"medium",members:0},{set:(max)+"+",color:"#2F8533",classfy:"max",members:0}];
+
+                }
+return legends;
+            }else{
+                return false;
+            }
+        }
+        function decideOnColor(max_and_min,legend,value){
+            var classfy = "";
+            var i = 0;
+            angular.forEach(max_and_min[2],function(valueL,indexL){
+                if(value.id==valueL.id){ console.log(valueL.value);
+                    i++;
+                    if(valueL.value!=0&&valueL.value>=max_and_min[0]){
+                       console.log("This is maximum legend is");
+                       console.log(legend[2]);
+                        legend[2].members=legend[2].members+1;
+                        classfy = legend[2];
+                        return false;
+                    }
+
+                   if(valueL.value!=0&&valueL.value<=((max_and_min[1]+max_and_min[0])/2)&&valueL.value>max_and_min[1]){
+                       console.log("This is medium legend is");
+                       console.log(legend[1]);
+                       legend[1].members=legend[1].members+1;
+                        classfy = legend[1];
+                       return false;
+                    }
+
+                    if(valueL.value==0||valueL.value<=max_and_min[1]){
+                        legend[0].members=legend[0].members+1;
+                        classfy = legend[0];
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            });
+            return classfy;
+        }
+        function prepareId(card,value){
+            return card.data+"_"+value+"_"+$scope.selectedPeriod+"_"+$scope.selectedOrgUnit;
+        }
+        return map;
+    }])
+    .controller("mortalityCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 //        jQuery(document).ready(function() {
 //            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
 //                {withCredentials: true, params : {
@@ -23,6 +394,7 @@ angular.module("hmisPortal")
 //        });
         $scope.cards = {};
         $scope.data = {};
+        var map = this;
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
         $rootScope.selectedPeriod = "2014";
         $scope.selectedOrgUnitLevel = "2";
@@ -76,7 +448,7 @@ angular.module("hmisPortal")
             dataSource:'',
             size:'small',
             displayTable:false,
-            displayMap:false,
+            displayMap:true,
             chart:'bar',
             chartObject:{
                 title: {
@@ -483,7 +855,9 @@ angular.module("hmisPortal")
                 }
 
             }
-        ]
+        ];
+
+
 
         $scope.prepareData = function(jsonObject){
             var data = [];
@@ -553,6 +927,7 @@ angular.module("hmisPortal")
                 cardObject.displayTable = true;
                 cardObject.displayMap = false;
             }else if(chart == 'map'){
+
                 cardObject.displayMap = true;
                 cardObject.displayTable = false;
             }
@@ -620,9 +995,15 @@ angular.module("hmisPortal")
                     });
                 }else if(chart == 'map'){
                     if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                        $scope.drawMap($scope.selectedOrgUnit,2,cardObject);
+                        angular.forEach(dataToUse,function(val){
+                            cardObject.chartObject.series.push({id:val.id,name:val.name,value:parseInt(val.value)});
+                        });
+                        map.drawMap($scope.selectedOrgUnit,2,cardObject);
                     }else{
-                        $scope.drawMap($scope.selectedOrgUnit,3,cardObject);
+                        angular.forEach(dataToUse,function(val){
+                            cardObject.chartObject.series.push({id:val.id,name:val.name,value:parseInt(val.value)});
+                          });
+                        map.drawMap($scope.selectedOrgUnit,3,cardObject);
                     }
                 }
                 else{
@@ -704,244 +1085,18 @@ angular.module("hmisPortal")
          *
          * DRAW MAP
          * */
-        $scope.drawMap = function(parentUid,level,card){
-            $scope.shared = shared;
-            shared.facility =3029;
-            var url = 'https://dhis.moh.go.tz/api/organisationUnits.geojson?parent='+parentUid+'&level='+level;
-            card.chartObject.loading = true;
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-
-            }}).success(
-                function(data) {
-                    card.chartObject.loading = false;
-                    var TotalGeo = {
-                        "type":"FeatureCollection",
-                        "features":[]
-                    };
-                    var districtProperties = [];
-
-                    var dateObject = new Date();
-                    $scope.thisyear = dateObject.getFullYear();
-                    $scope.districts = {};
-                    $scope.DistrictFreeObject = [];
-                    angular.forEach(data.features, function (value, index) {
-
-                        var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-                        // creating dynamic colors for district
-                        $scope.saveColorInlocalStorage(value.id,hue);
-
-                        // prepare objects of district for properties to display on tooltip
-                        districtProperties[value.id] = {
-                            district_id:value.id,
-                            year:$scope.thisyear,
-                            name:value.properties.name,
-                            "color":hue,
-                            "facility":Math.floor(Math.random() * 256),
-                            "anc_12":0,
-                            "anc_fisrt":0,
-                            "inst":0,
-                            "post":0,
-                            "measle":0,
-                            "penta3":0,
-                            "vitaminA":0,
-                            "child":0,
-                            "cervical":0,
-                            "doctor":0,
-                            "nurse":0,
-                            "complete":0
-
-                        };
-
-                        $scope.DistrictFreeObject.push(districtProperties[value.id]);
-                        $scope.districts[value.id]= districtProperties;
-
-                        // creating geojson object
-                        var Object =
-                        {
-                            "type":"Feature",
-                            "id":value.id,
-                            "properties":{
-                                "name":value.properties
-                            },
-                            "geometry":{
-                                "type":value.geometry.type,
-                                "coordinates":value.geometry.coordinates
-                            },
-                            "style":{
-                                fill:{
-                                    color:$scope.getColorFromLocalStorage(value.id),
-                                    opacity:5
-                                },
-                                stroke:{
-                                    color:'white',
-                                    width:2
-                                }
-                            }
-                        };
-                        TotalGeo.features.push(Object);
-
-                    });
-
-                    // function getter for district object
-                    var getColor = function(district){
-                        if(!district || !district['district_id']){
-                            return "#FFF";
-                        }
-                        var color = districtProperties[district['district_id']].color;
-                        return color;
-                    }
-                    var getStyle = function(feature){
-
-                        var style = olHelpers.createStyle({
-                            fill:{
-                                color:getColor($scope.districts[feature.getId()]),
-                                opacity:0.4
-                            },
-                            stroke:{
-                                color:'white',
-                                width:2
-                            }
-                        });
-                        return [ style ];
-
-                    }
-
-                    angular.extend($scope, {
-                        Africa: {
-                            lat: -6.45,
-                            lon: 35,
-                            zoom: 5.6
-                        },
-                        layers:[
-                            {
-                                name:'mapbox',
-                                source: {
-                                    type: 'TileJSON',
-                                    url:'http://api.tiles.mapbox.com/v3/mapbox.geography-class.jsonp'
-                                }
-                            } ,
-                            {
-                                name:'geojson',
-                                source: {
-                                    type: 'GeoJSON',
-                                    geojson: {
-                                        object: TotalGeo
-                                    }
-                                },
-                                style: getStyle
-                            }
-                        ],defaults: {
-                            events: {
-                                layers: [ 'mousemove', 'click']
-                            }
-                        }
-                    });
-
-                    $scope.districts = {};
-                    angular.forEach($scope.DistrictFreeObject,function(data,index){
-                        var district = data;
-                        $scope.districts[district['district_id']] = district;
-                    });
-
-
-                    olData.getMap().then(function(map) {
-                        var previousFeature;
-                        var overlay = new ol.Overlay({
-                            element: document.getElementById('districtbox'),
-                            positioning: 'top-right',
-                            offset: [100, -100],
-                            position: [100, -100]
-                        });
-                        var overlayHidden = true;
-                        // Mouse over function, called from the Leaflet Map Events
-                        $scope.$on('openlayers.layers.geojson.mousemove', function(event, feature, olEvent) {
-                            $scope.$apply(function(scope) {
-                                scope.selectedDistrict = feature ? $scope.districts[feature.getId()] : '';
-                                if(feature) {
-                                    // looping throught indicator types
-                                    var url1 = "http://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+card.data+"&dimension=pe:"+$scope.thisyear+"&filter=ou:"+feature.getId()+"&displayProperty=NAME";
-                                    $http.get(url1,{withCredentials: true, params : {
-                                        j_username: "portal",
-                                        j_password: "Portal123"
-                                    }}).success(
-                                        function(data) {
-                                            var currentDistrict = $scope.districts[feature.getId()];
-                                            if(data.rows[0]){
-                                                if(value==data.rows[0][0]){
-
-                                                    currentDistrict[index] = data.rows[0][2];
-                                                }
-                                            }
-
-                                            $scope.districts[feature.getId()] = currentDistrict;
-                                        });
-
-                                    scope.selectedDistrict = feature ? $scope.districts[feature.getId()] : '';
-                                }
-                            });
-
-                            if (!feature) {
-                                map.removeOverlay(overlay);
-                                overlayHidden = true;
-                                return;
-                            } else if (overlayHidden) {
-                                map.addOverlay(overlay);
-                                overlayHidden = false;
-                            }
-                            overlay.setPosition(map.getEventCoordinate(olEvent));
-                            if (feature) {
-                                feature.setStyle(olHelpers.createStyle({
-                                    fill: {
-                                        color: '#FFF'
-                                    }
-                                }));
-                                if (previousFeature && feature !== previousFeature) {
-                                    previousFeature.setStyle(getStyle(previousFeature));
-                                }
-                                previousFeature = feature;
-                            }
-                        });
-                        $scope.$on('openlayers.layers.geojson.featuresadded', function(event, feature, olEvent) {
-                            $scope.$apply(function(scope) {
-                                if(feature) {
-                                    $scope.id = feature.getId();
-                                    scope.selectedDistrict = feature ? $scope.districts[feature.getId()]: '';
-                                }
-                            });
-
-                        });
-                    });
-
-
-                });
-            $scope.saveColorInlocalStorage  = function(id,value){
-
-                if(!$scope.getColorFromLocalStorage(id)){
-                    localStorage.setItem(id , value);
-                }
+        map.drawMap = function(parentUid,level,card){
+            console.log(card);
+            if(card.chart==="map"){
+                mapService.renderMap(parentUid,level,card);
             }
 
-            $scope.getColorFromLocalStorage = function(id){
-                var Item = localStorage.getItem( id );
-                if(!Item){
-                    return false;
-                }else{
-                    return Item;
-                }
-
-            }
         }
 
 
-    })
-    .factory('shared', function() {
-        var shared = {
-            "facility":0
-        };
-        return shared;
     });
+
+
 var ogUnitsObjectConstruct=function(underOne,ObjectNames,ObectData,orgUnits){
     var num='';
     angular.forEach(ObectData,function(value) {
