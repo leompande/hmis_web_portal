@@ -2,26 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04baf79a-0569-4e9a-b5bc-16bee837f29c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/mapServices.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/dashboard.html" afterPath="$PROJECT_DIR$/views/dashboard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/dashboardCtrl.js" afterPath="$PROJECT_DIR$/controllers/dashboardCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/ivd.html" afterPath="$PROJECT_DIR$/views/ivd.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/ivdCtrl.js" afterPath="$PROJECT_DIR$/controllers/ivdCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/jinsiCtrl.js" afterPath="$PROJECT_DIR$/controllers/jinsiCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/mainCtrl.js" afterPath="$PROJECT_DIR$/controllers/mainCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/malaria.html" afterPath="$PROJECT_DIR$/views/malaria.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/malariaCtrl.js" afterPath="$PROJECT_DIR$/controllers/malariaCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/maternal.html" afterPath="$PROJECT_DIR$/views/maternal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/maternalCtrl.js" afterPath="$PROJECT_DIR$/controllers/maternalCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/morbidity.html" afterPath="$PROJECT_DIR$/views/morbidity.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/morbidityCtrl.js" afterPath="$PROJECT_DIR$/controllers/morbidityCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/mortality.html" afterPath="$PROJECT_DIR$/views/mortality.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/mortalityCtrl.js" afterPath="$PROJECT_DIR$/controllers/mortalityCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/nutrition.html" afterPath="$PROJECT_DIR$/views/nutrition.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/nutritionCtrl.js" afterPath="$PROJECT_DIR$/controllers/nutritionCtrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/tracer_medicine.html" afterPath="$PROJECT_DIR$/views/tracer_medicine.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" afterPath="$PROJECT_DIR$/controllers/tracermedicineCtrl.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hmis_portal.iws" />
@@ -49,12 +29,9 @@
       <file leaf-file-name="mortality.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/mortality.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.481482" vertical-offset="1292" max-vertical-offset="3150">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3402" max-vertical-offset="4950">
               <caret line="189" column="40" selection-start-line="189" selection-start-column="40" selection-end-line="189" selection-end-column="40" />
-              <folding>
-                <element signature="tag#style#0" expanded="false" />
-                <element signature="e#2353#2464#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -62,7 +39,7 @@
       <file leaf-file-name="downloads.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/downloads.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="378">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -72,7 +49,7 @@
       <file leaf-file-name="district_profiles.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/district_profiles.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="414">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="414">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -82,12 +59,9 @@
       <file leaf-file-name="morbidity.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/morbidity.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.481482" vertical-offset="1328" max-vertical-offset="3690">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3384" max-vertical-offset="5490">
               <caret line="188" column="40" selection-start-line="188" selection-start-column="40" selection-end-line="188" selection-end-column="40" />
-              <folding>
-                <element signature="tag#style#0" expanded="false" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -95,12 +69,9 @@
       <file leaf-file-name="maternal.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/maternal.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.148149" vertical-offset="1364" max-vertical-offset="3690">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3384" max-vertical-offset="5490">
               <caret line="188" column="40" selection-start-line="188" selection-start-column="40" selection-end-line="188" selection-end-column="40" />
-              <folding>
-                <element signature="tag#style#0" expanded="false" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,11 +79,9 @@
       <file leaf-file-name="malaria.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/malaria.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.148149" vertical-offset="3011" max-vertical-offset="5184">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3011" max-vertical-offset="5184">
               <caret line="187" column="192" selection-start-line="187" selection-start-column="192" selection-end-line="187" selection-end-column="192" />
-              <folding>
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,12 +89,9 @@
       <file leaf-file-name="ivd.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/ivd.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.666667" vertical-offset="1404" max-vertical-offset="3510">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3600" max-vertical-offset="5310">
               <caret line="200" column="40" selection-start-line="200" selection-start-column="40" selection-end-line="200" selection-end-column="40" />
-              <folding>
-                <element signature="tag#style#0" expanded="false" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -133,7 +99,7 @@
       <file leaf-file-name="hiv.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/hiv.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="108">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -143,12 +109,9 @@
       <file leaf-file-name="dashboard.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.0" vertical-offset="594" max-vertical-offset="4230">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2718" max-vertical-offset="6030">
               <caret line="151" column="48" selection-start-line="151" selection-start-column="48" selection-end-line="151" selection-end-column="48" />
-              <folding>
-                <element signature="tag#style#0" expanded="false" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -156,8 +119,8 @@
       <file leaf-file-name="mortalityCtrl.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3658088" vertical-offset="1583" max-vertical-offset="3402">
-              <caret line="354" column="59" selection-start-line="354" selection-start-column="59" selection-end-line="354" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.25768322" vertical-offset="1583" max-vertical-offset="3402">
+              <caret line="349" column="24" selection-start-line="349" selection-start-column="24" selection-end-line="349" selection-end-column="24" />
               <folding>
                 <element signature="e#1062#1156#0" expanded="false" />
                 <element signature="e#1290#1403#0" expanded="false" />
@@ -247,10 +210,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1402" />
-    <option name="y" value="-10" />
-    <option name="width" value="1405" />
-    <option name="height" value="911" />
+    <option name="x" value="1455" />
+    <option name="y" value="150" />
+    <option name="width" value="1329" />
+    <option name="height" value="757" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -545,17 +508,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1402" y="-10" width="1405" height="911" extended-state="6" />
+    <frame x="1455" y="150" width="1329" height="757" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.08974359" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22575977" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22588055" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32948717" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24337958" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25039124" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -818,7 +781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="108">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -826,9 +788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="1026">
           <caret line="69" column="38" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
-          <folding>
-            <element signature="e#1537#2432#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -964,10 +923,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.481482" vertical-offset="1310" max-vertical-offset="4158">
           <caret line="187" column="40" selection-start-line="187" selection-start-column="40" selection-end-line="187" selection-end-column="40" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -975,54 +930,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.148149" vertical-offset="1337" max-vertical-offset="3258">
           <caret line="188" column="40" selection-start-line="188" selection-start-column="40" selection-end-line="188" selection-end-column="40" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/mortality.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.481482" vertical-offset="1292" max-vertical-offset="3150">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3402" max-vertical-offset="4950">
           <caret line="189" column="40" selection-start-line="189" selection-start-column="40" selection-end-line="189" selection-end-column="40" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="e#2353#2464#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/morbidity.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.481482" vertical-offset="1328" max-vertical-offset="3690">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3384" max-vertical-offset="5490">
           <caret line="188" column="40" selection-start-line="188" selection-start-column="40" selection-end-line="188" selection-end-column="40" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/maternal.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.148149" vertical-offset="1364" max-vertical-offset="3690">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3384" max-vertical-offset="5490">
           <caret line="188" column="40" selection-start-line="188" selection-start-column="40" selection-end-line="188" selection-end-column="40" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/ivd.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.666667" vertical-offset="1404" max-vertical-offset="3510">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3600" max-vertical-offset="5310">
           <caret line="200" column="40" selection-start-line="200" selection-start-column="40" selection-end-line="200" selection-end-column="40" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1052,29 +991,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.0" vertical-offset="594" max-vertical-offset="4230">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2718" max-vertical-offset="6030">
           <caret line="151" column="48" selection-start-line="151" selection-start-column="48" selection-end-line="151" selection-end-column="48" />
-          <folding>
-            <element signature="tag#style#0" expanded="false" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/malaria.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.148149" vertical-offset="3011" max-vertical-offset="5184">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3011" max-vertical-offset="5184">
           <caret line="187" column="192" selection-start-line="187" selection-start-column="192" selection-end-line="187" selection-end-column="192" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/mortalityCtrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3658088" vertical-offset="1583" max-vertical-offset="3402">
-          <caret line="354" column="59" selection-start-line="354" selection-start-column="59" selection-end-line="354" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.25768322" vertical-offset="1583" max-vertical-offset="3402">
+          <caret line="349" column="24" selection-start-line="349" selection-start-column="24" selection-end-line="349" selection-end-column="24" />
           <folding>
             <element signature="e#1062#1156#0" expanded="false" />
             <element signature="e#1290#1403#0" expanded="false" />
