@@ -6,6 +6,7 @@ angular.module("hmisPortal")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
+<<<<<<< HEAD
     .controller("malariaCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 
         $scope.cards = {};
@@ -13,144 +14,47 @@ angular.module("hmisPortal")
         var map = this;
         $rootScope.selectedOrgUnit = "m0frOspS7JY";
         $rootScope.selectedPeriod = "2014";
+=======
+    .controller("malariaCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared,portalService) {
+        //displaying loading during page change
+        $rootScope.$on("$routeChangeStart",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = true;
+            });
+        $rootScope.$on("$routeChangeSuccess",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = false
+            });
+        $scope.cards = {};
+        $scope.data = {};
+        portalService.orgUnitId = "m0frOspS7JY";
+        portalService.period = "2014";
+>>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
         $scope.selectedOrgUnitLevel = "2";
-        $scope.chartConfig = {
-            title: {
-                text: 'Combination chart'
-            },
-            xAxis: {
-                categories: [],
-                labels:{
-                    rotation: -90,
-                    style:{ "color": "#000000", "fontWeight": "normal" }
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: ''
-                },labels:{
-                    style:{ "color": "#000000", "fontWeight": "bold" }
-                }
-            },
-            labels: {
-                items: [{
-                    html: 'doses',
-                    style: {
-                        left: '50px',
-                        top: '18px',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                    }
-                }]
-            },
-            series: []
-        };
 
-        $scope.cards.malaria = [{
-            title:'ANC IPT2 COVERAGE',
-            description:'Maelezo ya ANC IPT2 COVERAGE',
-            cardClass:"col s12 m6",
-            data:'i47jm4Pkkq6',
-            icons:[
-                {name:'table',image:'table.jpg',action:''},
-                {name:'bar',image:'bar.png',action:''},
-                {name:'line',image:'line.png',action:''},
-                {name:'combined',image:'combined.jpg',action:''},
-                {name:'column',image:'column.png',action:''},
-                {name:'area',image:'area.jpg',action:''},
-                {name:'pie',image:'pie.png',action:''},
-                {name:'map',image:'map.jpg',action:''}
-            ],
-            dataSource:'',
-            size:'small',
-            displayTable:false,
-            displayMap:false,
-            chart:'bar',
-            chartObject:{
-                title: {
-                    text: 'Combination chart'
-                },
-                xAxis: {
-                    categories: [],
-                    labels:{
-                        rotation: -90,
-                        style:{ "color": "#000000", "fontWeight": "normal" }
-                    }
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: ''
-                    },labels:{
-                        style:{ "color": "#000000", "fontWeight": "bold" }
-                    }
-                },
-                labels: {
-                    items: [{
-                        html: 'doses',
-                        style: {
-                            left: '50px',
-                            top: '18px',
-                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                        }
-                    }]
-                },
-                series: []
-            }
-
-        },
+        $scope.cards.malaria = [
+            {
+                title:'ANC IPT2 COVERAGE',
+                description:'Maelezo ya ANC IPT2 COVERAGE',
+                cardClass:"col s12 m6",
+                data:'i47jm4Pkkq6',
+                icons:angular.copy(portalService.icons),
+                displayTable:false,
+                displayMap:false,
+                chart:'bar',
+                chartObject:angular.copy(portalService.chartObject)
+            },
             {
                 title:'ANC MALARIA PREVELANCE',
                 description:'Maelezo ya ANC MALARIA PREVELANCE',
                 cardClass:"col m6 s12",
                 cardSize:"medium",
                 data:'vfaY7k6TINl',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''},
-                    {name:'map',image:'map.jpg',action:''}
-                ],
-                dataSource:'',
-                size:'small',
+                icons:angular.copy(portalService.icons),
                 displayTable:false,
                 displayMap:false,
                 chart:'line',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -90,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
+                chartObject:angular.copy(portalService.chartObject)
 
             },
             {
@@ -158,52 +62,11 @@ angular.module("hmisPortal")
                 description:'Maelezo ya ANC Proportion  of pregnant women receiving ITN Voucher',
                 cardClass:"col m12 s12",
                 data:'tit1C1VPIV7',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''},
-                    {name:'map',image:'map.jpg',action:''}
-                ],
-                dataSource:'',
-                size:'large',
+                icons:angular.copy(portalService.icons),
                 displayTable:false,
                 displayMap:false,
                 chart:'combined',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -90,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
+                chartObject:angular.copy(portalService.chartObject)
 
             },
             {
@@ -211,52 +74,11 @@ angular.module("hmisPortal")
                 description:'Proportional of Malaria cases in OPD',
                 cardClass:"col m6 s12",
                 data:'xrYmEc4LCCo',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''},
-                    {name:'map',image:'map.jpg',action:''}
-                ],
-                dataSource:'',
-                size:'small',
+                icons:angular.copy(portalService.icons),
                 displayTable:false,
                 displayMap:false,
-                chart:'table',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -90,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
+                chart:'bar',
+                chartObject:angular.copy(portalService.chartObject)
 
             },
             {
@@ -264,68 +86,15 @@ angular.module("hmisPortal")
                 description:'Proportional of Malaria cases in OPD',
                 cardClass:"col m6 s12",
                 data:'CaPhxP3hIHD',
-                icons:[
-                    {name:'table',image:'table.jpg',action:''},
-                    {name:'bar',image:'bar.png',action:''},
-                    {name:'line',image:'line.png',action:''},
-                    {name:'combined',image:'combined.jpg',action:''},
-                    {name:'column',image:'column.png',action:''},
-                    {name:'area',image:'area.jpg',action:''},
-                    {name:'pie',image:'pie.png',action:''},
-                    {name:'map',image:'map.jpg',action:''}
-                ],
-                dataSource:'',
-                size:'small',
+                icons:angular.copy(portalService.icons),
                 displayTable:false,
                 displayMap:false,
-                chart:'map',
-                chartObject:{
-                    title: {
-                        text: 'Combination chart'
-                    },
-                    xAxis: {
-                        categories: [],
-                        labels:{
-                            rotation: -90,
-                            style:{ "color": "#000000", "fontWeight": "normal" }
-                        }
-                    },
-                    yAxis: {
-                        min: 0,
-                        title: {
-                            text: ''
-                        },labels:{
-                            style:{ "color": "#000000", "fontWeight": "bold" }
-                        }
-                    },
-                    labels: {
-                        items: [{
-                            html: 'doses',
-                            style: {
-                                left: '50px',
-                                top: '18px',
-                                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                            }
-                        }]
-                    },
-                    series: []
-                }
-
+                chart:'bar',
+                chartObject:angular.copy(portalService.chartObject)
             }
         ]
 
-        $scope.prepareData = function(jsonObject){
-            var data = [];
-            data.push({'name':jsonObject.metaData.names[$rootScope.selectedOrgUnit],'id':$rootScope.selectedOrgUnit,'value':getDataFromUrl(jsonObject.rows,$rootScope.selectedOrgUnit)});
 
-            angular.forEach(jsonObject.metaData.ou,function(region){
-                if(region != $rootScope.selectedOrgUnit ){
-                    data.push({'name':jsonObject.metaData.names[region],'id':region,'value':getDataFromUrl(jsonObject.rows,region)});
-                }
-            });
-            return data;
-
-        };
         $scope.data.chartType = 'column';
         $scope.displayTable = false;
         $scope.changeChart = function(type,card){
@@ -349,10 +118,11 @@ angular.module("hmisPortal")
                 card.chart = type;
                 $scope.data.chartType = type;
             }
-            $scope.prepareSeries(card,$scope.data.chartType);
+            portalService.prepareSeries(card,$scope.data.chartType);
         };
 
         $scope.downloadExcel = function(id){
+<<<<<<< HEAD
             var url = "";
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
                 url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
@@ -472,18 +242,23 @@ angular.module("hmisPortal")
             });
 
 
+=======
+            portalService.downloadExcel(id);
+>>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
         };
-        $rootScope.lastCard=function(){
+
+        $scope.lastCard=function(){
             $scope.loadingImage=true;
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
             if($scope.selectedOrgUnit == "m0frOspS7JY"){
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }else{
                 var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
             }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(dataTable){
+            $http.get(lastUrl).success(function(dataTable){
                 //setTimeout(function(){
                 var generalArray=[];
                 var underOne="Wajawazito Maliopima Malaria";
@@ -520,27 +295,30 @@ angular.module("hmisPortal")
                 $scope.authenticationFailed=error;
                 console.log($scope.authenticationFailed);
             });
+            });
+        };
 
-        }
         $scope.downloadExcelTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-                //var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou"
-                //var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/octet-stream'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
-            }).error(function(error){
-                alert("Aunthentification Failed " +error);
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                    //var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:Y6cNfApg9Kf;rB0DvqiPEVA;vfaY7k6TINl;tIs7rshvixe;qN1zFaX9mVe;i47jm4Pkkq6;tit1C1VPIV7;vYXCiIEJTwU;CaPhxP3hIHD;xrYmEc4LCCo&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou"
+                    //var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:i47jm4Pkkq6;vfaY7k6TINl;tit1C1VPIV7;aw1jQ1tJTmE&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/octet-stream'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                }).error(function(error){
+                    alert("Aunthentification Failed " +error);
+                });
             });
         }
 
@@ -548,9 +326,9 @@ angular.module("hmisPortal")
         $rootScope.firstClick = function(){
             angular.forEach($scope.cards.malaria,function(value){
 //              $scope.data.chartType = value.chart;
-                $scope.prepareSeries(value,value.chart);
+                portalService.prepareSeries(value,value.chart);
             });
-            $rootScope.lastCard();
+            $scope.lastCard();
         }
         $scope.firstClick();
 

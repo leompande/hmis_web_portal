@@ -5,6 +5,7 @@
 angular.module("hmisPortal")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
+<<<<<<< HEAD
     })
     .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 //        jQuery(document).ready(function() {
@@ -17,6 +18,46 @@ angular.module("hmisPortal")
 //                    j_username: "portal", j_password: "Portal123"
 //                }});
 //        });
+=======
+        $httpProvider.defaults.headers.post["Content-Type"] = "application/json";
+     })
+    .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
+        $scope.userGroupID='tthud5BXCSD';
+        var userGroups =[];
+        var dataTextToSend={};
+
+        var messageUrl='https://dhis.moh.go.tz/api/messageConversations';
+        $scope.sendMessage=function(subject,text){
+            userGroups.length=0;
+            userGroups.push({'id':$scope.userGroupID});
+            dataTextToSend['subject']=subject;
+            dataTextToSend['text']=text;
+            dataTextToSend['userGroups']=userGroups;
+            console.log(dataTextToSend);
+            $http({
+                method: 'POST',
+                url: messageUrl,
+                data: dataTextToSend
+             }).then(function(response) {
+                    console.log(dataTextToSend);
+                    // success
+                },
+                function(response) { // optional
+                    // failed
+                });
+
+         }
+        //displaying loading during page change
+        $rootScope.$on("$routeChangeStart",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = true;
+            });
+        $rootScope.$on("$routeChangeSuccess",
+            function (event, current, previous, rejection) {
+                $rootScope.showLoader = false;
+
+            });
+>>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
         $scope.cards = {};
         $scope.data = {};
         var map = this;
@@ -1056,95 +1097,63 @@ angular.module("hmisPortal")
         };
 
         $scope.downloadExcel = function(id){
-            var url = "";
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
-            }else{
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                var url = "";
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                }else{
 
-                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
-            }
-            $http.get(url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+                }
+                $http.get(url,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
         }
 
         $scope.prepareSeries = function(cardObject,chart){
-            if(chart == 'table'){
-                cardObject.displayTable = true;
-                cardObject.displayMap = false;
-            }else if(chart == 'map'){
-                cardObject.displayMap = true;
-                cardObject.displayTable = false;
-            }
-            else{
-                cardObject.displayMap = false;
-                cardObject.displayTable = false;
-            }
-            cardObject.chartObject.title.text = cardObject.title;
-            cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
-
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
             cardObject.chartObject.loading = true;
-            $http.get($scope.url,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-
-            }}).success(function(data){
-                $scope.area = [];
-                cardObject.chartObject.xAxis.categories = [];
-                //
-                var dataToUse = $scope.prepareData(data);
-                //
-                angular.forEach(dataToUse,function(val){
-                    cardObject.chartObject.xAxis.categories.push(val.name);
-                });
-                $scope.normalseries = [];
-                if(chart == "pie"){
-                    delete cardObject.chartObject.chart;
-                    var serie = [];
-                    angular.forEach(dataToUse,function(val){
-                        serie.push({name: val.name, y: parseInt(val.value)})
-                    });
-                    $scope.normalseries.push({type: chart, name:cardObject.title , data: serie,showInLegend: true,
-                        dataLabels: {
-                            enabled: false
-                        } });
-                    cardObject.chartObject.series = $scope.normalseries;
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if(chart == 'table'){
+                    cardObject.displayTable = true;
+                    cardObject.displayMap = false;
+                }else if(chart == 'map'){
+                    cardObject.displayMap = true;
+                    cardObject.displayTable = false;
                 }
-                else if(chart == "combined"){
-                    delete cardObject.chartObject.chart;
-                    var serie1 = [];
-                    var serie = [];
-
-                    angular.forEach(dataToUse,function(val){
-                        serie.push(parseInt(val.value));
-                        serie1.push({name: val.name , y: parseInt(val.value) })
-                    });
-                    $scope.normalseries.push({type: 'column', name: cardObject.title, data: serie});
-                    $scope.normalseries.push({type: 'spline', name: cardObject.title, data: serie});
-                    $scope.normalseries.push({type: 'pie', name: cardObject.title, data: serie1,center: [100, 80],size: 150,showInLegend: false,
-                        dataLabels: {
-                            enabled: false
-                        }})
-                    cardObject.chartObject.series = $scope.normalseries;
+                else{
+                    cardObject.displayMap = false;
+                    cardObject.displayTable = false;
                 }
-                else if(chart == 'table'){
-                    cardObject.table = {};
-                    cardObject.table.colums =[];
+                cardObject.chartObject.title.text = cardObject.title;
+                cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
+
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                cardObject.chartObject.loading = true;
+                $http.get($scope.url).success(function(data){
+                    $scope.area = [];
+                    cardObject.chartObject.xAxis.categories = [];
+                    //
+                    var dataToUse = $scope.prepareData(data);
+                    //
                     angular.forEach(dataToUse,function(val){
-                        cardObject.table.colums.push({name:val.name,value:parseInt(val.value)});
+                        cardObject.chartObject.xAxis.categories.push(val.name);
                     });
+<<<<<<< HEAD
                 }else if(chart == 'map'){
                     console.log(dataToUse);
                     if($scope.selectedOrgUnit == "m0frOspS7JY"){
@@ -1157,108 +1166,157 @@ angular.module("hmisPortal")
                             cardObject.chartObject.series.push({id:val.id,name:val.name,value:parseInt(val.value)});
                         });
                         map.drawMap($scope.selectedOrgUnit,3,cardObject);
+=======
+                    $scope.normalseries = [];
+                    if(chart == "pie"){
+                        delete cardObject.chartObject.chart;
+                        var serie = [];
+                        angular.forEach(dataToUse,function(val){
+                            serie.push({name: val.name, y: parseInt(val.value)})
+                        });
+                        $scope.normalseries.push({type: chart, name:cardObject.title , data: serie,showInLegend: true,
+                            dataLabels: {
+                                enabled: false
+                            } });
+                        cardObject.chartObject.series = $scope.normalseries;
+>>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
                     }
-                }
-                else{
-                    delete cardObject.chartObject.chart;
-                    var serie = [];
-                    angular.forEach(dataToUse,function(val){
-                        serie.push(val.value);
-                    });
-                    cardObject.chartObject.chart={};
-                    cardObject.chartObject.chart.type=chart;
-                    $scope.normalseries.push({type: chart, name: cardObject.title, data: serie})
-                    cardObject.chartObject.series = $scope.normalseries;
-                }
-                cardObject.chartObject.loading = false
+                    else if(chart == "combined"){
+                        delete cardObject.chartObject.chart;
+                        var serie1 = [];
+                        var serie = [];
+
+                        angular.forEach(dataToUse,function(val){
+                            serie.push(parseInt(val.value));
+                            serie1.push({name: val.name , y: parseInt(val.value) })
+                        });
+                        $scope.normalseries.push({type: 'column', name: cardObject.title, data: serie});
+                        $scope.normalseries.push({type: 'spline', name: cardObject.title, data: serie});
+                        $scope.normalseries.push({type: 'pie', name: cardObject.title, data: serie1,center: [100, 80],size: 150,showInLegend: false,
+                            dataLabels: {
+                                enabled: false
+                            }})
+                        cardObject.chartObject.series = $scope.normalseries;
+                    }
+                    else if(chart == 'table'){
+                        cardObject.table = {};
+                        cardObject.table.colums =[];
+                        angular.forEach(dataToUse,function(val){
+                            cardObject.table.colums.push({name:val.name,value:parseInt(val.value)});
+                        });
+                    }
+                    else if(chart == 'map'){
+                        if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                            $scope.drawMap($scope.selectedOrgUnit,2,cardObject);
+                        }else{
+                            $scope.drawMap($scope.selectedOrgUnit,3,cardObject);
+                        }
+                    }
+                    else{
+                        delete cardObject.chartObject.chart;
+                        var serie = [];
+                        angular.forEach(dataToUse,function(val){
+                            serie.push(val.value);
+                        });
+                        cardObject.chartObject.chart={};
+                        cardObject.chartObject.chart.type=chart;
+                        $scope.normalseries.push({type: chart, name: cardObject.title, data: serie})
+                        cardObject.chartObject.series = $scope.normalseries;
+                    }
+                    cardObject.chartObject.loading = false
+                });
             });
 
-
         };
-        $rootScope.lastCard=function(){
+        $scope.lastCard=function(){
             $scope.loadingImage=true;
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            }}).success(function(dataTable){
-                var generalArray=[];
-                var underOne="Acute Diarrhoea (<14 Days)";
-                var undertwo="Acute Ear Infection in OPD";
-                var underpop="X_OPD_Animal bite (suspected Rabies) Umri mwaka 1 hadi umri chini ya 5";
-                var underthree="X_OPD_Birth asphyxia Umri chini ya mwezi 1";
-                var underfour="X_OPD_Bronchial Asthma Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underANC="X_OPD_Caries Umri mwaka 1 hadi umri chini  ya mwaka 5";
-                var underDe="X_OPD_Caries Umri mwaka 5 hadi umri chini  ya mwaka 60";
-                var underMeb="EYE:Cataract Congenital <5";
-                var underCov="EYE:Cataract Congenital >15";
-                var underSy="X_OPD_Fungal Infection, Non-skin Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underSyP="X_OPD_Fungal Infection, Non-skin Umri mwaka 5 hadi umri chini ya mwaka 60";
-                var underSyT="X_OPD_Gynaecological Diseases, Other Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underHIV="X_OPD_Gynaecological Diseases, Other Umri mwaka 5 hadi umri chini ya mwaka 60";
-                var underHIVTest="X_IPD_Tuberculosis Umri mwaka 1 hadi chini ya mwaka 5";
-                var underHIVTestDone="X_OPD_Tuberculosis Umri mwaka 1 hadi umri chini ya mwaka 5";
-                var underHIVTestRate="X_OPD_Tuberculosis Umri mwaka 5 hadi umri chini ya mwaka 60";
-                var underHIVTestDev="X_IPD_Tuberculosis Umri mwaka 5 hadi chini ya mwaka 60";
-                var underHIVTestDevS="X_IPD_Cardiovascular Disorders, other Umri mwaka 1 hadi chini ya mwaka 5";
-                var underHIVTestDevP="X_IPD_Cardiovascular Disorders, other Umri mwaka 5 hadi chini ya mwaka 60";
-                $scope.arrayed=[{'underOne':'OPD Diarrhoea,Acute(<14 days)','undertwo':'OPD Acute Ear Infection(<5)','underpop':'OPD_Animal bite (suspected Rabies) < 5',
-                    'underthree':'OPD_Birth asphyxia Umri < 5','underfour':'OPD_Bronchial Asthma < 5',
-                    'underANC': 'OPD_Caries < 5','underDe':'OPD_Caries >5','underMeb':'Cataract Congenital <5',
-                    'underCov':'Cataract Congenital >5','underSy':'OPD_Fungal Infection, Non-skin <5',
-                    'underSyP':'OPD_Fungal Infection, Non-skin >5 ','underSyT':'OPD_Gynaecological Diseases, Other<5','underHIV':'X_OPD_Gynaecological Diseases, Other >5',
-                    'underHIVTest':'IPD_Tuberculosis < 5','underHIVTestDone':'OPD_Tuberculosis > 5','underHIVTestRate':'OPD_Tuberculosis >5',
-                    'underHIVTestDev':'IPD_Tuberculosis >5','underHIVTestDevS':'IPD_Cardiovascular Disorders, other > 5',
-                    'underHIVTestDevP':'IPD_Cardiovascular Disorders,> 5'
-                }];
-                angular.forEach(dataTable.metaData.ou,function(region){
-                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
-                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
-                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
-                        underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
-                        underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
-                        underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
-                        underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
-                        underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
-                        underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
-                        underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
-                        underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+                }
+                $http.get(lastUrl).success(function(dataTable){
+                    var generalArray=[];
+                    var underOne="Acute Diarrhoea (<14 Days)";
+                    var undertwo="Acute Ear Infection in OPD";
+                    var underpop="X_OPD_Animal bite (suspected Rabies) Umri mwaka 1 hadi umri chini ya 5";
+                    var underthree="X_OPD_Birth asphyxia Umri chini ya mwezi 1";
+                    var underfour="X_OPD_Bronchial Asthma Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underANC="X_OPD_Caries Umri mwaka 1 hadi umri chini  ya mwaka 5";
+                    var underDe="X_OPD_Caries Umri mwaka 5 hadi umri chini  ya mwaka 60";
+                    var underMeb="EYE:Cataract Congenital <5";
+                    var underCov="EYE:Cataract Congenital >15";
+                    var underSy="X_OPD_Fungal Infection, Non-skin Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underSyP="X_OPD_Fungal Infection, Non-skin Umri mwaka 5 hadi umri chini ya mwaka 60";
+                    var underSyT="X_OPD_Gynaecological Diseases, Other Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underHIV="X_OPD_Gynaecological Diseases, Other Umri mwaka 5 hadi umri chini ya mwaka 60";
+                    var underHIVTest="X_IPD_Tuberculosis Umri mwaka 1 hadi chini ya mwaka 5";
+                    var underHIVTestDone="X_OPD_Tuberculosis Umri mwaka 1 hadi umri chini ya mwaka 5";
+                    var underHIVTestRate="X_OPD_Tuberculosis Umri mwaka 5 hadi umri chini ya mwaka 60";
+                    var underHIVTestDev="X_IPD_Tuberculosis Umri mwaka 5 hadi chini ya mwaka 60";
+                    var underHIVTestDevS="X_IPD_Cardiovascular Disorders, other Umri mwaka 1 hadi chini ya mwaka 5";
+                    var underHIVTestDevP="X_IPD_Cardiovascular Disorders, other Umri mwaka 5 hadi chini ya mwaka 60";
+                    $scope.arrayed=[{'underOne':'OPD Diarrhoea,Acute(<14 days)','undertwo':'OPD Acute Ear Infection(<5)','underpop':'OPD_Animal bite (suspected Rabies) < 5',
+                        'underthree':'OPD_Birth asphyxia Umri < 5','underfour':'OPD_Bronchial Asthma < 5',
+                        'underANC': 'OPD_Caries < 5','underDe':'OPD_Caries >5','underMeb':'Cataract Congenital <5',
+                        'underCov':'Cataract Congenital >5','underSy':'OPD_Fungal Infection, Non-skin <5',
+                        'underSyP':'OPD_Fungal Infection, Non-skin >5 ','underSyT':'OPD_Gynaecological Diseases, Other<5','underHIV':'X_OPD_Gynaecological Diseases, Other >5',
+                        'underHIVTest':'IPD_Tuberculosis < 5','underHIVTestDone':'OPD_Tuberculosis > 5','underHIVTestRate':'OPD_Tuberculosis >5',
+                        'underHIVTestDev':'IPD_Tuberculosis >5','underHIVTestDevS':'IPD_Cardiovascular Disorders, other > 5',
+                        'underHIVTestDevP':'IPD_Cardiovascular Disorders,> 5'
+                    }];
+                    angular.forEach(dataTable.metaData.ou,function(region){
+                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                            undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underpop:underpopObject(underpop,dataTable,dataTable.rows,region),
+                            underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                            underANC:underANCObject(underANC,dataTable,dataTable.rows,region),
+                            underDe:underDeObject(underDe,dataTable,dataTable.rows,region),underMeb:underMebObject(underMeb,dataTable,dataTable.rows,region),
+                            underCov:underCovObject(underCov,dataTable,dataTable.rows,region),underSy:underSyObject(underSy,dataTable,dataTable.rows,region),
+                            underSyP:underSyPObject(underSyP,dataTable,dataTable.rows,region),underSyT:underSyTObject(underSyT,dataTable,dataTable.rows,region),
+                            underHIV:underHIVObject(underHIV,dataTable,dataTable.rows,region),underHIVTest:underHIVTestObject(underHIVTest,dataTable,dataTable.rows,region),
+                            underHIVTestDone:underHIVTestDoneObject(underHIVTestDone,dataTable,dataTable.rows,region),underHIVTestRate:underHIVTestRateObject(underHIVTestRate,dataTable,dataTable.rows,region),
+                            underHIVTestDev:underHIVTestDevObject(underHIVTestDev,dataTable,dataTable.rows,region),underHIVTestDevS:underHIVTestDevSObject(underHIVTestDevS,dataTable,dataTable.rows,region),
+                            underHIVTestDevP:underHIVTestDevPObject(underHIVTestDevP,dataTable,dataTable.rows,region)
+                        });
+
                     });
+                    $scope.loadingImage=false;
+                    $scope.tableContent=generalArray;
+                    console.log($scope.tableContent);
+                    //},2000);
+                }).error(function(error){
+                    $scope.loadingImage=false;
+
+                    $scope.authenticationFailed="Oops..!! Something wrong Check internet Connection and reload your page Again..!! ";
+                    console.log($scope.authenticationFailed);
 
                 });
-                $scope.loadingImage=false;
-                $scope.tableContent=generalArray;
-                console.log($scope.tableContent);
-                //},2000);
-            }).error(function(error){
-                $scope.loadingImage=false;
-
-                 $scope.authenticationFailed="Oops..!! Something wrong Check internet Connection and reload your page Again..!! ";
-                console.log($scope.authenticationFailed);
-
             });
 
         }
         $scope.downloadExcelMaternalTotal = function(){
-            if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }else{
-                var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
-            }
-            $http.get(lastUrl,{withCredentials: true, params : {
-                j_username: "portal",
-                j_password: "Portal123"
-            },'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                var a = document.createElement('a');
-                var blob = new Blob([data]);
-                a.href = window.URL.createObjectURL(blob);
-                a.download = "data.xls";
-                a.click();
+            var base = "https://dhis.moh.go.tz/";
+            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
+                j_username: "portal", j_password: "Portal123"
+            },function(){
+                if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }else{
+                    var lastUrl="https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:SgeSIiqTN2l;BaszRhHxjAI;ZPz1gxQigcH;b0WKuHON2aB;LIcnPEw9OGn;ssEyRWhRHoN;Aw3yuT0bo6o;vzI8BLOfJ1m;r1LmEfxjidr;QhqZxwhJzOc;B4a9r6geSSE;yR4s722Jb5Y;uJgUVpyumqG;foKjtNmwy2K;UAEtiuoCfew;bLcyqjhjhr7;hMMObZY1URK;Mfu4kCFqgQ8;IINaYannWWy&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=ou";
+                }
+                $http.get(lastUrl,{'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                    var a = document.createElement('a');
+                    var blob = new Blob([data]);
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = "data.xls";
+                    a.click();
+                });
             });
+
         }
 
 
@@ -1267,16 +1325,14 @@ angular.module("hmisPortal")
 //              $scope.data.chartType = value.chart;
                 $scope.prepareSeries(value,value.chart);
             });
-            $rootScope.lastCard();
+            $scope.lastCard();
         }
         $scope.firstClick();
-
-
-
 
         /**
          *
          * DRAW MAP
+         *
          * */
        map.drawMap = function(parentUid,level,card){
            mapService.renderMap(parentUid,level,card);
