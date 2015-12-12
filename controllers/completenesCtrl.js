@@ -11,16 +11,16 @@ angular.module("hmisPortal")
         $httpProvider.defaults.withCredentials = true;
     })
     .controller("completenesCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
-        //displaying loading during page change
-        $rootScope.$on("$routeChangeStart",
-            function (event, current, previous, rejection) {
-                $rootScope.showLoader = true;
-            });
-        $rootScope.$on("$routeChangeSuccess",
-            function (event, current, previous, rejection) {
-                $rootScope.showLoader = false;
-
-            });
+//        jQuery(document).ready(function() {
+//            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
+//                {withCredentials: true, params : {
+//                    j_username: "portal", j_password: "Portal123"
+//                }});
+//            $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
+//                {withCredentials: true, params : {
+//                    j_username: "portal", j_password: "Portal123"
+//                }});
+//        });
         $scope.cards = {};
         $scope.data = {};
         $rootScope.selectedOrgUnit = "m0frOspS7JY";

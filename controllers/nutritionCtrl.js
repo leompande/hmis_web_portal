@@ -6,7 +6,6 @@ angular.module("hmisPortal")
     .config(function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
     })
-<<<<<<< HEAD
     .controller("nutritionCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 //        jQuery(document).ready(function() {
 //            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
@@ -18,19 +17,6 @@ angular.module("hmisPortal")
 //                    j_username: "portal", j_password: "Portal123"
 //                }});
 //        });
-=======
-    .controller("nutritionCtrl",function ($rootScope,$scope,$http,$location,$timeout,olData,olHelpers,shared) {
-//displaying loading during page change
-        $rootScope.$on("$routeChangeStart",
-            function (event, current, previous, rejection) {
-                $rootScope.showLoader = true;
-            });
-        $rootScope.$on("$routeChangeSuccess",
-            function (event, current, previous, rejection) {
-                $rootScope.showLoader = false;
-
-            });
->>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
         $scope.cards = {};
         $scope.data = {};
         var map = this;
@@ -218,63 +204,88 @@ angular.module("hmisPortal")
         };
 
         $scope.downloadExcel = function(id){
-            var base = "https://dhis.moh.go.tz/";
-            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
-                j_username: "portal", j_password: "Portal123"
-            },function(){
-                var url = "";
-                if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
-                }else{
+            var url = "";
+            if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-1;LEVEL-2;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+            }else{
 
-                    url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
-                }
-                $http.get(url,{withCredentials: true,'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
-                    var a = document.createElement('a');
-                    var blob = new Blob([data]);
-                    a.href = window.URL.createObjectURL(blob);
-                    a.download = "data.xls";
-                    a.click();
-                });
+                url = "https://dhis.moh.go.tz/api/analytics.csv?dimension=dx:"+id+"&dimension=pe:"+$scope.selectedPeriod+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&displayProperty=NAME&tableLayout=true&columns=dx&rows=pe;ou";
+            }
+            $http.get(url,{withCredentials: true,'Content-Type': 'application/csv;charset=UTF-8'}).success(function(data){
+                var a = document.createElement('a');
+                var blob = new Blob([data]);
+                a.href = window.URL.createObjectURL(blob);
+                a.download = "data.xls";
+                a.click();
             });
         }
 
         $scope.prepareSeries = function(cardObject,chart){
-            cardObject.chartObject.loading = true;
-            var base = "https://dhis.moh.go.tz/";
-            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
-                j_username: "portal", j_password: "Portal123"
-            },function(){
-                if(chart == 'table'){
-                    cardObject.displayTable = true;
-                    cardObject.displayMap = false;
-                }else if(chart == 'map'){
-                    cardObject.displayMap = true;
-                    cardObject.displayTable = false;
-                }
-                else{
-                    cardObject.displayMap = false;
-                    cardObject.displayTable = false;
-                }
-                cardObject.chartObject.title.text = cardObject.title;
-                cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
+            if(chart == 'table'){
+                cardObject.displayTable = true;
+                cardObject.displayMap = false;
+            }else if(chart == 'map'){
+                cardObject.displayMap = true;
+                cardObject.displayTable = false;
+            }
+            else{
+                cardObject.displayMap = false;
+                cardObject.displayTable = false;
+            }
+            cardObject.chartObject.title.text = cardObject.title;
+            cardObject.chartObject.yAxis.title.text = cardObject.title.toLowerCase();
 
-                if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-                }else{
-                    $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-                }
-                cardObject.chartObject.loading = true;
-                $http.get($scope.url).success(function(data){
-                    $scope.area = [];
-                    cardObject.chartObject.xAxis.categories = [];
-                    //
-                    var dataToUse = $scope.prepareData(data);
-                    //
+            if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-1;LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+            }else{
+                $scope.url = "https://dhis.moh.go.tz/api/analytics.json?dimension=dx:"+cardObject.data+"&dimension=ou:LEVEL-2;LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+            }
+            cardObject.chartObject.loading = true;
+            $http.get($scope.url,{withCredentials: true }).success(function(data){
+                $scope.area = [];
+                cardObject.chartObject.xAxis.categories = [];
+                //
+                var dataToUse = $scope.prepareData(data);
+                //
+                angular.forEach(dataToUse,function(val){
+                    cardObject.chartObject.xAxis.categories.push(val.name);
+                });
+                $scope.normalseries = [];
+                if(chart == "pie"){
+                    delete cardObject.chartObject.chart;
+                    var serie = [];
                     angular.forEach(dataToUse,function(val){
-                        cardObject.chartObject.xAxis.categories.push(val.name);
+                        serie.push({name: val.name, y: parseInt(val.value)})
                     });
-<<<<<<< HEAD
+                    $scope.normalseries.push({type: chart, name:cardObject.title , data: serie,showInLegend: true,
+                        dataLabels: {
+                            enabled: false
+                        } });
+                    cardObject.chartObject.series = $scope.normalseries;
+                }
+                else if(chart == "combined"){
+                    delete cardObject.chartObject.chart;
+                    var serie1 = [];
+                    var serie = [];
+
+                    angular.forEach(dataToUse,function(val){
+                        serie.push(parseInt(val.value));
+                        serie1.push({name: val.name , y: parseInt(val.value) })
+                    });
+                    $scope.normalseries.push({type: 'column', name: cardObject.title, data: serie});
+                    $scope.normalseries.push({type: 'spline', name: cardObject.title, data: serie});
+                    $scope.normalseries.push({type: 'pie', name: cardObject.title, data: serie1,center: [100, 80],size: 150,showInLegend: false,
+                        dataLabels: {
+                            enabled: false
+                        }})
+                    cardObject.chartObject.series = $scope.normalseries;
+                }
+                else if(chart == 'table'){
+                    cardObject.table = {};
+                    cardObject.table.colums =[];
+                    angular.forEach(dataToUse,function(val){
+                        cardObject.table.colums.push({name:val.name,value:parseInt(val.value)});
+                    });
                 }else if(chart == 'map'){
                     if($scope.selectedOrgUnit == "m0frOspS7JY"){
                         angular.forEach(dataToUse,function(val){
@@ -286,109 +297,61 @@ angular.module("hmisPortal")
                             cardObject.chartObject.series.push({id:val.id,name:val.name,value:parseInt(val.value)});
                         });
                         map.drawMap($scope.selectedOrgUnit,3,cardObject);
-=======
-                    $scope.normalseries = [];
-                    if(chart == "pie"){
-                        delete cardObject.chartObject.chart;
-                        var serie = [];
-                        angular.forEach(dataToUse,function(val){
-                            serie.push({name: val.name, y: parseInt(val.value)})
-                        });
-                        $scope.normalseries.push({type: chart, name:cardObject.title , data: serie,showInLegend: true,
-                            dataLabels: {
-                                enabled: false
-                            } });
-                        cardObject.chartObject.series = $scope.normalseries;
->>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
                     }
-                    else if(chart == "combined"){
-                        delete cardObject.chartObject.chart;
-                        var serie1 = [];
-                        var serie = [];
-
-                        angular.forEach(dataToUse,function(val){
-                            serie.push(parseInt(val.value));
-                            serie1.push({name: val.name , y: parseInt(val.value) })
-                        });
-                        $scope.normalseries.push({type: 'column', name: cardObject.title, data: serie});
-                        $scope.normalseries.push({type: 'spline', name: cardObject.title, data: serie});
-                        $scope.normalseries.push({type: 'pie', name: cardObject.title, data: serie1,center: [100, 80],size: 150,showInLegend: false,
-                            dataLabels: {
-                                enabled: false
-                            }})
-                        cardObject.chartObject.series = $scope.normalseries;
-                    }
-                    else if(chart == 'table'){
-                        cardObject.table = {};
-                        cardObject.table.colums =[];
-                        angular.forEach(dataToUse,function(val){
-                            cardObject.table.colums.push({name:val.name,value:parseInt(val.value)});
-                        });
-                    }else if(chart == 'map'){
-                        if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                            $scope.drawMap($scope.selectedOrgUnit,2,cardObject);
-                        }else{
-                            $scope.drawMap($scope.selectedOrgUnit,3,cardObject);
-                        }
-                    }
-                    else{
-                        delete cardObject.chartObject.chart;
-                        var serie = [];
-                        angular.forEach(dataToUse,function(val){
-                            serie.push(val.value);
-                        });
-                        cardObject.chartObject.chart={};
-                        cardObject.chartObject.chart.type=chart;
-                        $scope.normalseries.push({type: chart, name: cardObject.title, data: serie})
-                        cardObject.chartObject.series = $scope.normalseries;
-                    }
-                    cardObject.chartObject.loading = false
-                });
+                }
+                else{
+                    delete cardObject.chartObject.chart;
+                    var serie = [];
+                    angular.forEach(dataToUse,function(val){
+                        serie.push(val.value);
+                    });
+                    cardObject.chartObject.chart={};
+                    cardObject.chartObject.chart.type=chart;
+                    $scope.normalseries.push({type: chart, name: cardObject.title, data: serie})
+                    cardObject.chartObject.series = $scope.normalseries;
+                }
+                cardObject.chartObject.loading = false
             });
 
+
         };
-        $scope.lastCard=function(){
+        $rootScope.lastCard=function(){
 
             $scope.loadingImage=true;
-            var base = "https://dhis.moh.go.tz/";
-            $.post( base + "dhis-web-commons-security/login.action?authOnly=true", {
-                j_username: "portal", j_password: "Portal123"
-            },function(){
-                if($scope.selectedOrgUnit == "m0frOspS7JY"){
-                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-                }else{
-                    var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
-                }
-                $http.get(lastUrl).success(function(dataTable){
-                    var generalArray=[];
-                    var underOne="Vitamin A supplementation coverage to children under 1 year";
-                    var undertwo="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 12-17";
-                    var underSup="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 18-23";
-                    var underthree="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 25-59";
-                    var underfour="Idadi ya Watu";
-                    var underFive="Children under 5 who are underweight";
-                    var underWeight="Uwiano wa Uzito kwa Umri";
-                     $scope.arrayed=[{'underOne':'Vitamin A supplementation coverage to children under 1 year','undertwo':'Vitamin A supplementation coverage to children 12-17 months','underSup':'Vitamin A supplementation coverage to children 18-23 months',
-                        'underthree':'itamin A supplementation coverage to children 25-59','underfour':'Population',
-                        'underFive': 'Children under 5 who are underweight','underWeight':'Children who are underweight'
-                    }];
-                    angular.forEach(dataTable.metaData.ou,function(region){
-                        generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
-                            undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underSup:underSupObject(underSup,dataTable,dataTable.rows,region),
-                            underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
-                            underFive:underFiveObject(underFive,dataTable,dataTable.rows,region),underWeight:underWeightObject(underWeight,dataTable,dataTable.rows,region),
-                         });
+            if($scope.selectedOrgUnit == "m0frOspS7JY"){
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-2;m0frOspS7JY&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+            }else{
+                var lastUrl="https://dhis.moh.go.tz/api/analytics.json?dimension=dx:elneHkTBLxm;WhRlrHeEh1g;KYydraby8cN;Lm7jBB0h77z;ykShMtNgDB1;cj5OnikG3Mz;yJ3D6kGkz7E&dimension=ou:LEVEL-3;"+$scope.selectedOrgUnit+"&filter=pe:"+$scope.selectedPeriod+"&displayProperty=NAME";
+            }
+            $http.get(lastUrl,{withCredentials: true }).success(function(dataTable){
+                var generalArray=[];
+                var underOne="Vitamin A supplementation coverage to children under 1 year";
+                var undertwo="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 12-17";
+                var underSup="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 18-23";
+                var underthree="Nyongeza ya Vitamin A kwa Watoto Umri wa Miezi 25-59";
+                var underfour="Idadi ya Watu";
+                var underFive="Children under 5 who are underweight";
+                var underWeight="Uwiano wa Uzito kwa Umri";
+                 $scope.arrayed=[{'underOne':'Vitamin A supplementation coverage to children under 1 year','undertwo':'Vitamin A supplementation coverage to children 12-17 months','underSup':'Vitamin A supplementation coverage to children 18-23 months',
+                    'underthree':'itamin A supplementation coverage to children 25-59','underfour':'Population',
+                    'underFive': 'Children under 5 who are underweight','underWeight':'Children who are underweight'
+                }];
+                angular.forEach(dataTable.metaData.ou,function(region){
+                    generalArray.push({"orgUnit":dataTable.metaData.names[region],underOne:ogUnitsObjectConstruct(underOne,dataTable,dataTable.rows,region),
+                        undertwo:undertwoObject(undertwo,dataTable,dataTable.rows,region),underSup:underSupObject(underSup,dataTable,dataTable.rows,region),
+                        underthree:underthreeObject(underthree,dataTable,dataTable.rows,region),underfour:underfourObject(underfour,dataTable,dataTable.rows,region),
+                        underFive:underFiveObject(underFive,dataTable,dataTable.rows,region),underWeight:underWeightObject(underWeight,dataTable,dataTable.rows,region),
+                     });
 
-                    });
-                    $scope.loadingImage=false;
-                    $scope.tableContent=generalArray;
-                    console.log($scope.tableContent);
-                    //},2000);
-                }).error(function(error){
-                    //$scope.loadingImage=false;
-                    $scope.authenticationFailed=error;
-                    console.log($scope.authenticationFailed);
                 });
+                $scope.loadingImage=false;
+                $scope.tableContent=generalArray;
+                console.log($scope.tableContent);
+                //},2000);
+            }).error(function(error){
+                //$scope.loadingImage=false;
+                $scope.authenticationFailed=error;
+                console.log($scope.authenticationFailed);
             });
 
         }
@@ -413,7 +376,7 @@ angular.module("hmisPortal")
 //              $scope.data.chartType = value.chart;
                 $scope.prepareSeries(value,value.chart);
             });
-            $scope.lastCard();
+            $rootScope.lastCard();
         }
         $scope.firstClick();
 

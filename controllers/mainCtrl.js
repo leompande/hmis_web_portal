@@ -4,9 +4,17 @@
 
 angular.module("hmisPortal")
     .run(function() {
-
+//        jQuery(document).ready(function() {
+//            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
+//                {withCredentials: true, params : {
+//                    j_username: "portal", j_password: "Portal123"
+//                }});
+//            $.post("https://etl.moh.go.tz/dhis/dhis-web-commons-security/login.action?authOnly=true",
+//               {withCredentials: true, params : {
+//                j_username: "portal", j_password: "Portal123"
+//              }});
+//        });
     })
-<<<<<<< HEAD
     .controller("mainCtrl",function ($rootScope,$scope,$http,$location,$timeout,mapService) {
 //        jQuery(document).ready(function() {
 //            $.post("https://dhis.moh.go.tz/dhis-web-commons-security/login.action?authOnly=true",
@@ -18,21 +26,6 @@ angular.module("hmisPortal")
 //                    j_username: "portal", j_password: "Portal123"
 //                }});
 //        });
-=======
-    .controller("mainCtrl",function ($rootScope,$scope,$q) {
-
-        $rootScope.showLoader = false;
-        $rootScope.$on("$routeChangeStart",
-            function (event, current, previous, rejection) {
-                $rootScope.showLoader = true;
-            });
-        $rootScope.$on("$routeChangeSuccess",
-            function (event, current, previous, rejection) {
-                $rootScope.showLoader = false;
-
-            });
-
->>>>>>> b345a9a3d0eeaa7d6400bcdaac2475d24181c58b
         $scope.cards = {};
         $scope.data = {};
         var map = this;
@@ -77,20 +70,13 @@ angular.module("hmisPortal")
         $scope.hideFilter = function(){
             $scope.rightclass = 'col s12';
             $scope.showFilter = false;
-        };
+        }
         $scope.displayFilter = function(){
             $scope.leftclass = 'col s2';
             $scope.rightclass = 'col s10';
             $scope.showFilter = true;
-        };
-
-        $scope.linkValue = 'statistcs';
-
-        $scope.activateLink = function(linkValue){
-            $scope.linkValue = linkValue;
-            alert(linkValue);
         }
-     });
+     })
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
